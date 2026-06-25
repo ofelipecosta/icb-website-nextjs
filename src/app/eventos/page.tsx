@@ -46,7 +46,6 @@ export default async function EventosPage() {
 
         {/* Hero */}
         <div className="navy-ambient relative overflow-hidden">
-          <span className="absolute bottom-4 right-4 font-display font-black leading-none select-none pointer-events-none" aria-hidden="true" style={{ fontSize: "clamp(6rem, 14vw, 12rem)", color: "rgba(255,255,255,0.04)", lineHeight: 1 }}>ICB</span>
           <div className="max-w-7xl mx-auto px-6 pt-32 pb-16">
             <div className="mb-8">
               <Breadcrumb items={[{ label: "Eventos" }]} />

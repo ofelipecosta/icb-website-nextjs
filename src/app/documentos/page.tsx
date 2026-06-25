@@ -51,7 +51,6 @@ export default async function DocumentosPage() {
       <main>
         {/* Hero */}
         <div className="relative overflow-hidden navy-ambient">
-          <span className="absolute bottom-6 right-4 font-display font-black leading-none select-none pointer-events-none" aria-hidden="true" style={{ fontSize: "clamp(6rem, 14vw, 12rem)", color: "rgba(255,255,255,0.04)", lineHeight: 1 }}>ICB</span>
           <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: "radial-gradient(ellipse at 70% 0%, rgba(178,34,34,0.25) 0%, transparent 65%)" }} />
           <div className="max-w-7xl mx-auto px-6 pt-32 pb-16 relative">
             <div className="mb-8">
