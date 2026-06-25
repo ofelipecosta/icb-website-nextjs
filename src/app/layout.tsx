@@ -116,6 +116,7 @@ export default function RootLayout({
       className={`${playfair.variable} ${inter.variable} scroll-smooth`}
     >
       <head>
+        <meta name="color-scheme" content="light only" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
