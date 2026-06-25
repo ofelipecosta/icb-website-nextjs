@@ -1,26 +1,197 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-navy: #0A1628;
+  --color-navy-mid: #122040;
+  --color-navy-light: #1E3A5F;
+  --color-red: #B22222;
+  --color-red-light: #CC3333;
+  --color-red-pale: #E57373;
+  --color-ivory: #F5F0E8;
+  --color-ivory-dark: #EDE5D4;
+  --color-anchor: #6B7A8D;
+  --color-anchor-light: #8FA0B4;
+
+  --font-display: 'Cormorant', Georgia, serif;
+  --font-body: 'IBM Plex Sans', system-ui, sans-serif;
+
+  --shadow-luxury: 0 4px 20px rgba(10, 22, 40, 0.12), 0 1px 4px rgba(10, 22, 40, 0.08);
+  --shadow-luxury-lg: 0 20px 60px rgba(10, 22, 40, 0.2), 0 4px 16px rgba(10, 22, 40, 0.12);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.navy-ambient {
+  background-color: #0A1628;
+  background-image:
+    radial-gradient(ellipse 60% 50% at 85% 15%, rgba(178,34,34,0.18) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 60% at 10% 80%, rgba(30,70,140,0.28) 0%, transparent 60%);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+  }
+
+  html, body {
+    background-color: #ffffff !important;
+  }
+
+  body {
+    font-family: var(--font-body);
+    color: var(--color-navy);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+  }
+
+  ::selection {
+    background: var(--color-red);
+    color: #ffffff;
+  }
+
+  *:focus-visible {
+    outline: 2px solid var(--color-red);
+    outline-offset: 3px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #ffffff;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-red);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-red-light);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+    html {
+      scroll-behavior: auto;
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  .text-gradient-red {
+    background: linear-gradient(135deg, var(--color-red) 0%, var(--color-red-light) 50%, var(--color-red) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .red-line {
+    display: block;
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--color-red), var(--color-red-light));
+  }
+
+  .rope-divider {
+    height: 1px;
+    background: repeating-linear-gradient(
+      90deg,
+      var(--color-red) 0px,
+      var(--color-red) 4px,
+      transparent 4px,
+      transparent 10px
+    );
+    opacity: 0.4;
+  }
+
+  .glass-navy {
+    background: rgba(10, 22, 40, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(178, 34, 34, 0.2);
+  }
+
+  .glass-white {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .shadow-luxury {
+    box-shadow: var(--shadow-luxury);
+  }
+
+  .shadow-luxury-lg {
+    box-shadow: var(--shadow-luxury-lg);
+  }
+
+  .section-py {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  @media (min-width: 768px) {
+    .section-py {
+      padding-top: 4rem;
+      padding-bottom: 4rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .section-py {
+      padding-top: 5rem;
+      padding-bottom: 5rem;
+    }
+  }
+
+  .wave-overlay {
+    background: linear-gradient(180deg, transparent 0%, rgba(10, 22, 40, 0.8) 100%);
+  }
+}
+
+@keyframes wave-move {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.wave-animate {
+  animation: wave-move 20s linear infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.shimmer-red {
+  background: linear-gradient(
+    90deg,
+    var(--color-red) 0%,
+    var(--color-red-light) 25%,
+    var(--color-red-pale) 50%,
+    var(--color-red-light) 75%,
+    var(--color-red) 100%
+  );
+  background-size: 200% auto;
+  animation: shimmer 4s linear infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
