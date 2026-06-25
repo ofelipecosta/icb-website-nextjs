@@ -168,7 +168,7 @@ export default function AdministracaoPage() {
                   style={{ border: `3px solid ${RED}` }}
                 >
                   <Image
-                    src="/images/comodoro_e_vice.png"
+                    src="/images/comodoro_e_vice.webp"
                     alt="Comodoro e Vice-Comodoro do Iate Clube Brasileiro"
                     width={400}
                     height={520}

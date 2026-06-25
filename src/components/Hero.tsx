@@ -20,7 +20,7 @@ export default function Hero() {
     >
       {/* Background photo */}
       <Image
-        src="/images/hero1.png"
+        src="/images/hero1.webp"
         alt="Vista aérea do Iate Clube Brasileiro"
         fill
         className="object-cover object-[20%_center] sm:object-center"

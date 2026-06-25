@@ -52,7 +52,7 @@ export const metadata: Metadata = {
       "Fundado em 1906, o ICB é o mais tradicional clube náutico do Brasil. Vela, regatas, eventos e vida social às margens da Baía de Guanabara em Niterói.",
     images: [
       {
-        url: "/images/hero1.png",
+        url: "/images/hero1.webp",
         width: 1200,
         height: 630,
         alt: "Iate Clube Brasileiro — vista aérea da sede em Niterói",
@@ -63,7 +63,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Iate Clube Brasileiro",
     description: "O primeiro clube de vela do Brasil, desde 1906.",
-    images: ["/images/hero1.png"],
+    images: ["/images/hero1.webp"],
   },
   robots: {
     index: true,
@@ -81,23 +81,23 @@ const jsonLd = {
     "Fundado em 10 de setembro de 1906, o Iate Clube Brasileiro é o primeiro clube náutico do Brasil.",
   url: BASE_URL,
   logo: `${BASE_URL}/images/logo/logo-icb-colorido.png`,
-  image: `${BASE_URL}/images/hero1.png`,
+  image: `${BASE_URL}/images/hero1.webp`,
   foundingDate: "1906-09-10",
   sport: "Sailing",
   telephone: "+55-21-2714-8252",
   email: "secretaria@icb.org.br",
   address: {
     "@type": "PostalAddress",
-    streetAddress: "Rua Coronel Gomes Machado, 47",
+    streetAddress: "Estrada Leopoldo Fróes, 400",
     addressLocality: "Niterói",
     addressRegion: "RJ",
-    postalCode: "24050-050",
+    postalCode: "24360-005",
     addressCountry: "BR",
   },
   geo: {
     "@type": "GeoCoordinates",
-    latitude: -22.893,
-    longitude: -43.126,
+    latitude: -22.9418,
+    longitude: -43.1147,
   },
   sameAs: [
     "https://www.instagram.com/iateclubebrasileiro",
