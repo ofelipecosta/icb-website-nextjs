@@ -27,6 +27,16 @@
     radial-gradient(ellipse 50% 60% at 10% 80%, rgba(30,70,140,0.28) 0%, transparent 60%);
 }
 
+/* Force light mode — block browser automatic dark theme */
+:root {
+  color-scheme: light only;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root { color-scheme: light; }
+  html, body { background-color: #ffffff !important; color: #111827 !important; }
+}
+
 @layer base {
   *, *::before, *::after {
     box-sizing: border-box;
