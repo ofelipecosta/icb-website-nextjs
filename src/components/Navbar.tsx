@@ -126,7 +126,7 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop nav */}
-          <nav className="hidden lg:flex items-center gap-1 py-1 px-1 rounded-full bg-white/[0.06] border border-white/10 backdrop-blur-md">
+          <nav className="hidden lg:flex items-center gap-1 py-1 px-1 rounded-full" style={{ backgroundColor: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.10)", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)" }}>
             {navItems.map((item) => {
               const isActive  = activeItem === item.name;
               const hasDrop   = !!dropdowns[item.name];

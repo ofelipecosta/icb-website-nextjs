@@ -25,7 +25,7 @@ export function FlowButton({ text, onClick, href, className, variant = "light" }
       hoverFill: "bg-gray-900",
     },
     dark: {
-      wrapper: "bg-transparent border border-white/25 text-white",
+      wrapper: "bg-transparent text-white",
       defaultText: "text-white",
       hoverFill: "bg-white",
     },
@@ -88,16 +88,18 @@ export function FlowButton({ text, onClick, href, className, variant = "light" }
     </>
   );
 
+  const borderStyle = variant === "dark" ? { border: "1px solid rgba(255,255,255,0.25)" } : {};
+
   if (href) {
     return (
-      <a href={href} className={cn(base, s.wrapper, className)}>
+      <a href={href} className={cn(base, s.wrapper, className)} style={borderStyle}>
         {inner}
       </a>
     );
   }
 
   return (
-    <button type="button" onClick={onClick} className={cn(base, s.wrapper, className)}>
+    <button type="button" onClick={onClick} className={cn(base, s.wrapper, className)} style={borderStyle}>
       {inner}
     </button>
   );

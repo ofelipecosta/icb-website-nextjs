@@ -23,11 +23,8 @@ export function TubelightNav({ items, activeItem, onSelect, className }: Tubelig
   return (
     <nav
       aria-label="Navegação principal"
-      className={cn(
-        "flex items-center gap-1 py-1 px-1 rounded-full",
-        "bg-white/[0.06] border border-white/10 backdrop-blur-md",
-        className
-      )}
+      className={cn("flex items-center gap-1 py-1 px-1 rounded-full", className)}
+      style={{ backgroundColor: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.10)", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)" }}
     >
       {items.map((item) => {
         const isActive = activeItem === item.name;
@@ -41,7 +38,7 @@ export function TubelightNav({ items, activeItem, onSelect, className }: Tubelig
             className={cn(
               "relative text-sm font-medium px-4 py-2 rounded-full cursor-pointer",
               "transition-colors duration-200 select-none whitespace-nowrap",
-              isActive ? "text-white" : "text-white/55 hover:text-white/85"
+              isActive ? "text-white" : "opacity-60 text-white hover:opacity-90"
             )}
           >
             {/* Label above the indicator */}

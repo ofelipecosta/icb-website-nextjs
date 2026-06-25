@@ -75,7 +75,7 @@ export default function Regattas({ sanityData }: RegattasProps) {
               <h3 className="font-display text-2xl font-semibold text-white mb-6">
                 Uma Tradição Vencedora
               </h3>
-              <p className="text-white/50 text-sm leading-relaxed mb-10">
+              <p className="text-white opacity-50 text-sm leading-relaxed mb-10">
                 O ICB é berço de campeões. Nossos atletas representam o Brasil
                 nas mais importantes competições de vela do mundo, da Semana
                 Internacional de Vela de Ilhabela à Copa do Mundo de Vela.
@@ -93,7 +93,7 @@ export default function Regattas({ sanityData }: RegattasProps) {
                     <p className="font-display text-3xl font-bold text-[var(--color-red)] mb-1">
                       {a.value}
                     </p>
-                    <p className="text-white/50 text-xs uppercase tracking-widest">
+                    <p className="text-white opacity-50 text-xs uppercase tracking-widest">
                       {a.label}
                     </p>
                   </motion.div>
