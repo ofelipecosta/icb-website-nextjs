@@ -1,3 +1,5 @@
+export const revalidate = 3600;
+
 import Link from "next/link";
 import { ArrowLeft, FileText, Download } from "lucide-react";
 import Navbar from "@/components/Navbar";
