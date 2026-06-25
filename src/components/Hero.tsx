@@ -59,10 +59,10 @@ export default function Hero() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.9, delay: 0.4 }}
           className="font-display font-bold leading-[1.05] mb-8"
-          style={{ fontSize: "clamp(2.2rem, 5vw, 3.5rem)", color: "white" }}
+          style={{ fontSize: "clamp(2.2rem, 5vw, 3.5rem)", color: "white", textShadow: "0 2px 16px rgba(0,0,0,0.55), 0 1px 4px rgba(0,0,0,0.4)" }}
         >
           O Primeiro<br />
-          Clube de <em className="not-italic" style={{ color: RED }}>Vela</em><br />
+          Clube de <em className="not-italic" style={{ color: RED }}>Iatismo</em><br />
           do Brasil
         </motion.h1>
 
@@ -72,7 +72,7 @@ export default function Hero() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
           className="text-lg sm:text-xl max-w-xl leading-relaxed mb-12 font-light"
-          style={{ color: "rgba(255,255,255,0.7)" }}
+          style={{ color: "rgba(255,255,255,0.7)", textShadow: "0 1px 8px rgba(0,0,0,0.5)" }}
         >
           120 anos de tradição náutica, esporte e vida social
           às margens da Baía de Guanabara, em Niterói.
