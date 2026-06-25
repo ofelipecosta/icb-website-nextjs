@@ -18,28 +18,31 @@ export default function Hero() {
       id="hero"
       className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden navy-ambient"
     >
-      {/* Background photo */}
+      {/* Background photo — cores naturais e vibrantes, leve realce de saturação/contraste */}
       <Image
         src="/images/hero1.webp"
         alt="Vista aérea do Iate Clube Brasileiro"
         fill
         className="object-cover object-[20%_center] sm:object-center"
         priority
-        quality={90}
+        quality={88}
+        style={{ filter: "saturate(1.12) contrast(1.04) brightness(1.02)" }}
       />
 
-      {/* Light overlay — mantém texto legível */}
+      {/* Scrim direcional — escurece só a esquerda (atrás do texto); o lado direito da
+          marina permanece claro e colorido */}
       <div
-        className="absolute inset-0"
+        className="absolute inset-0 pointer-events-none"
         style={{
-          background: "rgba(0, 0, 0, 0.25)",
+          background:
+            "linear-gradient(100deg, rgba(10,22,40,0.85) 0%, rgba(10,22,40,0.55) 32%, rgba(10,22,40,0.18) 60%, rgba(10,22,40,0) 100%)",
         }}
       />
 
-      {/* Navy fade no bottom para transição suave com a próxima seção */}
+      {/* Scrim inferior suave — reforça legibilidade dos botões e funde com a próxima seção */}
       <div
-        className="absolute bottom-0 left-0 right-0 h-48 pointer-events-none"
-        style={{ background: "linear-gradient(to top, #0A1628 0%, transparent 100%)" }}
+        className="absolute bottom-0 left-0 right-0 h-64 pointer-events-none"
+        style={{ background: "linear-gradient(to top, #0A1628 0%, rgba(10,22,40,0.35) 45%, transparent 100%)" }}
       />
 
       {/* Content */}
