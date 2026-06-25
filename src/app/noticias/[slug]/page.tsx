@@ -126,14 +126,14 @@ export default async function NoticiaPage({ params }: { params: Promise<{ slug: 
       <main style={{ backgroundColor: "#ffffff" }}>
 
         {/* ── Header with breadcrumb ── */}
-        <div className="navy-ambient relative overflow-hidden" style={{ paddingTop: "6rem", paddingBottom: "0" }}>
+        <div className="navy-ambient relative overflow-hidden" style={{ paddingTop: "7rem", paddingBottom: "0" }}>
           <div className="max-w-4xl mx-auto px-6 pb-6">
             <Breadcrumb items={[{ label: "Notícias", href: "/noticias" }, { label: title }]} />
           </div>
         </div>
 
         {/* ── 2-column layout: article + sidebar ── */}
-        <div className="max-w-7xl mx-auto px-6 pt-10 pb-16 grid lg:grid-cols-[1fr_340px] gap-12 items-start">
+        <div className="max-w-7xl mx-auto px-6 pt-10 pb-16 grid lg:grid-cols-[1fr_340px] gap-12 items-start" style={{ overflowWrap: "break-word", wordBreak: "break-word" }}>
 
           {/* Article */}
           <article>
@@ -144,7 +144,7 @@ export default async function NoticiaPage({ params }: { params: Promise<{ slug: 
                 className="font-display font-black leading-tight"
                 style={{
                   color: INK,
-                  fontSize: "clamp(2.2rem, 5vw, 3.5rem)",
+                  fontSize: "clamp(1.6rem, 5vw, 3.5rem)",
                   lineHeight: 1.1,
                   fontWeight: 800,
                 }}
