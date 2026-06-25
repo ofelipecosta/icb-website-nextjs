@@ -134,7 +134,7 @@ export default async function NoticiaPage({ params }: { params: Promise<{ slug: 
         </div>
 
         {/* ── 2-column layout: article + sidebar ── */}
-        <div className="max-w-7xl mx-auto px-6 pb-16 grid lg:grid-cols-[1fr_340px] gap-12 items-start">
+        <div className="max-w-7xl mx-auto px-6 pt-10 pb-16 grid lg:grid-cols-[1fr_340px] gap-12 items-start">
 
           {/* Article */}
           <article>
