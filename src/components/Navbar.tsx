@@ -28,14 +28,6 @@ function SocialFacebook() {
   );
 }
 
-function SocialYoutube() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.95C18.88 4 12 4 12 4s-6.88 0-8.59.47a2.78 2.78 0 0 0-1.95 1.95A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z" />
-      <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none" />
-    </svg>
-  );
-}
 
 const navItems = [
   { name: "Início",      href: "#hero" },
@@ -449,16 +441,6 @@ export default function Navbar() {
                   style={{ color: "rgba(22,32,46,0.38)" }}
                 >
                   <SocialFacebook />
-                </a>
-                <a
-                  href="https://youtube.com/@iateclubebrasileiro"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="YouTube"
-                  className="transition-opacity duration-200 hover:opacity-50"
-                  style={{ color: "rgba(22,32,46,0.38)" }}
-                >
-                  <SocialYoutube />
                 </a>
               </div>
             </div>

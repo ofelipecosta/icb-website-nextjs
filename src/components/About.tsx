@@ -143,13 +143,13 @@ export default function About() {
               />
 
               {/* Logo */}
-              <div className="absolute inset-0 flex items-center justify-center">
+              <div className="absolute inset-0 flex items-center justify-center pb-10">
                 <Image
                   src="/images/logo-timao-contorno.png"
                   alt="Logo Iate Clube Brasileiro"
                   width={340}
                   height={340}
-                  className="object-contain w-[58%] h-auto max-h-[80%]"
+                  className="object-contain w-[54%] h-auto max-h-[64%]"
                   style={{ filter: "drop-shadow(0 4px 24px rgba(0,0,0,0.4))" }}
                 />
               </div>

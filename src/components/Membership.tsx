@@ -5,10 +5,11 @@ import { motion, useInView } from "framer-motion";
 import { Check, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import SectionHeader from "@/components/SectionHeader";
+import type { SocioSanity } from "@/lib/sanity";
 
 const WHATSAPP = "https://wa.me/5521985564487";
 
-const benefits = [
+const DEFAULT_BENEFITS = [
   "Acesso à marina e áreas náuticas",
   "Restaurante e bar com preços exclusivos",
   "Participação em regatas e competições",
@@ -17,26 +18,15 @@ const benefits = [
   "Eventos sociais exclusivos",
 ];
 
-const plans = [
-  {
-    parcelas: "10×",
-    valor: "R$ 1.500,00",
-    taxa: "50% da taxa de manutenção em vigor durante o pagamento das parcelas",
-    destaque: false,
-  },
-  {
-    parcelas: "15×",
-    valor: "R$ 1.000,00",
-    taxa: "Taxa de manutenção em vigor no valor integral",
-    destaque: true,
-  },
-  {
-    parcelas: "24×",
-    valor: "R$ 625,00",
-    taxa: "Taxa de manutenção em vigor no valor integral",
-    destaque: false,
-  },
+const DEFAULT_PLANS = [
+  { parcelas: 10, valorParcela: 1500, taxaInfo: "50% da taxa de manutenção em vigor durante o pagamento das parcelas", destaque: false },
+  { parcelas: 15, valorParcela: 1000, taxaInfo: "Taxa de manutenção em vigor no valor integral", destaque: true },
+  { parcelas: 24, valorParcela: 625,  taxaInfo: "Taxa de manutenção em vigor no valor integral", destaque: false },
 ];
+
+function formatBRL(value: number): string {
+  return value.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
 
 const WaIcon = () => (
   <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -44,9 +34,20 @@ const WaIcon = () => (
   </svg>
 );
 
-export default function Membership() {
-  const ref = useRef<HTMLDivElement>(null);
+interface MembershipProps {
+  sanityData?: SocioSanity | null;
+}
+
+export default function Membership({ sanityData }: MembershipProps) {
+  const ref    = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
+
+  const valorVenal      = sanityData?.valorVenal      ?? 15000;
+  const taxaManutencao  = sanityData?.taxaManutencao  ?? 639.05;
+  const taxaAno         = sanityData?.taxaAno         ?? 2025;
+  const vagas           = sanityData?.vagas           ?? 50;
+  const benefits        = sanityData?.beneficios?.length ? sanityData.beneficios : DEFAULT_BENEFITS;
+  const plans           = sanityData?.planos?.length   ? sanityData.planos       : DEFAULT_PLANS;
 
   return (
     <section id="seja-socio" className="section-py px-6" style={{ backgroundColor: "var(--color-surface)" }}>
@@ -65,25 +66,23 @@ export default function Membership() {
             description="Faça parte de mais de um século de história, esporte e convivência de alto nível."
             titleSize="lg"
           />
-          {/* Vagas limitadas */}
           <div
             className="inline-flex items-center gap-2 mt-5 px-4 py-2 text-xs font-semibold uppercase tracking-widest"
             style={{ backgroundColor: "rgba(178,34,34,0.08)", color: "var(--color-red)", borderRadius: "var(--radius-btn)" }}
           >
-            Oportunidade limitada — 50 títulos disponíveis
+            Oportunidade limitada — {vagas} títulos disponíveis
           </div>
         </motion.div>
 
         <div className="grid lg:grid-cols-[1fr_1.6fr] gap-14 items-start">
 
-          {/* Left — benefícios + valores de referência */}
+          {/* Left — valores + benefícios */}
           <motion.div
             initial={{ opacity: 0, x: -24 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.15 }}
             className="flex flex-col gap-8"
           >
-            {/* Valores */}
             <div className="flex flex-col gap-3">
               <div
                 className="p-5"
@@ -93,7 +92,7 @@ export default function Membership() {
                   Valor Venal do Título
                 </p>
                 <p className="font-display font-bold" style={{ fontSize: "1.75rem", color: "var(--color-ink)" }}>
-                  R$ 15.000,00
+                  R$ {formatBRL(valorVenal)}
                 </p>
               </div>
               <div
@@ -101,15 +100,14 @@ export default function Membership() {
                 style={{ backgroundColor: "#fff", border: "1px solid rgba(0,0,0,0.07)", borderRadius: "var(--radius-card)" }}
               >
                 <p className="text-xs font-semibold uppercase tracking-widest mb-1" style={{ color: "var(--color-anchor)" }}>
-                  Taxa de Manutenção 2025
+                  Taxa de Manutenção {taxaAno}
                 </p>
                 <p className="font-display font-bold" style={{ fontSize: "1.75rem", color: "var(--color-ink)" }}>
-                  R$ 639,05
+                  R$ {formatBRL(taxaManutencao)}
                 </p>
               </div>
             </div>
 
-            {/* Benefícios */}
             <div>
               <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: "var(--color-anchor)" }}>
                 O que está incluído
@@ -136,7 +134,7 @@ export default function Membership() {
             </div>
           </motion.div>
 
-          {/* Right — planos de parcelamento */}
+          {/* Right — planos */}
           <motion.div
             initial={{ opacity: 0, x: 24 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
@@ -147,50 +145,55 @@ export default function Membership() {
               Condições de pagamento
             </p>
 
-            {plans.map((p, i) => (
-              <motion.div
-                key={p.parcelas}
-                initial={{ opacity: 0, y: 16 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.35 + i * 0.08 }}
-                className="p-7 relative"
-                style={{
-                  backgroundColor: p.destaque ? "var(--color-navy)" : "#fff",
-                  border: p.destaque ? "none" : "1px solid rgba(0,0,0,0.07)",
-                  borderRadius: "var(--radius-card)",
-                  boxShadow: p.destaque ? "0 20px 48px rgba(10,22,40,0.18)" : "var(--shadow-luxury)",
-                }}
-              >
-                {p.destaque && (
-                  <span
-                    className="absolute top-5 right-5 text-xs font-bold uppercase tracking-widest px-2 py-0.5"
-                    style={{ backgroundColor: "var(--color-red)", color: "#fff", borderRadius: "4px" }}
-                  >
-                    Mais escolhido
-                  </span>
-                )}
-                <div className="flex items-baseline gap-3 mb-2">
-                  <span
-                    className="font-display font-bold"
-                    style={{ fontSize: "2.25rem", lineHeight: 1, color: p.destaque ? "var(--color-red)" : "var(--color-ink)" }}
-                  >
-                    {p.parcelas}
-                  </span>
-                  <span
-                    className="font-display font-semibold"
-                    style={{ fontSize: "1.25rem", color: p.destaque ? "#fff" : "var(--color-ink)" }}
-                  >
-                    {p.valor}
-                  </span>
-                </div>
-                <p
-                  className="text-sm leading-relaxed"
-                  style={{ color: p.destaque ? "rgba(255,255,255,0.5)" : "var(--color-anchor)" }}
+            {plans.map((p, i) => {
+              const isDestaque = p.destaque ?? false;
+              return (
+                <motion.div
+                  key={`${p.parcelas}-${i}`}
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={inView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.5, delay: 0.35 + i * 0.08 }}
+                  className="p-7 relative"
+                  style={{
+                    backgroundColor: isDestaque ? "var(--color-navy)" : "#fff",
+                    border:      isDestaque ? "none" : "1px solid rgba(0,0,0,0.07)",
+                    borderRadius: "var(--radius-card)",
+                    boxShadow:   isDestaque ? "0 20px 48px rgba(10,22,40,0.18)" : "var(--shadow-luxury)",
+                  }}
                 >
-                  + {p.taxa}
-                </p>
-              </motion.div>
-            ))}
+                  {isDestaque && (
+                    <span
+                      className="absolute top-5 right-5 text-xs font-bold uppercase tracking-widest px-2 py-0.5"
+                      style={{ backgroundColor: "var(--color-red)", color: "#fff", borderRadius: "4px" }}
+                    >
+                      Mais escolhido
+                    </span>
+                  )}
+                  <div className="flex items-baseline gap-3 mb-2">
+                    <span
+                      className="font-display font-bold"
+                      style={{ fontSize: "2.25rem", lineHeight: 1, color: isDestaque ? "var(--color-red)" : "var(--color-ink)" }}
+                    >
+                      {p.parcelas}×
+                    </span>
+                    <span
+                      className="font-display font-semibold"
+                      style={{ fontSize: "1.25rem", color: isDestaque ? "#fff" : "var(--color-ink)" }}
+                    >
+                      R$ {formatBRL(p.valorParcela)}
+                    </span>
+                  </div>
+                  {p.taxaInfo && (
+                    <p
+                      className="text-sm leading-relaxed"
+                      style={{ color: isDestaque ? "rgba(255,255,255,0.5)" : "var(--color-anchor)" }}
+                    >
+                      + {p.taxaInfo}
+                    </p>
+                  )}
+                </motion.div>
+              );
+            })}
 
             {/* CTA */}
             <div

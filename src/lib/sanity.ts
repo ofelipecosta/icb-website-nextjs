@@ -121,6 +121,31 @@ export async function getEventos(): Promise<EventoSanity[]> {
   );
 }
 
+export interface PlanSanity {
+  _key: string;
+  parcelas: number;
+  valorParcela: number;
+  taxaInfo?: string;
+  destaque?: boolean;
+}
+
+export interface SocioSanity {
+  _id: string;
+  valorVenal: number;
+  taxaManutencao: number;
+  taxaAno?: number;
+  vagas?: number;
+  planos?: PlanSanity[];
+  beneficios?: string[];
+}
+
+export async function getSocio(): Promise<SocioSanity | null> {
+  const result = await client.fetch(
+    `*[_type == "socio"][0]{ _id, valorVenal, taxaManutencao, taxaAno, vagas, planos, beneficios }`
+  );
+  return result ?? null;
+}
+
 export async function getNoticiasRelacionadas(excludeSlug: string, limit = 4): Promise<NoticiaSanity[]> {
   return client.fetch(
     `*[_type == "noticia" && slug.current != $excludeSlug] | order(data desc)[0..${limit - 1}]{ _id, titulo, slug, data, resumo, capa, fixado }`,
