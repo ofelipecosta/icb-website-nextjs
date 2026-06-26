@@ -1,8 +1,10 @@
-import { MapPin, Clock } from "lucide-react";
+import { MapPin, Clock, Phone } from "lucide-react";
 import Link from "next/link";
 import SectionHeader from "@/components/SectionHeader";
 
 const WHATSAPP = "https://wa.me/5521985564487";
+const TEL_HREF  = "tel:+552127148252";
+const TEL_LABEL = "(21) 2714-8252";
 
 const WaIcon = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -67,16 +69,27 @@ export default function ContactStrip() {
               </div>
             </div>
 
-            <a
-              href={WHATSAPP}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 py-3.5 font-semibold text-sm transition-opacity hover:opacity-90"
-              style={{ backgroundColor: "#25D366", color: "#fff", borderRadius: "var(--radius-btn)" }}
-            >
-              <WaIcon />
-              WhatsApp — Secretaria Social
-            </a>
+            <div className="grid grid-cols-2 gap-3">
+              <a
+                href={TEL_HREF}
+                className="flex items-center justify-center gap-2 py-3.5 font-semibold text-sm transition-opacity hover:opacity-70"
+                style={{ border: "1px solid rgba(0,0,0,0.12)", borderRadius: "var(--radius-btn)", color: "var(--color-ink)", backgroundColor: "#fff" }}
+              >
+                <Phone className="w-4 h-4" style={{ color: "var(--color-red)" }} />
+                {TEL_LABEL}
+              </a>
+
+              <a
+                href={WHATSAPP}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 py-3.5 font-semibold text-sm transition-opacity hover:opacity-90"
+                style={{ backgroundColor: "#25D366", color: "#fff", borderRadius: "var(--radius-btn)" }}
+              >
+                <WaIcon />
+                WhatsApp
+              </a>
+            </div>
           </div>
 
         </div>
