@@ -8,6 +8,7 @@ import {
   X, ChevronLeft, ChevronRight, Images, type LucideIcon,
 } from "lucide-react";
 import { urlFor, type InstalacaoSanity } from "@/lib/sanity";
+import SectionHeader from "@/components/SectionHeader";
 
 const RED = "#B22222";
 
@@ -433,36 +434,19 @@ export default function Installations({ sanityData = [] }: InstallationsProps) {
     <>
       <section id="instalacoes" className="section-py px-6" style={{ backgroundColor: "#FAF8F3" }}>
         <div className="max-w-7xl mx-auto" ref={ref}>
-          {/* Masthead — horizontal, left-aligned, consistent with News/Events */}
+          {/* Masthead */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={inView ? { opacity: 1 } : {}}
             transition={{ duration: 0.4 }}
-            className="flex items-end justify-between gap-6 mb-12 relative overflow-hidden"
-            style={{ paddingBottom: "1.5rem", borderBottom: "1px solid rgba(0,0,0,0.07)" }}
+            className="mb-12"
           >
-            {/* Left: bar + title + subtitle */}
-            <div className="flex items-start gap-4">
-              <span
-                className="w-1 rounded-full flex-shrink-0 mt-1"
-                style={{ backgroundColor: RED, height: "3.5rem" }}
-              />
-              <div>
-                <p className="text-xs tracking-[0.28em] uppercase font-semibold mb-2" style={{ color: RED }}>
-                  Estrutura
-                </p>
-                <h2
-                  className="font-display font-bold leading-none"
-                  style={{ fontSize: "clamp(1.75rem, 3.5vw, 2.5rem)", color: "#16202E" }}
-                >
-                  Instalações do ICB
-                </h2>
-                <p className="mt-2 text-sm leading-relaxed max-w-md" style={{ color: "#6B7A8D" }}>
-                  Infraestrutura completa para lazer, esporte e convivência.
-                </p>
-              </div>
-            </div>
-
+            <SectionHeader
+              eyebrow="Estrutura"
+              title="Instalações do ICB"
+              description="Infraestrutura completa para lazer, esporte e convivência."
+              titleSize="lg"
+            />
           </motion.div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">

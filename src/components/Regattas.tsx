@@ -19,11 +19,8 @@ const achievements = [
   { value: "8", label: "Classes de Vela" },
 ];
 
-function formatDate(iso: string): string {
-  const [y, m, d] = iso.split("-");
-  const months = ["Jan","Fev","Mar","Abr","Mai","Jun","Jul","Ago","Set","Out","Nov","Dez"];
-  return `${parseInt(d)} de ${months[parseInt(m) - 1]} de ${y}`;
-}
+import { formatDateLong } from "@/lib/utils";
+import SectionHeader from "@/components/SectionHeader";
 
 interface RegattasProps {
   sanityData?: RegatasSanity[];
@@ -35,7 +32,7 @@ export default function Regattas({ sanityData }: RegattasProps) {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="regatas" className="section-py px-6" style={{ backgroundColor: "#F8F9FA" }}>
+    <section id="regatas" className="section-py px-6" style={{ backgroundColor: "var(--color-surface)" }}>
       <div className="max-w-7xl mx-auto" ref={ref}>
 
         {/* Masthead */}
@@ -43,20 +40,21 @@ export default function Regattas({ sanityData }: RegattasProps) {
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ duration: 0.4 }}
-          className="flex items-start gap-4 mb-12"
-          style={{ paddingBottom: "1.5rem", borderBottom: "1px solid #E5E7EB" }}
+          className="mb-12"
         >
-          <span className="w-1 rounded-full flex-shrink-0 mt-1" style={{ backgroundColor: "var(--color-red)", height: "3.5rem" }} />
-          <div>
-            <p className="text-xs tracking-[0.28em] uppercase font-semibold mb-2" style={{ color: "var(--color-red)" }}>Náutica</p>
-            <h2 className="font-display font-black leading-none" style={{ color: "var(--color-navy)", fontSize: "clamp(1.75rem, 3.5vw, 2.5rem)" }}>
-              Velas & Regatas
-            </h2>
-            <p className="mt-2 text-sm leading-relaxed max-w-md" style={{ color: "#6B7280" }}>
-              Calendário de competições na Baía de Guanabara. Inscrições via{" "}
-              <a href="https://regatas.icb.org.br" target="_blank" rel="noopener noreferrer" style={{ color: "var(--color-red)" }}>regatas.icb.org.br</a>.
-            </p>
-          </div>
+          <SectionHeader
+            eyebrow="Náutica"
+            title="Velas & Regatas"
+            titleSize="lg"
+            description={
+              <>
+                Calendário de competições na Baía de Guanabara. Inscrições via{" "}
+                <a href="https://regatas.icb.org.br" target="_blank" rel="noopener noreferrer" style={{ color: "var(--color-red)" }}>
+                  regatas.icb.org.br
+                </a>.
+              </>
+            }
+          />
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-16 items-start">
@@ -136,7 +134,7 @@ export default function Regattas({ sanityData }: RegattasProps) {
                       {regatta.data && (
                         <span className="flex items-center gap-1.5">
                           <Calendar className="w-3.5 h-3.5" />
-                          {formatDate(regatta.data)}
+                          {formatDateLong(regatta.data)}
                         </span>
                       )}
                       {regatta.classes && (

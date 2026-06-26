@@ -6,6 +6,8 @@ import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { urlFor, type NoticiaSanity } from "@/lib/sanity";
+import { formatDate } from "@/lib/utils";
+import SectionHeader from "@/components/SectionHeader";
 
 const RED    = "#B22222";
 const INK    = "#16202E";
@@ -13,18 +15,6 @@ const ANCHOR = "#6B7A8D";
 
 function stripEmoji(s: string): string {
   return s.replace(/\p{Emoji_Presentation}/gu, "").replace(/\p{Emoji}️/gu, "").trim();
-}
-
-function formatDate(iso: string): string {
-  const [y, m, d] = iso.split("-");
-  const months = ["jan","fev","mar","abr","mai","jun","jul","ago","set","out","nov","dez"];
-  return `${parseInt(d)} ${months[parseInt(m) - 1]}. ${y}`;
-}
-
-function formatDateShort(iso: string): string {
-  const [, m, d] = iso.split("-");
-  const months = ["JAN","FEV","MAR","ABR","MAI","JUN","JUL","AGO","SET","OUT","NOV","DEZ"];
-  return `${parseInt(d)} ${months[parseInt(m) - 1]}`;
 }
 
 const fallbacks = [
@@ -69,29 +59,13 @@ export default function News({ sanityData = [] }: NewsProps) {
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ duration: 0.4 }}
-          className="flex items-center justify-between"
-          style={{ paddingTop: "1rem", paddingBottom: "1.25rem", borderBottom: "1px solid rgba(16,32,46,0.10)" }}
+          className="pt-4"
         >
-          <div className="flex items-center gap-3">
-            <span
-              className="w-1 h-7 rounded-full flex-shrink-0"
-              style={{ backgroundColor: RED }}
-            />
-            <span
-              className="font-display font-black leading-none"
-              style={{ color: "#16202E", fontSize: "clamp(1.5rem, 3vw, 2rem)" }}
-            >
-              Notícias
-            </span>
-          </div>
-          <Link
-            href="/noticias"
-            className="group flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest transition-opacity duration-200 hover:opacity-60"
-            style={{ color: RED }}
-          >
-            Ver todas
-            <ArrowRight className="w-3 h-3 transition-transform duration-200 group-hover:translate-x-0.5" />
-          </Link>
+          <SectionHeader
+            title="Notícias"
+            titleSize="lg"
+            cta={{ label: "Ver todas", href: "/noticias" }}
+          />
         </motion.div>
 
         {/* ── Featured story ── */}

@@ -4,8 +4,8 @@ import { useActionState, useRef } from "react";
 import { submitContact, type ContactState } from "@/app/actions/contact";
 import { Send, CheckCircle, AlertCircle } from "lucide-react";
 
-const RED  = "#B22222";
-const INK  = "#111827";
+const RED = "#B22222";
+const INK = "var(--color-ink)";
 
 const initial: ContactState = { status: "idle" };
 
@@ -91,7 +91,7 @@ export default function ContactForm() {
 
 function Field({ label, name, type, placeholder }: { label: string; name: string; type: string; placeholder: string }) {
   const RED = "#B22222";
-  const INK = "#111827";
+  const INK = "var(--color-ink)";
   return (
     <div className="flex flex-col gap-1.5">
       <label className="text-xs font-semibold uppercase tracking-wider" style={{ color: INK }}>

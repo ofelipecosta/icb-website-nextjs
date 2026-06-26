@@ -10,6 +10,33 @@ import Link from "next/link";
 const RED  = "#B22222";
 const NAVY = "#0A1628";
 
+function SocialInstagram() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="2" y="2" width="20" height="20" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+function SocialFacebook() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+    </svg>
+  );
+}
+
+function SocialYoutube() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.95C18.88 4 12 4 12 4s-6.88 0-8.59.47a2.78 2.78 0 0 0-1.95 1.95A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z" />
+      <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
 const navItems = [
   { name: "Início",      href: "#hero" },
   { name: "O Clube",     href: "#sobre" },
@@ -247,7 +274,7 @@ export default function Navbar() {
         </div>
       </motion.header>
 
-      {/* Mobile Drawer — mantém dark (contraste garantido) */}
+      {/* Mobile Drawer — Opção C: drawer lateral com fundo claro */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
@@ -256,10 +283,47 @@ export default function Navbar() {
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ type: "spring", damping: 28, stiffness: 280 }}
-            className="fixed inset-y-0 right-0 w-72 max-w-[85vw] z-50 flex flex-col pt-24 pb-8 px-7 overflow-y-auto"
-            style={{ backgroundColor: NAVY, borderLeft: "1px solid rgba(255,255,255,0.07)" }}
+            className="fixed inset-y-0 right-0 w-72 max-w-[85vw] z-50 flex flex-col overflow-y-auto"
+            style={{
+              backgroundColor: "#ffffff",
+              boxShadow: "-4px 0 28px rgba(0,0,0,0.12)",
+            }}
           >
-            <nav className="flex flex-col" aria-label="Menu mobile">
+            {/* Drawer header: logo colorido + fechar */}
+            <div
+              className="flex items-center justify-between px-6 pt-6 pb-5 flex-shrink-0"
+              style={{ borderBottom: "1px solid rgba(0,0,0,0.06)" }}
+            >
+              <Image
+                src="/images/logo/logo-icb-colorido.png"
+                alt="Iate Clube Brasileiro"
+                width={110}
+                height={40}
+                className="object-contain"
+              />
+              <button
+                type="button"
+                onClick={() => setMobileOpen(false)}
+                className="p-2 rounded-full cursor-pointer transition-colors duration-200 hover:bg-black/5"
+                aria-label="Fechar menu"
+                style={{ color: NAVY, backgroundColor: "rgba(22,32,46,0.06)" }}
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            {/* Eyebrow */}
+            <div className="px-6 pt-5 pb-3 flex-shrink-0">
+              <p
+                className="text-xs font-semibold tracking-[0.2em] uppercase"
+                style={{ color: "rgba(22,32,46,0.28)" }}
+              >
+                Navegação
+              </p>
+            </div>
+
+            {/* Nav items */}
+            <nav className="flex flex-col px-6 flex-1" aria-label="Menu mobile">
               {navItems.map((item, i) => {
                 const isActive = activeItem === item.name;
                 const hasDrop  = !!dropdowns[item.name];
@@ -269,7 +333,7 @@ export default function Navbar() {
                   <div key={item.href}>
                     <motion.button
                       type="button"
-                      initial={{ opacity: 0, x: 16 }}
+                      initial={{ opacity: 0, x: 12 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: i * 0.04 }}
                       onClick={() => {
@@ -279,27 +343,33 @@ export default function Navbar() {
                           handleSelect(item.href, item.name);
                         }
                       }}
-                      className="flex items-center justify-between w-full text-base font-medium text-left py-3.5 cursor-pointer"
-                      style={{
-                        color:        isActive ? "#fff" : "rgba(255,255,255,0.55)",
-                        borderBottom: "1px solid rgba(255,255,255,0.06)",
-                      }}
+                      className="flex items-center justify-between w-full py-3 cursor-pointer"
                     >
                       <div className="flex items-center gap-3">
-                        {isActive && (
-                          <span
-                            className="w-1 h-4 rounded-full flex-shrink-0"
-                            style={{ backgroundColor: RED }}
-                          />
-                        )}
-                        {item.name}
+                        <span
+                          className="rounded-full flex-shrink-0 transition-all duration-200"
+                          style={{
+                            width: "3px",
+                            height: "16px",
+                            backgroundColor: isActive ? RED : "transparent",
+                          }}
+                        />
+                        <span
+                          className="text-base"
+                          style={{
+                            color:      isActive ? NAVY : "rgba(22,32,46,0.5)",
+                            fontWeight: isActive ? 600 : 400,
+                          }}
+                        >
+                          {item.name}
+                        </span>
                       </div>
                       {hasDrop && (
                         <ChevronDown
                           className="w-4 h-4 transition-transform duration-200"
                           style={{
                             transform: isExp ? "rotate(180deg)" : "rotate(0deg)",
-                            color: "rgba(255,255,255,0.35)",
+                            color: "rgba(22,32,46,0.28)",
                           }}
                         />
                       )}
@@ -310,7 +380,7 @@ export default function Navbar() {
                         <motion.div
                           initial={{ opacity: 0, height: 0 }}
                           animate={{ opacity: 1, height: "auto" }}
-                          exit={   { opacity: 0, height: 0 }}
+                          exit={{ opacity: 0, height: 0 }}
                           transition={{ duration: 0.2 }}
                           className="overflow-hidden"
                         >
@@ -319,16 +389,9 @@ export default function Navbar() {
                               key={sub.href}
                               href={sub.href}
                               onClick={() => { setMobileOpen(false); setMobileExpanded(null); }}
-                              className="flex items-center pl-6 py-3 text-sm"
-                              style={{
-                                color:        "rgba(255,255,255,0.45)",
-                                borderBottom: "1px solid rgba(255,255,255,0.04)",
-                              }}
+                              className="flex items-center pl-6 py-2.5 text-sm"
+                              style={{ color: "rgba(22,32,46,0.4)" }}
                             >
-                              <span
-                                className="w-1 h-1 rounded-full mr-3 flex-shrink-0"
-                                style={{ backgroundColor: RED }}
-                              />
                               {sub.label}
                             </Link>
                           ))}
@@ -339,6 +402,39 @@ export default function Navbar() {
                 );
               })}
             </nav>
+
+            {/* Rodapé com redes sociais */}
+            <div
+              className="px-6 py-5 flex-shrink-0"
+              style={{ borderTop: "1px solid rgba(0,0,0,0.06)" }}
+            >
+              <div className="flex items-center gap-5">
+                <a
+                  href="#"
+                  aria-label="Instagram"
+                  className="transition-opacity duration-200 hover:opacity-50"
+                  style={{ color: "rgba(22,32,46,0.38)" }}
+                >
+                  <SocialInstagram />
+                </a>
+                <a
+                  href="#"
+                  aria-label="Facebook"
+                  className="transition-opacity duration-200 hover:opacity-50"
+                  style={{ color: "rgba(22,32,46,0.38)" }}
+                >
+                  <SocialFacebook />
+                </a>
+                <a
+                  href="#"
+                  aria-label="YouTube"
+                  className="transition-opacity duration-200 hover:opacity-50"
+                  style={{ color: "rgba(22,32,46,0.38)" }}
+                >
+                  <SocialYoutube />
+                </a>
+              </div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

@@ -1,19 +1,11 @@
 "use client";
 
 import { Clock, MapPin } from "lucide-react";
+import { categoryColors, DEFAULT_CATEGORY_COLOR } from "@/lib/constants";
+import { formatDateShort } from "@/lib/utils";
 
 const RED = "#B22222";
-const INK = "#111827";
-
-const categoryColors: Record<string, { bg: string; text: string }> = {
-  Social: { bg: "rgba(168, 85, 247, 0.08)", text: "#A855F7" },
-  Esporte: { bg: "rgba(16, 185, 129, 0.08)", text: "#10B981" },
-  Náutico: { bg: "rgba(59, 130, 246, 0.08)", text: "#3B82F6" },
-};
-
-function formatDate(month: string, day: string): string {
-  return `${day} ${month.slice(0, 3).toLowerCase()}`;
-}
+const INK = "var(--color-ink)";
 
 interface EventCardProps {
   event: {
@@ -25,112 +17,97 @@ interface EventCardProps {
     time: string;
     location: string;
     category: string;
+    data?: string;
   };
 }
 
 export default function EventCard({ event }: EventCardProps) {
+  const cat = categoryColors[event.category] ?? DEFAULT_CATEGORY_COLOR;
+  const dateLabel = event.data
+    ? formatDateShort(event.data)
+    : `${event.day} ${event.month.slice(0, 3)}`;
+
   return (
-    <div className="group cursor-pointer">
+    <div
+      className="group cursor-pointer card-hover h-full"
+      style={{
+        backgroundColor: "#ffffff",
+        border: "1px solid rgba(0,0,0,0.07)",
+        borderRadius: "var(--radius-card)",
+        boxShadow: "var(--shadow-luxury)",
+        overflow: "hidden",
+      }}
+    >
+      {/* Image placeholder — gradient background */}
       <div
-        className="h-full rounded-lg transition-all duration-300"
-        style={{
-          backgroundColor: "#ffffff",
-          border: "1px solid #E5E7EB",
-          boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
-          overflow: "hidden",
-        }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.boxShadow = "0 10px 25px rgba(0,0,0,0.15)";
-          e.currentTarget.style.transform = "translateY(-4px)";
-          e.currentTarget.style.borderColor = "#D1D5DB";
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.boxShadow = "0 1px 3px rgba(0,0,0,0.1)";
-          e.currentTarget.style.transform = "translateY(0)";
-          e.currentTarget.style.borderColor = "#E5E7EB";
-        }}
+        className="relative overflow-hidden flex-shrink-0 flex items-center justify-center"
+        style={{ aspectRatio: "3/1", backgroundColor: cat.bg }}
       >
-        {/* Image placeholder */}
-        <div
-          className="relative overflow-hidden flex-shrink-0 rounded-t-lg flex items-center justify-center"
-          style={{
-            aspectRatio: "3/1",
-            backgroundColor: "#F9FAFB",
-          }}
+        <span
+          className="font-display text-6xl font-bold opacity-20 select-none"
+          style={{ color: cat.text }}
         >
-          <div
-            className="absolute inset-0 flex items-center justify-center transition-transform duration-300 group-hover:scale-105"
-            style={{
-              background: `linear-gradient(135deg, ${categoryColors[event.category].bg} 0%, rgba(229, 231, 235, 0.5) 100%)`,
-            }}
+          {event.day}
+        </span>
+      </div>
+
+      {/* Content */}
+      <div className="p-5 flex flex-col h-full">
+        {/* Date + Category */}
+        <div className="flex flex-wrap items-center gap-3 mb-4">
+          <span
+            className="text-xs font-semibold uppercase tracking-widest px-2.5 py-1"
+            style={{ backgroundColor: RED, color: "#fff", borderRadius: "var(--radius-btn)" }}
           >
-            <span
-              className="font-display text-6xl font-bold opacity-20"
-              style={{ color: categoryColors[event.category].text }}
-            >
-              {event.day}
-            </span>
-          </div>
+            {dateLabel}
+          </span>
+          <span
+            className="text-xs font-semibold px-2 py-1"
+            style={{ backgroundColor: cat.bg, color: cat.text, borderRadius: "var(--radius-btn)" }}
+          >
+            {event.category}
+          </span>
         </div>
 
-        {/* Content */}
-        <div className="p-5 flex flex-col h-full">
-          {/* Date + Category */}
-          <div className="flex flex-wrap items-center gap-3 mb-4">
-            <span
-              className="text-xs font-black uppercase tracking-widest px-2.5 py-1 rounded"
-              style={{ backgroundColor: RED, color: "#fff" }}
-            >
-              {formatDate(event.month, event.day)}
-            </span>
-            <span
-              className="text-xs font-semibold px-2 py-1 rounded"
-              style={{
-                backgroundColor: categoryColors[event.category].bg,
-                color: categoryColors[event.category].text,
-              }}
-            >
-              {event.category}
-            </span>
-          </div>
+        {/* Title */}
+        <h3
+          className="font-display text-lg font-semibold leading-snug mb-3 transition-colors duration-200 group-hover:text-[#B22222] line-clamp-2"
+          style={{ color: INK }}
+        >
+          {event.title}
+        </h3>
 
-          {/* Title */}
-          <h3
-            className="font-display text-lg font-semibold leading-snug mb-3 transition-colors duration-200 group-hover:text-[#B22222] line-clamp-2"
-            style={{ color: INK }}
+        {/* Description */}
+        <p
+          className="text-sm leading-relaxed line-clamp-2 mb-4 flex-1"
+          style={{ color: "var(--color-anchor)" }}
+        >
+          {event.description}
+        </p>
+
+        {/* Time + Location */}
+        <div className="flex flex-col gap-2 text-xs" style={{ color: "var(--color-anchor)" }}>
+          <span className="flex items-center gap-1.5">
+            <Clock className="w-3.5 h-3.5" />
+            {event.time}
+          </span>
+          <span className="flex items-center gap-1.5">
+            <MapPin className="w-3.5 h-3.5" />
+            {event.location}
+          </span>
+        </div>
+
+        {/* CTA */}
+        <div
+          className="mt-4 pt-4"
+          style={{ borderTop: "1px solid rgba(0,0,0,0.07)" }}
+        >
+          <span
+            className="text-xs font-semibold uppercase tracking-wider flex items-center gap-1.5 group-hover:gap-2.5 transition-all duration-300"
+            style={{ color: RED }}
           >
-            {event.title}
-          </h3>
-
-          {/* Description */}
-          <p
-            className="text-sm leading-relaxed line-clamp-2 mb-4 flex-1"
-            style={{ color: "#6B7A8D" }}
-          >
-            {event.description}
-          </p>
-
-          {/* Time + Location */}
-          <div className="flex flex-col gap-2 text-xs" style={{ color: "#6B7A8D" }}>
-            <span className="flex items-center gap-1.5">
-              <Clock className="w-3.5 h-3.5" />
-              {event.time}
-            </span>
-            <span className="flex items-center gap-1.5">
-              <MapPin className="w-3.5 h-3.5" />
-              {event.location}
-            </span>
-          </div>
-
-          {/* CTA */}
-          <div className="mt-4 pt-4" style={{ borderTop: "1px solid #E5E7EB" }}>
-            <span
-              className="text-xs font-semibold uppercase tracking-wider flex items-center gap-1.5 group-hover:gap-2.5 transition-all duration-300"
-              style={{ color: RED }}
-            >
-              Ver detalhes →
-            </span>
-          </div>
+            Ver detalhes →
+          </span>
         </div>
       </div>
     </div>

@@ -4,6 +4,9 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { Calendar, MapPin, ArrowRight } from "lucide-react";
 import type { EventoSanity } from "@/lib/sanity";
+import { categoryColors, DEFAULT_CATEGORY_COLOR } from "@/lib/constants";
+import { formatDateShort } from "@/lib/utils";
+import SectionHeader from "@/components/SectionHeader";
 
 const RED    = "#B22222";
 const INK    = "#16202E";
@@ -14,20 +17,6 @@ const FALLBACK_EVENTS: EventoSanity[] = [
   { _id: "2", titulo: "Festa do Sócio",                     categoria: "Social",  data: "2026-04-19", local: "Salão de Festas", detalhe: "Grande confraternização com drinks, gastronomia e lazer para toda a família." },
   { _id: "3", titulo: "Escola de Vela – Início das Turmas", categoria: "Náutico", data: "2026-05-10", local: "Marina",          detalhe: "Inscrições abertas para iniciantes e avançados na Escola de Vela do ICB." },
 ];
-
-const categoryColors: Record<string, { bg: string; text: string }> = {
-  Social:   { bg: "rgba(168, 85, 247, 0.08)", text: "#A855F7" },
-  Esporte:  { bg: "rgba(16, 185, 129, 0.08)", text: "#10B981" },
-  Náutico:  { bg: "rgba(59, 130, 246, 0.08)", text: "#3B82F6" },
-  Cultural: { bg: "rgba(234, 179, 8, 0.08)",  text: "#CA8A04" },
-};
-
-function formatEventDate(iso?: string): string {
-  if (!iso) return "";
-  const [, m, d] = iso.split("-");
-  const months = ["Jan","Fev","Mar","Abr","Mai","Jun","Jul","Ago","Set","Out","Nov","Dez"];
-  return `${parseInt(d)} ${months[parseInt(m) - 1]}`;
-}
 
 interface EventsProps {
   sanityData?: EventoSanity[];
@@ -41,40 +30,22 @@ export default function Events({ sanityData }: EventsProps) {
   return (
     <section id="eventos" className="section-py px-6" style={{ backgroundColor: "#ffffff" }}>
       <div className="max-w-7xl mx-auto" ref={ref}>
-        {/* Masthead — igual ao de Notícias */}
+        {/* Masthead */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ duration: 0.4 }}
-          className="flex items-center justify-between"
-          style={{ paddingBottom: "1.25rem", borderBottom: "1px solid rgba(0,0,0,0.07)" }}
         >
-          <div className="flex items-center gap-3">
-            <span
-              className="w-1 h-7 rounded-full flex-shrink-0"
-              style={{ backgroundColor: RED }}
-            />
-            <span
-              className="font-display font-black leading-none"
-              style={{ color: INK, fontSize: "clamp(1.4rem, 2.8vw, 1.875rem)" }}
-            >
-              Eventos
-            </span>
-          </div>
-          <a
-            href="/eventos"
-            className="group flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest transition-opacity duration-200 hover:opacity-60 cursor-pointer"
-            style={{ color: RED }}
-          >
-            Ver todos
-            <ArrowRight className="w-3 h-3 transition-transform duration-200 group-hover:translate-x-0.5" />
-          </a>
+          <SectionHeader
+            title="Eventos"
+            cta={{ label: "Ver todos", href: "/eventos" }}
+          />
         </motion.div>
 
         {/* Event cards grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
           {items.map((event, i) => {
-            const cat = categoryColors[event.categoria] ?? { bg: "rgba(107,122,141,0.08)", text: "#6B7A8D" };
+            const cat = categoryColors[event.categoria] ?? DEFAULT_CATEGORY_COLOR;
             return (
             <motion.div
               key={event._id}
@@ -106,10 +77,10 @@ export default function Events({ sanityData }: EventsProps) {
                   <div className="flex flex-wrap items-center gap-3 mb-4">
                     {event.data && (
                       <span className="text-xs font-semibold uppercase tracking-widest px-2.5 py-1 rounded" style={{ backgroundColor: RED, color: "#fff" }}>
-                        <Calendar className="w-3 h-3 inline mr-1" />{formatEventDate(event.data)}
+                        <Calendar className="w-3 h-3 inline mr-1" />{formatDateShort(event.data)}
                       </span>
                     )}
-                    <span className="text-xs font-semibold px-2 py-1 rounded" style={{ backgroundColor: cat.bg, color: cat.text }}>
+                    <span className="text-xs font-semibold px-2 py-1" style={{ backgroundColor: cat.bg, color: cat.text, borderRadius: "var(--radius-btn)" }}>
                       {event.categoria}
                     </span>
                   </div>
@@ -135,7 +106,7 @@ export default function Events({ sanityData }: EventsProps) {
                   )}
 
                   {/* CTA */}
-                  <div className="mt-auto pt-4" style={{ borderTop: "1px solid #E5E7EB" }}>
+                  <div className="mt-auto pt-4" style={{ borderTop: "1px solid rgba(0,0,0,0.07)" }}>
                     <span className="text-xs font-semibold uppercase tracking-wider flex items-center gap-1.5 group-hover:gap-2.5 transition-all duration-300" style={{ color: RED }}>
                       {event.ctaLabel ?? "Ver mais"} →
                     </span>

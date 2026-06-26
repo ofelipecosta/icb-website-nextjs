@@ -3,17 +3,12 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Pin } from "lucide-react";
+import { formatDate } from "@/lib/utils";
 
 const RED = "#B22222";
 
 function stripEmoji(s: string): string {
   return s.replace(/\p{Emoji_Presentation}/gu, "").replace(/\p{Emoji}️/gu, "").trim();
-}
-
-function formatDate(iso: string): string {
-  const [y, m, d] = iso.split("-");
-  const months = ["Jan","Fev","Mar","Abr","Mai","Jun","Jul","Ago","Set","Out","Nov","Dez"];
-  return `${parseInt(d)} ${months[parseInt(m) - 1]} ${y}`;
 }
 
 const fallbackGradients = [
@@ -40,31 +35,18 @@ export default function NewsCard({ noticia, index, imgUrl }: NewsCardProps) {
   const title = stripEmoji(noticia.titulo);
 
   return (
-    <Link
-      href={`/noticias/${noticia.slug.current}`}
-      className="group cursor-pointer"
-    >
+    <Link href={`/noticias/${noticia.slug.current}`} className="group cursor-pointer h-full block">
       <div
-        className="h-full rounded-lg transition-all duration-300"
+        className="h-full card-hover overflow-hidden flex flex-col"
         style={{
           backgroundColor: "#ffffff",
-          border: "1px solid #E5E7EB",
-          boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
-          overflow: "visible",
-        }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.boxShadow = "0 10px 25px rgba(0,0,0,0.15)";
-          e.currentTarget.style.transform = "translateY(-4px)";
-          e.currentTarget.style.borderColor = "#D1D5DB";
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.boxShadow = "0 1px 3px rgba(0,0,0,0.1)";
-          e.currentTarget.style.transform = "translateY(0)";
-          e.currentTarget.style.borderColor = "#E5E7EB";
+          border: "1px solid rgba(0,0,0,0.07)",
+          borderRadius: "var(--radius-card)",
+          boxShadow: "var(--shadow-luxury)",
         }}
       >
         {/* Cover */}
-        <div className="aspect-video overflow-hidden relative rounded-t-lg">
+        <div className="aspect-video overflow-hidden relative flex-shrink-0">
           {imgUrl ? (
             <Image
               src={imgUrl}
@@ -83,8 +65,8 @@ export default function NewsCard({ noticia, index, imgUrl }: NewsCardProps) {
           <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
           {noticia.fixado && (
             <div
-              className="absolute top-3 left-3 flex items-center gap-1 text-xs font-semibold px-2.5 py-1 rounded-full"
-              style={{ backgroundColor: RED, color: "#fff" }}
+              className="absolute top-3 left-3 flex items-center gap-1 text-xs font-semibold px-2.5 py-1"
+              style={{ backgroundColor: RED, color: "#fff", borderRadius: "var(--radius-btn)" }}
             >
               <Pin className="w-3 h-3" /> Destaque
             </div>
@@ -92,26 +74,23 @@ export default function NewsCard({ noticia, index, imgUrl }: NewsCardProps) {
         </div>
 
         {/* Content */}
-        <div className="p-5">
-          <span className="text-xs mb-2 block" style={{ color: "#6B7A8D" }}>
+        <div className="p-5 flex flex-col flex-1">
+          <span className="text-xs mb-2 block" style={{ color: "var(--color-anchor)" }}>
             {formatDate(noticia.data)}
           </span>
-
           <h2
             className="font-display text-lg font-semibold leading-snug mb-3 transition-colors duration-300 group-hover:text-[#B22222] line-clamp-2"
-            style={{ color: "#0A1628" }}
+            style={{ color: "var(--color-ink)" }}
           >
             {title}
           </h2>
-
           {noticia.resumo && (
-            <p className="text-sm leading-relaxed line-clamp-2 mb-4" style={{ color: "#6B7A8D" }}>
+            <p className="text-sm leading-relaxed line-clamp-2 mb-4 flex-1" style={{ color: "var(--color-anchor)" }}>
               {noticia.resumo}
             </p>
           )}
-
           <span
-            className="text-xs font-semibold uppercase tracking-wider flex items-center gap-1.5 group-hover:gap-2.5 transition-all duration-300"
+            className="text-xs font-semibold uppercase tracking-wider flex items-center gap-1.5 group-hover:gap-2.5 transition-all duration-300 mt-auto"
             style={{ color: RED }}
           >
             Ler mais →

@@ -8,27 +8,16 @@ import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import Breadcrumb from "@/components/Breadcrumb";
 import { getNoticia, getNoticiasNav, getNoticiasRelacionadas, urlFor } from "@/lib/sanity";
+import { formatDate, formatDateShort } from "@/lib/utils";
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type SanityImageSource = any;
 
 const RED  = "#B22222";
 const NAVY = "#0A1628";
-const INK  = "#111827";
+const INK  = "var(--color-ink)";
 
 function stripEmoji(s: string): string {
   return s.replace(/\p{Emoji_Presentation}/gu, "").replace(/\p{Emoji}️/gu, "").trim();
-}
-
-function formatDate(iso: string): string {
-  const [y, m, d] = iso.split("-");
-  const months = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
-  return `${parseInt(d)} de ${months[parseInt(m) - 1]} de ${y}`;
-}
-
-function formatDateShort(iso: string): string {
-  const [, m, d] = iso.split("-");
-  const months = ["JAN","FEV","MAR","ABR","MAI","JUN","JUL","AGO","SET","OUT","NOV","DEZ"];
-  return `${parseInt(d)} ${months[parseInt(m) - 1]}`;
 }
 
 const portableComponents: PortableTextComponents = {

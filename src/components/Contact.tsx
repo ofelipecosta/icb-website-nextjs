@@ -7,7 +7,7 @@ import ContactForm from "@/components/ContactForm";
 
 const RED  = "#B22222";
 const NAVY = "#0A1628";
-const INK  = "#111827";
+const INK  = "var(--color-ink)";
 
 const WaIcon = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
