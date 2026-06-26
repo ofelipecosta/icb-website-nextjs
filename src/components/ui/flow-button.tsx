@@ -13,26 +13,26 @@ interface FlowButtonProps {
 
 export function FlowButton({ text, onClick, href, className, variant = "light" }: FlowButtonProps) {
   const base = cn(
-    "group relative inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg",
+    "group relative inline-flex items-center justify-center gap-2 px-8 py-3 rounded-lg",
     "text-sm font-semibold overflow-hidden cursor-pointer select-none",
-    "transition-colors duration-300"
+    "transition-all duration-300 border-0"
   );
 
   const styles: Record<string, { wrapper: string; defaultText: string; hoverFill: string }> = {
     light: {
-      wrapper: "bg-white border border-gray-200 text-gray-900",
+      wrapper: "bg-white text-gray-900",
       defaultText: "text-gray-900 group-hover:text-white",
       hoverFill: "bg-gray-900",
     },
     dark: {
-      wrapper: "bg-transparent text-white",
-      defaultText: "text-white",
+      wrapper: "bg-slate-800 text-white",
+      defaultText: "text-white group-hover:text-slate-800",
       hoverFill: "bg-white",
     },
     red: {
-      wrapper: "bg-transparent border border-[#B22222] text-[#B22222]",
-      defaultText: "text-[#B22222] group-hover:text-white",
-      hoverFill: "bg-[#B22222]",
+      wrapper: "bg-[#B22222] text-white",
+      defaultText: "text-white group-hover:text-white",
+      hoverFill: "bg-[#A01F1F]",
     },
   };
 
@@ -88,18 +88,16 @@ export function FlowButton({ text, onClick, href, className, variant = "light" }
     </>
   );
 
-  const borderStyle = variant === "dark" ? { border: "1px solid rgba(255,255,255,0.25)" } : {};
-
   if (href) {
     return (
-      <a href={href} className={cn(base, s.wrapper, className)} style={borderStyle}>
+      <a href={href} className={cn(base, s.wrapper, className)}>
         {inner}
       </a>
     );
   }
 
   return (
-    <button type="button" onClick={onClick} className={cn(base, s.wrapper, className)} style={borderStyle}>
+    <button type="button" onClick={onClick} className={cn(base, s.wrapper, className)}>
       {inner}
     </button>
   );
