@@ -59,7 +59,7 @@ export default function News({ sanityData = [] }: NewsProps) {
   return (
     <section
       id="noticias"
-      className="navy-ambient"
+      style={{ backgroundColor: "#EAF2F6" }}
     >
       <div className="max-w-7xl mx-auto px-6" ref={ref}>
 
@@ -69,7 +69,7 @@ export default function News({ sanityData = [] }: NewsProps) {
           animate={inView ? { opacity: 1 } : {}}
           transition={{ duration: 0.4 }}
           className="flex items-center justify-between"
-          style={{ paddingTop: "1rem", paddingBottom: "1.25rem", borderBottom: "1px solid rgba(255,255,255,0.08)" }}
+          style={{ paddingTop: "1rem", paddingBottom: "1.25rem", borderBottom: "1px solid rgba(16,32,46,0.10)" }}
         >
           <div className="flex items-center gap-3">
             <span
@@ -78,7 +78,7 @@ export default function News({ sanityData = [] }: NewsProps) {
             />
             <span
               className="font-display font-black leading-none"
-              style={{ color: "#ffffff", fontSize: "clamp(1.5rem, 3vw, 2rem)" }}
+              style={{ color: "#16202E", fontSize: "clamp(1.5rem, 3vw, 2rem)" }}
             >
               Notícias
             </span>
@@ -98,7 +98,7 @@ export default function News({ sanityData = [] }: NewsProps) {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.1 }}
-          style={{ paddingTop: "2rem", paddingBottom: "2rem", borderBottom: "1px solid rgba(255,255,255,0.08)" }}
+          style={{ paddingTop: "2rem", paddingBottom: "2rem", borderBottom: "1px solid rgba(16,32,46,0.10)" }}
         >
           <Link
             href={featSlug ? `/noticias/${featSlug}` : "/noticias"}
@@ -134,7 +134,7 @@ export default function News({ sanityData = [] }: NewsProps) {
                     Destaque
                   </span>
                 )}
-                <time className="text-xs font-medium" style={{ color: "rgba(255,255,255,0.45)" }}>
+                <time className="text-xs font-medium" style={{ color: "#4A5666" }}>
                   {formatDate(featured.data)}
                 </time>
               </div>
@@ -142,7 +142,7 @@ export default function News({ sanityData = [] }: NewsProps) {
               <h3
                 className="font-display font-black leading-tight transition-colors duration-200 group-hover:text-[#B22222]"
                 style={{
-                  color: "#ffffff",
+                  color: "#16202E",
                   fontSize: "clamp(1.5rem, 2.8vw, 2.25rem)",
                   lineHeight: 1.1,
                 }}
@@ -153,13 +153,13 @@ export default function News({ sanityData = [] }: NewsProps) {
               {(featured as NoticiaSanity & { resumo?: string }).resumo && (
                 <p
                   className="leading-relaxed line-clamp-3"
-                  style={{ color: "rgba(255,255,255,0.6)", fontSize: "1rem" }}
+                  style={{ color: "#4A5666", fontSize: "1rem" }}
                 >
                   {(featured as NoticiaSanity & { resumo?: string }).resumo}
                 </p>
               )}
 
-              <div style={{ paddingTop: "0.75rem", borderTop: "1px solid rgba(255,255,255,0.08)" }}>
+              <div style={{ paddingTop: "0.75rem", borderTop: "1px solid rgba(16,32,46,0.10)" }}>
                 <span
                   className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest transition-all duration-200 group-hover:gap-3"
                   style={{ color: RED }}
@@ -265,7 +265,7 @@ export default function News({ sanityData = [] }: NewsProps) {
         {/* Mobile "ver todas" */}
         <div
           className="flex justify-center pb-8"
-          style={{ borderTop: "1px solid rgba(255,255,255,0.08)", paddingTop: "1.5rem" }}
+          style={{ borderTop: "1px solid rgba(16,32,46,0.10)", paddingTop: "1.5rem" }}
         >
           <Link
             href="/noticias"

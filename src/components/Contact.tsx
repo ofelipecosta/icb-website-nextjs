@@ -148,7 +148,7 @@ export default function Contact() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="contato" className="section-py px-6" style={{ backgroundColor: "#ffffff" }}>
+    <section id="contato" className="section-py px-6" style={{ backgroundColor: "#F2EEE6" }}>
       <div className="max-w-7xl mx-auto" ref={ref}>
 
         {/* Masthead — horizontal, left-aligned */}

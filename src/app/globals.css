@@ -13,6 +13,14 @@
   --color-anchor: #6B7A8D;
   --color-anchor-light: #8FA0B4;
 
+  /* Paleta costeira — base clara e quente */
+  --color-sand: #FAF8F3;
+  --color-sand-100: #F2EEE6;
+  --color-mist: #EAF2F6;
+  --color-sea: #2E6E8E;
+  --color-ink: #16202E;
+  --color-ink-soft: #4A5666;
+
   --font-display: 'Cormorant', Georgia, serif;
   --font-body: 'IBM Plex Sans', system-ui, sans-serif;
 
@@ -23,8 +31,8 @@
 .navy-ambient {
   background-color: #0A1628;
   background-image:
-    radial-gradient(ellipse 60% 50% at 85% 15%, rgba(178,34,34,0.18) 0%, transparent 65%),
-    radial-gradient(ellipse 50% 60% at 10% 80%, rgba(30,70,140,0.28) 0%, transparent 60%);
+    radial-gradient(ellipse 70% 55% at 85% 8%, rgba(30,70,140,0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 65% at 8% 92%, rgba(20,52,104,0.20) 0%, transparent 58%);
 }
 
 /* Force light mode — block browser automatic dark theme */
@@ -34,7 +42,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root { color-scheme: light; }
-  html, body { background-color: #ffffff !important; color: #111827 !important; }
+  html, body { background-color: #FAF8F3 !important; color: #16202E !important; }
 }
 
 @layer base {
@@ -48,7 +56,7 @@
   }
 
   html, body {
-    background-color: #ffffff !important;
+    background-color: #FAF8F3 !important;
   }
 
   body {

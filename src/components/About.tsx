@@ -33,7 +33,7 @@ export default function About() {
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="sobre" className="section-py bg-white px-6">
+    <section id="sobre" className="section-py bg-[#FAF8F3] px-6">
       <div className="max-w-7xl mx-auto" ref={ref}>
         {/* Masthead — horizontal, left-aligned */}
         <motion.div
