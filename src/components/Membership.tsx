@@ -1,8 +1,12 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Check, ChevronRight, Send } from "lucide-react";
+import { Check, ArrowRight } from "lucide-react";
+import Link from "next/link";
+import SectionHeader from "@/components/SectionHeader";
+
+const WHATSAPP = "https://wa.me/5521985564487";
 
 const benefits = [
   "Acesso à marina e áreas náuticas",
@@ -10,254 +14,213 @@ const benefits = [
   "Participação em regatas e competições",
   "Escola de vela para toda a família",
   "Reserva de salões e churrasqueiras",
-  "Academia e quadras poliesportivas",
   "Eventos sociais exclusivos",
-  "Desconto em parceiros e estabelecimentos",
 ];
 
 const plans = [
   {
-    name: "Individual",
-    description: "Para o entusiasta do mar",
-    highlight: false,
+    parcelas: "10×",
+    valor: "R$ 1.500,00",
+    taxa: "50% da taxa de manutenção em vigor durante o pagamento das parcelas",
+    destaque: false,
   },
   {
-    name: "Familiar",
-    description: "Para toda a família",
-    highlight: true,
+    parcelas: "15×",
+    valor: "R$ 1.000,00",
+    taxa: "Taxa de manutenção em vigor no valor integral",
+    destaque: true,
   },
   {
-    name: "Jovem",
-    description: "Até 30 anos",
-    highlight: false,
+    parcelas: "24×",
+    valor: "R$ 625,00",
+    taxa: "Taxa de manutenção em vigor no valor integral",
+    destaque: false,
   },
 ];
+
+const WaIcon = () => (
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
+  </svg>
+);
 
 export default function Membership() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
-  const [formData, setFormData] = useState({
-    nome: "",
-    email: "",
-    telefone: "",
-    plano: "Familiar",
-    mensagem: "",
-  });
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Here you would send to the backend/email
-    setSubmitted(true);
-  };
 
   return (
-    <section id="socio" className="section-py bg-white px-6">
+    <section id="seja-socio" className="section-py px-6" style={{ backgroundColor: "var(--color-surface)" }}>
       <div className="max-w-7xl mx-auto" ref={ref}>
-        {/* Header */}
-        <div className="text-center mb-20">
-          <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
-            className="text-[var(--color-red)] text-xs tracking-[0.3em] uppercase font-semibold mb-4"
-          >
-            Associação
-          </motion.p>
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.1 }}
-            className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-[var(--color-navy)] leading-tight mb-6"
-          >
-            Faça Parte desta
-            <br />
-            <em className="not-italic text-[var(--color-red)]">Tradição</em>
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={inView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-[var(--color-anchor)] max-w-xl mx-auto text-base leading-relaxed"
-          >
-            Ser sócio do Iate Clube Brasileiro é pertencer a mais de um século
-            de história, esporte e convivência de alto nível.
-          </motion.p>
-        </div>
 
-        <div className="grid lg:grid-cols-2 gap-16 items-start">
-          {/* Benefits */}
-          <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
+        {/* Masthead */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.4 }}
+          className="mb-12"
+        >
+          <SectionHeader
+            eyebrow="Associação"
+            title="Seja Sócio do ICB"
+            description="Faça parte de mais de um século de história, esporte e convivência de alto nível."
+            titleSize="lg"
+          />
+          {/* Vagas limitadas */}
+          <div
+            className="inline-flex items-center gap-2 mt-5 px-4 py-2 text-xs font-semibold uppercase tracking-widest"
+            style={{ backgroundColor: "rgba(178,34,34,0.08)", color: "var(--color-red)", borderRadius: "var(--radius-btn)" }}
           >
-            <h3 className="font-display text-2xl font-semibold text-[var(--color-navy)] mb-8">
-              Benefícios Exclusivos
-            </h3>
-            <div className="grid gap-4 mb-10">
-              {benefits.map((b, i) => (
-                <motion.div
-                  key={b}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={inView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ duration: 0.4, delay: 0.3 + i * 0.06 }}
-                  className="flex items-center gap-4"
-                >
-                  <div className="w-6 h-6 rounded-full bg-[var(--color-red)]/15 flex items-center justify-center flex-shrink-0">
-                    <Check className="w-3.5 h-3.5 text-[var(--color-red)]" />
-                  </div>
-                  <span className="text-[var(--color-navy)]/70 text-sm">{b}</span>
-                </motion.div>
-              ))}
+            Oportunidade limitada — 50 títulos disponíveis
+          </div>
+        </motion.div>
+
+        <div className="grid lg:grid-cols-[1fr_1.6fr] gap-14 items-start">
+
+          {/* Left — benefícios + valores de referência */}
+          <motion.div
+            initial={{ opacity: 0, x: -24 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.7, delay: 0.15 }}
+            className="flex flex-col gap-8"
+          >
+            {/* Valores */}
+            <div className="flex flex-col gap-3">
+              <div
+                className="p-5"
+                style={{ backgroundColor: "#fff", border: "1px solid rgba(0,0,0,0.07)", borderRadius: "var(--radius-card)" }}
+              >
+                <p className="text-xs font-semibold uppercase tracking-widest mb-1" style={{ color: "var(--color-anchor)" }}>
+                  Valor Venal do Título
+                </p>
+                <p className="font-display font-bold" style={{ fontSize: "1.75rem", color: "var(--color-ink)" }}>
+                  R$ 15.000,00
+                </p>
+              </div>
+              <div
+                className="p-5"
+                style={{ backgroundColor: "#fff", border: "1px solid rgba(0,0,0,0.07)", borderRadius: "var(--radius-card)" }}
+              >
+                <p className="text-xs font-semibold uppercase tracking-widest mb-1" style={{ color: "var(--color-anchor)" }}>
+                  Taxa de Manutenção 2025
+                </p>
+                <p className="font-display font-bold" style={{ fontSize: "1.75rem", color: "var(--color-ink)" }}>
+                  R$ 639,05
+                </p>
+              </div>
             </div>
 
-            {/* Plan type selector */}
-            <div className="rope-divider mb-8" />
-            <h4 className="text-sm font-semibold text-[var(--color-navy)] uppercase tracking-widest mb-5">
-              Modalidades
-            </h4>
-            <div className="grid gap-3">
-              {plans.map((plan) => (
-                <button
-                  key={plan.name}
-                  onClick={() => setFormData((p) => ({ ...p, plano: plan.name }))}
-                  className={`flex items-center justify-between px-5 py-4 rounded-lg border-2 text-left transition-all duration-300 cursor-pointer ${
-                    formData.plano === plan.name
-                      ? "border-[var(--color-red)] bg-[var(--color-red)]/5"
-                      : "border-[var(--color-ivory-dark)] hover:border-[var(--color-red)]/50"
-                  }`}
-                >
-                  <div>
-                    <p className="font-semibold text-[var(--color-navy)] text-sm">{plan.name}</p>
-                    <p className="text-[var(--color-anchor)] text-xs mt-0.5">{plan.description}</p>
-                  </div>
-                  {plan.highlight && (
-                    <span className="text-xs bg-[var(--color-red)] text-[var(--color-navy)] px-2 py-0.5 rounded font-semibold">
-                      Popular
-                    </span>
-                  )}
-                  {formData.plano === plan.name && (
-                    <ChevronRight className="w-4 h-4 text-[var(--color-red)]" />
-                  )}
-                </button>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Form */}
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.3 }}
-          >
-            <div className="bg-white rounded-xl p-8 shadow-luxury-lg">
-              {submitted ? (
-                <div className="text-center py-12">
-                  <div className="w-16 h-16 rounded-full bg-[var(--color-red)]/10 flex items-center justify-center mx-auto mb-6">
-                    <Check className="w-8 h-8 text-[var(--color-red)]" />
-                  </div>
-                  <h3 className="font-display text-2xl font-semibold text-[var(--color-navy)] mb-3">
-                    Solicitação Enviada!
-                  </h3>
-                  <p className="text-[var(--color-anchor)] text-sm leading-relaxed">
-                    Nossa equipe entrará em contato em até 48 horas úteis
-                    para dar continuidade ao seu processo de associação.
-                  </p>
-                </div>
-              ) : (
-                <>
-                  <h3 className="font-display text-2xl font-semibold text-[var(--color-navy)] mb-2">
-                    Solicite Informações
-                  </h3>
-                  <p className="text-[var(--color-anchor)] text-sm mb-8">
-                    Preencha o formulário e entraremos em contato.
-                  </p>
-
-                  <form onSubmit={handleSubmit} className="space-y-5">
-                    <div>
-                      <label htmlFor="nome" className="block text-xs font-semibold text-[var(--color-navy)] uppercase tracking-wide mb-2">
-                        Nome completo *
-                      </label>
-                      <input
-                        id="nome"
-                        type="text"
-                        required
-                        value={formData.nome}
-                        onChange={(e) => setFormData((p) => ({ ...p, nome: e.target.value }))}
-                        className="w-full px-4 py-3 border-2 border-[var(--color-ivory-dark)] rounded-lg text-[var(--color-navy)] text-sm focus:border-[var(--color-red)] focus:outline-none transition-colors duration-200 bg-[var(--color-ivory)]"
-                        placeholder="Seu nome"
-                      />
-                    </div>
-                    <div className="grid grid-cols-2 gap-4">
-                      <div>
-                        <label htmlFor="email" className="block text-xs font-semibold text-[var(--color-navy)] uppercase tracking-wide mb-2">
-                          E-mail *
-                        </label>
-                        <input
-                          id="email"
-                          type="email"
-                          required
-                          value={formData.email}
-                          onChange={(e) => setFormData((p) => ({ ...p, email: e.target.value }))}
-                          className="w-full px-4 py-3 border-2 border-[var(--color-ivory-dark)] rounded-lg text-[var(--color-navy)] text-sm focus:border-[var(--color-red)] focus:outline-none transition-colors duration-200 bg-[var(--color-ivory)]"
-                          placeholder="seu@email.com"
-                        />
-                      </div>
-                      <div>
-                        <label htmlFor="telefone" className="block text-xs font-semibold text-[var(--color-navy)] uppercase tracking-wide mb-2">
-                          Telefone
-                        </label>
-                        <input
-                          id="telefone"
-                          type="tel"
-                          value={formData.telefone}
-                          onChange={(e) => setFormData((p) => ({ ...p, telefone: e.target.value }))}
-                          className="w-full px-4 py-3 border-2 border-[var(--color-ivory-dark)] rounded-lg text-[var(--color-navy)] text-sm focus:border-[var(--color-red)] focus:outline-none transition-colors duration-200 bg-[var(--color-ivory)]"
-                          placeholder="(21) 99999-9999"
-                        />
-                      </div>
-                    </div>
-                    <div>
-                      <label htmlFor="plano" className="block text-xs font-semibold text-[var(--color-navy)] uppercase tracking-wide mb-2">
-                        Modalidade de interesse
-                      </label>
-                      <select
-                        id="plano"
-                        value={formData.plano}
-                        onChange={(e) => setFormData((p) => ({ ...p, plano: e.target.value }))}
-                        className="w-full px-4 py-3 border-2 border-[var(--color-ivory-dark)] rounded-lg text-[var(--color-navy)] text-sm focus:border-[var(--color-red)] focus:outline-none transition-colors duration-200 bg-[var(--color-ivory)]"
-                      >
-                        {plans.map((p) => (
-                          <option key={p.name} value={p.name}>{p.name}</option>
-                        ))}
-                      </select>
-                    </div>
-                    <div>
-                      <label htmlFor="mensagem" className="block text-xs font-semibold text-[var(--color-navy)] uppercase tracking-wide mb-2">
-                        Mensagem
-                      </label>
-                      <textarea
-                        id="mensagem"
-                        rows={3}
-                        value={formData.mensagem}
-                        onChange={(e) => setFormData((p) => ({ ...p, mensagem: e.target.value }))}
-                        className="w-full px-4 py-3 border-2 border-[var(--color-ivory-dark)] rounded-lg text-[var(--color-navy)] text-sm focus:border-[var(--color-red)] focus:outline-none transition-colors duration-200 bg-[var(--color-ivory)] resize-none"
-                        placeholder="Dúvidas ou informações adicionais..."
-                      />
-                    </div>
-                    <button
-                      type="submit"
-                      className="w-full flex items-center justify-center gap-3 py-4 bg-[var(--color-navy)] text-white font-semibold rounded-lg text-sm tracking-wide hover:bg-[var(--color-navy-light)] transition-colors duration-300 cursor-pointer"
+            {/* Benefícios */}
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: "var(--color-anchor)" }}>
+                O que está incluído
+              </p>
+              <div className="flex flex-col gap-3">
+                {benefits.map((b, i) => (
+                  <motion.div
+                    key={b}
+                    initial={{ opacity: 0, x: -12 }}
+                    animate={inView ? { opacity: 1, x: 0 } : {}}
+                    transition={{ duration: 0.4, delay: 0.3 + i * 0.06 }}
+                    className="flex items-center gap-3"
+                  >
+                    <div
+                      className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0"
+                      style={{ backgroundColor: "rgba(178,34,34,0.1)" }}
                     >
-                      <Send className="w-4 h-4" />
-                      Enviar Solicitação
-                    </button>
-                  </form>
-                </>
-              )}
+                      <Check className="w-3 h-3" style={{ color: "var(--color-red)" }} />
+                    </div>
+                    <span className="text-sm" style={{ color: "var(--color-anchor)" }}>{b}</span>
+                  </motion.div>
+                ))}
+              </div>
             </div>
           </motion.div>
+
+          {/* Right — planos de parcelamento */}
+          <motion.div
+            initial={{ opacity: 0, x: 24 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.7, delay: 0.25 }}
+            className="flex flex-col gap-5"
+          >
+            <p className="text-xs font-semibold uppercase tracking-widest" style={{ color: "var(--color-anchor)" }}>
+              Condições de pagamento
+            </p>
+
+            {plans.map((p, i) => (
+              <motion.div
+                key={p.parcelas}
+                initial={{ opacity: 0, y: 16 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: 0.35 + i * 0.08 }}
+                className="p-7 relative"
+                style={{
+                  backgroundColor: p.destaque ? "var(--color-navy)" : "#fff",
+                  border: p.destaque ? "none" : "1px solid rgba(0,0,0,0.07)",
+                  borderRadius: "var(--radius-card)",
+                  boxShadow: p.destaque ? "0 20px 48px rgba(10,22,40,0.18)" : "var(--shadow-luxury)",
+                }}
+              >
+                {p.destaque && (
+                  <span
+                    className="absolute top-5 right-5 text-xs font-bold uppercase tracking-widest px-2 py-0.5"
+                    style={{ backgroundColor: "var(--color-red)", color: "#fff", borderRadius: "4px" }}
+                  >
+                    Mais escolhido
+                  </span>
+                )}
+                <div className="flex items-baseline gap-3 mb-2">
+                  <span
+                    className="font-display font-bold"
+                    style={{ fontSize: "2.25rem", lineHeight: 1, color: p.destaque ? "var(--color-red)" : "var(--color-ink)" }}
+                  >
+                    {p.parcelas}
+                  </span>
+                  <span
+                    className="font-display font-semibold"
+                    style={{ fontSize: "1.25rem", color: p.destaque ? "#fff" : "var(--color-ink)" }}
+                  >
+                    {p.valor}
+                  </span>
+                </div>
+                <p
+                  className="text-sm leading-relaxed"
+                  style={{ color: p.destaque ? "rgba(255,255,255,0.5)" : "var(--color-anchor)" }}
+                >
+                  + {p.taxa}
+                </p>
+              </motion.div>
+            ))}
+
+            {/* CTA */}
+            <div
+              className="flex flex-col sm:flex-row items-start sm:items-center gap-3 pt-2 mt-2"
+              style={{ borderTop: "1px solid rgba(0,0,0,0.07)" }}
+            >
+              <p className="text-sm flex-1" style={{ color: "var(--color-anchor)" }}>
+                Para iniciar o processo de associação, fale com a Secretaria Social.
+              </p>
+              <div className="flex items-center gap-3 flex-shrink-0">
+                <a
+                  href={WHATSAPP}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold transition-opacity hover:opacity-90"
+                  style={{ backgroundColor: "#25D366", color: "#fff", borderRadius: "var(--radius-btn)" }}
+                >
+                  <WaIcon /> WhatsApp
+                </a>
+                <Link
+                  href="/contato"
+                  className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest transition-opacity hover:opacity-60"
+                  style={{ color: "var(--color-red)" }}
+                >
+                  Contatos <ArrowRight className="w-3 h-3" />
+                </Link>
+              </div>
+            </div>
+          </motion.div>
+
         </div>
       </div>
     </section>
