@@ -51,11 +51,6 @@ export default async function NauticaPage() {
           title="Velas & Regatas"
           description="Calendário de competições, serviços náuticos e infraestrutura completa para sua embarcação na Baía de Guanabara."
           breadcrumb={[{ label: "Náutica" }]}
-          stats={[
-            { value: "200+", label: "Regatas/ano" },
-            { value: "8",    label: "Classes" },
-            { value: "50+",  label: "Títulos nacionais" },
-          ]}
           image="/images/vela.png"
           imageAlt="Marina do Iate Clube Brasileiro"
           variant="image-side"

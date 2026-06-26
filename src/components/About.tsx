@@ -52,53 +52,21 @@ export default function About() {
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ duration: 0.4 }}
-          className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-16"
+          className="mb-16"
           style={{ paddingBottom: "1.5rem", borderBottom: `1px solid rgba(0,0,0,0.07)` }}
         >
-          {/* Título */}
-          <div>
-            <p
-              className="text-xs tracking-[0.28em] uppercase font-semibold mb-2"
-              style={{ color: RED }}
-            >
-              Nossa História
-            </p>
-            <h2
-              className="font-display font-bold leading-none"
-              style={{ fontSize: "clamp(1.75rem, 3.5vw, 2.5rem)", color: INK }}
-            >
-              Iate Clube Brasileiro
-            </h2>
-          </div>
-
-          {/* Stats inline — discretos, sem destaque excessivo */}
-          <div
-            className="flex items-center gap-6 sm:gap-8 flex-wrap"
-            style={{ paddingLeft: "0", borderLeft: "none" }}
+          <p
+            className="text-xs tracking-[0.28em] uppercase font-semibold mb-2"
+            style={{ color: RED }}
           >
-            {stats.map((s, i) => (
-              <motion.div
-                key={s.label}
-                initial={{ opacity: 0, y: 8 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.4, delay: 0.1 + i * 0.06 }}
-                className="text-center sm:text-right"
-              >
-                <div
-                  className="font-display font-bold leading-none"
-                  style={{ fontSize: "clamp(1.3rem, 2.2vw, 1.75rem)", color: INK }}
-                >
-                  {s.value}
-                </div>
-                <div
-                  className="text-xs uppercase tracking-wider mt-0.5"
-                  style={{ color: "#9CA3AF", letterSpacing: "0.1em" }}
-                >
-                  {s.label}
-                </div>
-              </motion.div>
-            ))}
-          </div>
+            Nossa História
+          </p>
+          <h2
+            className="font-display font-bold leading-none"
+            style={{ fontSize: "clamp(1.75rem, 3.5vw, 2.5rem)", color: INK }}
+          >
+            Iate Clube Brasileiro
+          </h2>
         </motion.div>
 
         {/* ── Conteúdo principal ── */}

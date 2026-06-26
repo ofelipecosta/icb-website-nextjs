@@ -67,7 +67,6 @@ export default function Hero() {
             style={{
               fontSize: "clamp(2rem, 4.5vw, 3.25rem)",
               color: "white",
-              textShadow: "0 2px 16px rgba(0,0,0,0.5)",
             }}
           >
             O Primeiro<br />
@@ -84,7 +83,6 @@ export default function Hero() {
             style={{
               fontSize: "clamp(0.95rem, 1.6vw, 1.1rem)",
               color: "rgba(255,255,255,0.68)",
-              textShadow: "0 1px 8px rgba(0,0,0,0.4)",
             }}
           >
             120 anos de tradição náutica, esporte e vida social
@@ -105,8 +103,8 @@ export default function Hero() {
               className="w-full sm:w-auto"
             />
             <FlowButton
-              text="Conheça o Clube"
-              onClick={() => document.querySelector("#sobre")?.scrollIntoView({ behavior: "smooth" })}
+              text="Seja Sócio"
+              onClick={() => { window.location.href = "/seja-socio"; }}
               variant="dark"
               className="w-full sm:w-auto"
             />

@@ -249,15 +249,6 @@ export default function Navbar() {
             })}
           </nav>
 
-          {/* Desktop: CTA Seja Sócio */}
-          <Link
-            href="/seja-socio"
-            className="hidden lg:inline-flex items-center px-4 py-2 text-sm font-semibold transition-opacity hover:opacity-85"
-            style={{ backgroundColor: RED, color: "#fff", borderRadius: "var(--radius-btn)" }}
-          >
-            Seja Sócio
-          </Link>
-
           {/* Hamburger mobile */}
           <button
             type="button"
