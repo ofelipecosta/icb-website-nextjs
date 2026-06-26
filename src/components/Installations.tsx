@@ -431,7 +431,7 @@ export default function Installations({ sanityData = [] }: InstallationsProps) {
 
   return (
     <>
-      <section id="instalacoes" className="section-py navy-ambient px-6">
+      <section id="instalacoes" className="section-py px-6" style={{ backgroundColor: "#FAF8F3" }}>
         <div className="max-w-7xl mx-auto" ref={ref}>
           {/* Masthead — horizontal, left-aligned, consistent with News/Events */}
           <motion.div
@@ -439,7 +439,7 @@ export default function Installations({ sanityData = [] }: InstallationsProps) {
             animate={inView ? { opacity: 1 } : {}}
             transition={{ duration: 0.4 }}
             className="flex items-end justify-between gap-6 mb-12 relative overflow-hidden"
-            style={{ paddingBottom: "1.5rem", borderBottom: "1px solid rgba(255,255,255,0.08)" }}
+            style={{ paddingBottom: "1.5rem", borderBottom: "1px solid rgba(0,0,0,0.07)" }}
           >
             {/* Left: bar + title + subtitle */}
             <div className="flex items-start gap-4">
@@ -452,12 +452,12 @@ export default function Installations({ sanityData = [] }: InstallationsProps) {
                   Estrutura
                 </p>
                 <h2
-                  className="font-display font-black text-white leading-none"
-                  style={{ fontSize: "clamp(1.75rem, 3.5vw, 2.5rem)" }}
+                  className="font-display font-bold leading-none"
+                  style={{ fontSize: "clamp(1.75rem, 3.5vw, 2.5rem)", color: "#16202E" }}
                 >
                   Instalações do ICB
                 </h2>
-                <p className="mt-2 text-sm leading-relaxed max-w-md" style={{ color: "rgba(255,255,255,0.45)" }}>
+                <p className="mt-2 text-sm leading-relaxed max-w-md" style={{ color: "#6B7A8D" }}>
                   Infraestrutura completa para lazer, esporte e convivência.
                 </p>
               </div>

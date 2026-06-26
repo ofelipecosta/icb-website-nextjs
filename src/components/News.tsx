@@ -7,8 +7,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { urlFor, type NoticiaSanity } from "@/lib/sanity";
 
-const RED = "#B22222";
-const INK = "#111827";
+const RED    = "#B22222";
+const INK    = "#16202E";
+const ANCHOR = "#6B7A8D";
 
 function stripEmoji(s: string): string {
   return s.replace(/\p{Emoji_Presentation}/gu, "").replace(/\p{Emoji}️/gu, "").trim();
@@ -59,7 +60,7 @@ export default function News({ sanityData = [] }: NewsProps) {
   return (
     <section
       id="noticias"
-      style={{ backgroundColor: "#EAF2F6" }}
+      style={{ backgroundColor: "#FAF8F3" }}
     >
       <div className="max-w-7xl mx-auto px-6" ref={ref}>
 
@@ -194,19 +195,18 @@ export default function News({ sanityData = [] }: NewsProps) {
                     className="h-full rounded-lg transition-all duration-300 flex flex-col"
                     style={{
                       backgroundColor: "#ffffff",
-                      border: "1px solid #E5E7EB",
-                      boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
-                      overflow: "visible",
+                      border:       "1px solid rgba(0,0,0,0.07)",
+                      borderRadius: "var(--radius-card)",
+                      boxShadow:    "var(--shadow-luxury)",
+                      overflow:     "hidden",
                     }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.boxShadow = "0 10px 25px rgba(0,0,0,0.15)";
-                      e.currentTarget.style.transform = "translateY(-4px)";
-                      e.currentTarget.style.borderColor = "#D1D5DB";
+                      e.currentTarget.style.boxShadow = "var(--shadow-luxury-hover)";
+                      e.currentTarget.style.transform = "translateY(-3px)";
                     }}
                     onMouseLeave={(e) => {
-                      e.currentTarget.style.boxShadow = "0 1px 3px rgba(0,0,0,0.1)";
+                      e.currentTarget.style.boxShadow = "var(--shadow-luxury)";
                       e.currentTarget.style.transform = "translateY(0)";
-                      e.currentTarget.style.borderColor = "#E5E7EB";
                     }}
                   >
                     {/* Image */}
@@ -230,8 +230,8 @@ export default function News({ sanityData = [] }: NewsProps) {
                     {/* Text */}
                     <div className="flex flex-col gap-3 flex-1 p-5">
                       <time
-                        className="text-xs font-bold uppercase tracking-wider"
-                        style={{ color: RED }}
+                        className="text-xs font-medium"
+                        style={{ color: ANCHOR }}
                       >
                         {formatDate(item.data)}
                       </time>

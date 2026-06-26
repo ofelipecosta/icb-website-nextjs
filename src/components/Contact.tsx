@@ -148,7 +148,7 @@ export default function Contact() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="contato" className="section-py px-6" style={{ backgroundColor: "#F2EEE6" }}>
+    <section id="contato" className="section-py px-6" style={{ backgroundColor: "#ffffff" }}>
       <div className="max-w-7xl mx-auto" ref={ref}>
 
         {/* Masthead — horizontal, left-aligned */}
@@ -157,7 +157,7 @@ export default function Contact() {
           animate={inView ? { opacity: 1 } : {}}
           transition={{ duration: 0.4 }}
           className="flex items-start gap-4 mb-12"
-          style={{ paddingBottom: "1.5rem", borderBottom: "1px solid #E5E7EB" }}
+          style={{ paddingBottom: "1.5rem", borderBottom: "1px solid rgba(0,0,0,0.07)" }}
         >
           <span
             className="w-1 rounded-full flex-shrink-0 mt-1"
@@ -197,8 +197,9 @@ export default function Contact() {
                 className="rounded-xl p-5 flex flex-col gap-3"
                 style={{
                   backgroundColor: "#ffffff",
-                  border: "1px solid #E5E7EB",
-                  boxShadow: "0 1px 3px rgba(0,0,0,0.06)",
+                  border:       "1px solid rgba(0,0,0,0.07)",
+                  borderRadius: "var(--radius-card)",
+                  boxShadow:    "var(--shadow-luxury)",
                 }}
               >
                 <div>

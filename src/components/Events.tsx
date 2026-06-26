@@ -5,8 +5,9 @@ import { motion, useInView } from "framer-motion";
 import { Calendar, MapPin, ArrowRight } from "lucide-react";
 import type { EventoSanity } from "@/lib/sanity";
 
-const RED = "#B22222";
-const INK = "#111827";
+const RED    = "#B22222";
+const INK    = "#16202E";
+const ANCHOR = "#6B7A8D";
 
 const FALLBACK_EVENTS: EventoSanity[] = [
   { _id: "1", titulo: "Jantar de Abertura da Temporada",    categoria: "Social",  data: "2026-03-15", local: "Salão Nobre",    detalhe: "Celebre o início da temporada em nosso tradicional jantar de abertura." },
@@ -38,7 +39,7 @@ export default function Events({ sanityData }: EventsProps) {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="eventos" className="section-py px-6" style={{ backgroundColor: "#FAF8F3" }}>
+    <section id="eventos" className="section-py px-6" style={{ backgroundColor: "#ffffff" }}>
       <div className="max-w-7xl mx-auto" ref={ref}>
         {/* Masthead — igual ao de Notícias */}
         <motion.div
@@ -86,16 +87,17 @@ export default function Events({ sanityData }: EventsProps) {
                 className="rounded-lg transition-all duration-300 h-full"
                 style={{
                   backgroundColor: "#ffffff",
-                  border: "1px solid #E5E7EB",
-                  boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
-                  overflow: "hidden",
+                  border:       "1px solid rgba(0,0,0,0.07)",
+                  borderRadius: "var(--radius-card)",
+                  boxShadow:    "var(--shadow-luxury)",
+                  overflow:     "hidden",
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.boxShadow = "0 10px 25px rgba(0,0,0,0.15)";
-                  e.currentTarget.style.transform = "translateY(-4px)";
+                  e.currentTarget.style.boxShadow = "var(--shadow-luxury-hover)";
+                  e.currentTarget.style.transform = "translateY(-3px)";
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.boxShadow = "0 1px 3px rgba(0,0,0,0.1)";
+                  e.currentTarget.style.boxShadow = "var(--shadow-luxury)";
                   e.currentTarget.style.transform = "translateY(0)";
                 }}
               >
