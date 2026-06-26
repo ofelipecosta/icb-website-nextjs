@@ -47,7 +47,7 @@ export default function Events({ sanityData }: EventsProps) {
           animate={inView ? { opacity: 1 } : {}}
           transition={{ duration: 0.4 }}
           className="flex items-center justify-between"
-          style={{ paddingTop: "1rem", paddingBottom: "1.25rem", borderBottom: "1px solid #E5E7EB" }}
+          style={{ paddingBottom: "1.25rem", borderBottom: "1px solid rgba(0,0,0,0.07)" }}
         >
           <div className="flex items-center gap-3">
             <span
@@ -56,7 +56,7 @@ export default function Events({ sanityData }: EventsProps) {
             />
             <span
               className="font-display font-black leading-none"
-              style={{ color: INK, fontSize: "clamp(1.5rem, 3vw, 2rem)" }}
+              style={{ color: INK, fontSize: "clamp(1.4rem, 2.8vw, 1.875rem)" }}
             >
               Eventos
             </span>
@@ -105,7 +105,7 @@ export default function Events({ sanityData }: EventsProps) {
                   {/* Date + Category */}
                   <div className="flex flex-wrap items-center gap-3 mb-4">
                     {event.data && (
-                      <span className="text-xs font-black uppercase tracking-widest px-2.5 py-1 rounded" style={{ backgroundColor: RED, color: "#fff" }}>
+                      <span className="text-xs font-semibold uppercase tracking-widest px-2.5 py-1 rounded" style={{ backgroundColor: RED, color: "#fff" }}>
                         <Calendar className="w-3 h-3 inline mr-1" />{formatEventDate(event.data)}
                       </span>
                     )}
@@ -150,7 +150,7 @@ export default function Events({ sanityData }: EventsProps) {
         {/* CTA bottom */}
         <div
           className="flex justify-center pb-8"
-          style={{ borderTop: "1px solid #E5E7EB", paddingTop: "1.5rem", marginTop: "1.5rem" }}
+          style={{ borderTop: "1px solid rgba(0,0,0,0.07)", paddingTop: "1.5rem", marginTop: "1.5rem" }}
         >
           <a
             href="/eventos"
