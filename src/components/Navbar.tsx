@@ -257,6 +257,15 @@ export default function Navbar() {
             })}
           </nav>
 
+          {/* Desktop: CTA Seja Sócio */}
+          <Link
+            href="/seja-socio"
+            className="hidden lg:inline-flex items-center px-4 py-2 text-sm font-semibold transition-opacity hover:opacity-85"
+            style={{ backgroundColor: RED, color: "#fff", borderRadius: "var(--radius-btn)" }}
+          >
+            Seja Sócio
+          </Link>
+
           {/* Hamburger mobile */}
           <button
             type="button"
@@ -402,6 +411,18 @@ export default function Navbar() {
                 );
               })}
             </nav>
+
+            {/* CTA mobile */}
+            <div className="px-6 pb-4 pt-2 flex-shrink-0">
+              <Link
+                href="/seja-socio"
+                onClick={() => setMobileOpen(false)}
+                className="flex items-center justify-center py-3.5 text-sm font-semibold w-full transition-opacity hover:opacity-85"
+                style={{ backgroundColor: RED, color: "#fff", borderRadius: "var(--radius-btn)" }}
+              >
+                Seja Sócio
+              </Link>
+            </div>
 
             {/* Rodapé com redes sociais */}
             <div
