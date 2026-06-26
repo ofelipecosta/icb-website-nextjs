@@ -86,28 +86,21 @@ export default function Hero() {
           initial={{ opacity: 0, x: -40 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}
-          className="flex flex-col sm:flex-row items-start gap-4"
+          className="flex flex-col sm:flex-row items-start gap-4 w-full sm:w-auto"
         >
-          <button
+          <FlowButton
+            text="Área do Associado"
             onClick={() => {
               window.open("https://icb.areadosocio.com.br/#/entrada", "_blank");
             }}
-            className="px-8 py-3 font-semibold rounded tracking-wide text-sm w-full sm:w-auto text-center transition-all duration-300"
-            style={{
-              backgroundColor: RED,
-              color: "#ffffff",
-              boxShadow: "0 4px 15px rgba(178,34,34,0.5)",
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = RED_LIGHT)}
-            onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = RED)}
-          >
-            Área do Associado
-          </button>
+            variant="red"
+            className="w-full sm:w-auto"
+          />
           <FlowButton
             text="Conheça o Clube"
             onClick={() => document.querySelector("#sobre")?.scrollIntoView({ behavior: "smooth" })}
             variant="dark"
-            className="w-full sm:w-auto justify-center"
+            className="w-full sm:w-auto"
           />
         </motion.div>
 
