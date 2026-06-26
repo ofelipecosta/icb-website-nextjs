@@ -166,21 +166,13 @@ export default function News({ sanityData = [] }: NewsProps) {
               >
                 <Link href={slug ? `/noticias/${slug}` : "/noticias"} className="group h-full">
                   <div
-                    className="h-full rounded-lg transition-all duration-300 flex flex-col"
+                    className="card-hover h-full flex flex-col"
                     style={{
                       backgroundColor: "#ffffff",
                       border:       "1px solid rgba(0,0,0,0.07)",
                       borderRadius: "var(--radius-card)",
                       boxShadow:    "var(--shadow-luxury)",
                       overflow:     "hidden",
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.boxShadow = "var(--shadow-luxury-hover)";
-                      e.currentTarget.style.transform = "translateY(-3px)";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.boxShadow = "var(--shadow-luxury)";
-                      e.currentTarget.style.transform = "translateY(0)";
                     }}
                   >
                     {/* Image */}

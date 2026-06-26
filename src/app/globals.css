@@ -60,6 +60,9 @@
   box-shadow: var(--shadow-luxury-hover);
   transform: translateY(-3px);
 }
+.card-hover-sm {
+  transition: box-shadow 200ms, transform 200ms;
+}
 .card-hover-sm:hover {
   box-shadow: var(--shadow-luxury-hover);
   transform: translateY(-2px);

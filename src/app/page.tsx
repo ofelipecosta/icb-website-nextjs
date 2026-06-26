@@ -5,17 +5,19 @@ import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Installations from "@/components/Installations";
 import Events from "@/components/Events";
+import Regattas from "@/components/Regattas";
 import News from "@/components/News";
-import Contact from "@/components/Contact";
+import ContactStrip from "@/components/ContactStrip";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
-import { getInstalacoes, getNoticias, getEventos } from "@/lib/sanity";
+import { getInstalacoes, getNoticias, getEventos, getRegatas } from "@/lib/sanity";
 
 export default async function Home() {
-  const [instalacoes, noticias, eventos] = await Promise.all([
+  const [instalacoes, noticias, eventos, regatas] = await Promise.all([
     getInstalacoes(),
     getNoticias(4),
     getEventos(),
+    getRegatas(),
   ]);
 
   return (
@@ -24,10 +26,11 @@ export default async function Home() {
       <main>
         <Hero />
         <About />
-        <News sanityData={noticias} />
-        <Events sanityData={eventos} />
         <Installations sanityData={instalacoes} />
-        <Contact />
+        <Events sanityData={eventos} />
+        <Regattas sanityData={regatas} />
+        <News sanityData={noticias} />
+        <ContactStrip />
       </main>
       <Footer />
       <WhatsAppButton />

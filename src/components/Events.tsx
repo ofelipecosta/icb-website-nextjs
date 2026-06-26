@@ -55,21 +55,13 @@ export default function Events({ sanityData }: EventsProps) {
               className="group cursor-pointer"
             >
               <div
-                className="rounded-lg transition-all duration-300 h-full"
+                className="card-hover h-full"
                 style={{
                   backgroundColor: "#ffffff",
                   border:       "1px solid rgba(0,0,0,0.07)",
                   borderRadius: "var(--radius-card)",
                   boxShadow:    "var(--shadow-luxury)",
                   overflow:     "hidden",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.boxShadow = "var(--shadow-luxury-hover)";
-                  e.currentTarget.style.transform = "translateY(-3px)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.boxShadow = "var(--shadow-luxury)";
-                  e.currentTarget.style.transform = "translateY(0)";
                 }}
               >
                 <div className="p-5 flex flex-col h-full">

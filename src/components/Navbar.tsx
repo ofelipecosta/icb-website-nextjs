@@ -410,7 +410,9 @@ export default function Navbar() {
             >
               <div className="flex items-center gap-5">
                 <a
-                  href="#"
+                  href="https://instagram.com/iateclubebrasileiro"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label="Instagram"
                   className="transition-opacity duration-200 hover:opacity-50"
                   style={{ color: "rgba(22,32,46,0.38)" }}
@@ -418,7 +420,9 @@ export default function Navbar() {
                   <SocialInstagram />
                 </a>
                 <a
-                  href="#"
+                  href="https://facebook.com/iateclubebrasileiro"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label="Facebook"
                   className="transition-opacity duration-200 hover:opacity-50"
                   style={{ color: "rgba(22,32,46,0.38)" }}
@@ -426,7 +430,9 @@ export default function Navbar() {
                   <SocialFacebook />
                 </a>
                 <a
-                  href="#"
+                  href="https://youtube.com/@iateclubebrasileiro"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label="YouTube"
                   className="transition-opacity duration-200 hover:opacity-50"
                   style={{ color: "rgba(22,32,46,0.38)" }}

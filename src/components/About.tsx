@@ -225,19 +225,11 @@ export default function About() {
               initial={{ opacity: 0, y: 24 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.55, delay: 0.35 + i * 0.08 }}
-              className="rounded-[var(--radius-card)] p-7 group transition-all duration-300"
+              className="rounded-[var(--radius-card)] p-7 group card-hover"
               style={{
                 backgroundColor: "#fff",
                 border:      "1px solid rgba(0,0,0,0.07)",
                 boxShadow:   "var(--shadow-luxury)",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.boxShadow   = "var(--shadow-luxury-hover)";
-                e.currentTarget.style.transform   = "translateY(-3px)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.boxShadow   = "var(--shadow-luxury)";
-                e.currentTarget.style.transform   = "translateY(0)";
               }}
             >
               <div
