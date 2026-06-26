@@ -6,7 +6,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { TubelightNav } from "@/components/ui/tubelight-navbar";
 
 const RED  = "#B22222";
 const NAVY = "#0A1628";
@@ -31,25 +30,27 @@ const dropdowns: Record<string, { label: string; href: string }[]> = {
 };
 
 export default function Navbar() {
-  const [scrolled,     setScrolled]     = useState(false);
-  const [mobileOpen,   setMobileOpen]   = useState(false);
-  const [activeItem,   setActiveItem]   = useState("Início");
-  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const [scrolled,       setScrolled]       = useState(false);
+  const [mobileOpen,     setMobileOpen]     = useState(false);
+  const [activeItem,     setActiveItem]     = useState("Início");
+  const [openDropdown,   setOpenDropdown]   = useState<string | null>(null);
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
   const observerRef    = useRef<IntersectionObserver | null>(null);
   const dropdownTimers = useRef<Record<string, ReturnType<typeof setTimeout>>>({});
-  const pathname       = usePathname();
-  const router         = useRouter();
-  const isHome         = pathname === "/";
+  const pathname = usePathname();
+  const router   = useRouter();
+  const isHome   = pathname === "/";
 
-  /* ── Scroll shadow ── */
+  // Navbar é "clara" (branca) quando: não é a home OU fez scroll
+  const isLight = !isHome || scrolled;
+
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 60);
+    const onScroll = () => setScrolled(window.scrollY > 50);
+    onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  /* ── Active section tracker ── */
   useEffect(() => {
     if (!isHome) return;
     const ratios = new Map<string, number>();
@@ -84,53 +85,59 @@ export default function Navbar() {
     }
   };
 
-  const openMenu = (name: string) => {
+  const openMenu  = (name: string) => {
     if (dropdownTimers.current[name]) clearTimeout(dropdownTimers.current[name]);
     setOpenDropdown(name);
   };
-
   const closeMenu = (name: string) => {
-    dropdownTimers.current[name] = setTimeout(() => setOpenDropdown(null), 120);
+    dropdownTimers.current[name] = setTimeout(() => setOpenDropdown(null), 130);
   };
+
+  // Cores derivadas do estado claro/escuro
+  const linkColor        = isLight ? "rgba(16,32,46,0.62)"  : "rgba(255,255,255,0.65)";
+  const linkHoverColor   = isLight ? NAVY                    : "#fff";
+  const linkActiveColor  = isLight ? NAVY                    : "#fff";
 
   return (
     <>
       <motion.header
         initial={{ y: -80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.55, ease: "easeOut" }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
         className="fixed top-0 left-0 right-0 z-50"
         style={{
-          background: isHome
-            ? scrolled ? `rgba(10,22,40,0.65)` : "linear-gradient(to bottom, rgba(10,22,40,0.75) 0%, transparent 100%)"
-            : `rgba(10,22,40,0.75)`,
-          backdropFilter: scrolled ? "blur(20px)" : isHome ? "none" : "blur(20px)",
-          WebkitBackdropFilter: scrolled ? "blur(20px)" : isHome ? "none" : "blur(20px)",
-          borderBottom: scrolled ? "1px solid rgba(255,255,255,0.07)" : "none",
-          transition: "background 0.4s, backdrop-filter 0.4s, border-color 0.4s, padding 0.3s",
-          paddingTop: scrolled ? "0.625rem" : "1.125rem",
-          paddingBottom: scrolled ? "0.625rem" : "1.125rem",
+          background: isLight
+            ? "rgba(255,255,255,0.97)"
+            : "linear-gradient(to bottom, rgba(10,22,40,0.72) 0%, transparent 100%)",
+          backdropFilter:       isLight ? "blur(18px)" : "none",
+          WebkitBackdropFilter: isLight ? "blur(18px)" : "none",
+          borderBottom:         isLight ? "1px solid rgba(0,0,0,0.06)" : "none",
+          transition: "background 0.35s ease, backdrop-filter 0.35s, border-color 0.35s, padding 0.25s",
+          paddingTop:    scrolled ? "0.6rem"  : "1rem",
+          paddingBottom: scrolled ? "0.6rem"  : "1rem",
+          boxShadow:     isLight ? "0 1px 12px rgba(0,0,0,0.06)" : "none",
         }}
       >
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between gap-4">
 
-          {/* Logo */}
+          {/* Logo — branco no hero, colorido no estado claro */}
           <Link href="/" className="flex-shrink-0" aria-label="Início">
             <Image
-              src="/images/logo/timao-branco.png"
+              src={isLight ? "/images/logo/logo-icb-colorido.png" : "/images/logo/timao-branco.png"}
               alt="Iate Clube Brasileiro"
-              width={200}
-              height={75}
-              className="object-contain drop-shadow-sm"
+              width={isLight ? 140 : 160}
+              height={52}
+              className="object-contain transition-all duration-300"
+              priority
             />
           </Link>
 
           {/* Desktop nav */}
-          <nav className="hidden lg:flex items-center gap-1 py-1 px-1 rounded-full" style={{ backgroundColor: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.10)", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)" }}>
+          <nav className="hidden lg:flex items-center gap-0.5" aria-label="Menu principal">
             {navItems.map((item) => {
-              const isActive  = activeItem === item.name;
-              const hasDrop   = !!dropdowns[item.name];
-              const isOpen    = openDropdown === item.name;
+              const isActive = activeItem === item.name;
+              const hasDrop  = !!dropdowns[item.name];
+              const isOpen   = openDropdown === item.name;
 
               return (
                 <div
@@ -141,42 +148,36 @@ export default function Navbar() {
                 >
                   <button
                     type="button"
-                    onClick={() => hasDrop ? setOpenDropdown(isOpen ? null : item.name) : handleSelect(item.href, item.name)}
+                    onClick={() => hasDrop
+                      ? setOpenDropdown(isOpen ? null : item.name)
+                      : handleSelect(item.href, item.name)
+                    }
                     aria-current={isActive ? "page" : undefined}
                     aria-haspopup={hasDrop ? "true" : undefined}
                     aria-expanded={hasDrop ? isOpen : undefined}
-                    className="relative flex items-center gap-1 text-sm font-medium px-4 py-2 rounded-full cursor-pointer transition-colors duration-200 select-none whitespace-nowrap"
-                    style={{ color: isActive ? "#fff" : "rgba(255,255,255,0.55)" }}
-                    onMouseEnter={(e) => { if (!isActive) e.currentTarget.style.color = "rgba(255,255,255,0.85)"; }}
-                    onMouseLeave={(e) => { if (!isActive) e.currentTarget.style.color = "rgba(255,255,255,0.55)"; }}
+                    className="relative flex items-center gap-1 text-sm font-medium px-3.5 py-2 rounded-md cursor-pointer select-none whitespace-nowrap transition-colors duration-200"
+                    style={{ color: isActive ? linkActiveColor : linkColor }}
+                    onMouseEnter={(e) => { e.currentTarget.style.color = linkHoverColor; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.color = isActive ? linkActiveColor : linkColor; }}
                   >
-                    <span className="relative z-10">{item.name}</span>
+                    {item.name}
                     {hasDrop && (
                       <ChevronDown
                         className="w-3.5 h-3.5 transition-transform duration-200"
-                        style={{ transform: isOpen ? "rotate(180deg)" : "rotate(0deg)", color: "inherit" }}
+                        style={{ transform: isOpen ? "rotate(180deg)" : "rotate(0deg)" }}
                       />
                     )}
 
-                    {/* Tubelight bg */}
+                    {/* Indicador ativo — linha vermelha sob o item */}
                     {isActive && (
                       <motion.span
-                        layoutId="tubelight-bg"
+                        layoutId="nav-active-line"
                         aria-hidden
-                        className="absolute inset-0 rounded-full pointer-events-none"
-                        style={{ backgroundColor: "rgba(178,34,34,0.22)" }}
+                        className="absolute bottom-0 left-3 right-3 h-[2px] rounded-full"
+                        style={{ backgroundColor: RED }}
                         initial={false}
-                        transition={{ type: "spring", stiffness: 380, damping: 34 }}
-                      >
-                        <span
-                          aria-hidden
-                          className="absolute left-1/2 -translate-x-1/2 rounded-b-none rounded-t-full"
-                          style={{ top: -1, width: 28, height: 2, backgroundColor: RED, display: "block" }}
-                        >
-                          <span aria-hidden style={{ display: "block", position: "absolute", top: -6, left: -12, width: 52, height: 18, backgroundColor: RED, opacity: 0.28, borderRadius: "50%", filter: "blur(8px)" }} />
-                          <span aria-hidden style={{ display: "block", position: "absolute", top: -3, left: -4, width: 36, height: 10, backgroundColor: RED, opacity: 0.38, borderRadius: "50%", filter: "blur(4px)" }} />
-                        </span>
-                      </motion.span>
+                        transition={{ type: "spring", stiffness: 420, damping: 36 }}
+                      />
                     )}
                   </button>
 
@@ -185,14 +186,14 @@ export default function Navbar() {
                     {hasDrop && isOpen && (
                       <motion.div
                         initial={{ opacity: 0, y: -6, scale: 0.97 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: -6, scale: 0.97 }}
-                        transition={{ duration: 0.18, ease: "easeOut" }}
-                        className="absolute top-full left-0 mt-2 min-w-[200px] rounded-xl overflow-hidden shadow-2xl z-50"
+                        animate={{ opacity: 1, y: 0,  scale: 1    }}
+                        exit={   { opacity: 0, y: -6, scale: 0.97 }}
+                        transition={{ duration: 0.16, ease: "easeOut" }}
+                        className="absolute top-full left-0 mt-2 min-w-[210px] rounded-xl overflow-hidden z-50"
                         style={{
-                          backgroundColor: "rgba(10,22,40,0.97)",
-                          border: "1px solid rgba(255,255,255,0.1)",
-                          backdropFilter: "blur(20px)",
+                          background:   "#ffffff",
+                          border:       "1px solid rgba(0,0,0,0.08)",
+                          boxShadow:    "0 8px 28px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.06)",
                         }}
                         onMouseEnter={() => openMenu(item.name)}
                         onMouseLeave={() => closeMenu(item.name)}
@@ -202,18 +203,20 @@ export default function Navbar() {
                             key={sub.href}
                             href={sub.href}
                             onClick={() => { setOpenDropdown(null); setActiveItem(item.name); }}
-                            className="flex items-center px-4 py-3 text-sm transition-colors duration-150"
+                            className="flex items-center px-5 py-3 text-sm transition-colors duration-150"
                             style={{
-                              color: "rgba(255,255,255,0.7)",
-                              borderBottom: i < dropdowns[item.name].length - 1 ? "1px solid rgba(255,255,255,0.05)" : "none",
+                              color:        "rgba(16,32,46,0.72)",
+                              borderBottom: i < dropdowns[item.name].length - 1
+                                ? "1px solid rgba(0,0,0,0.05)"
+                                : "none",
                             }}
                             onMouseEnter={(e) => {
-                              e.currentTarget.style.backgroundColor = "rgba(178,34,34,0.12)";
-                              e.currentTarget.style.color = "#fff";
+                              e.currentTarget.style.backgroundColor = "rgba(178,34,34,0.05)";
+                              e.currentTarget.style.color = NAVY;
                             }}
                             onMouseLeave={(e) => {
                               e.currentTarget.style.backgroundColor = "transparent";
-                              e.currentTarget.style.color = "rgba(255,255,255,0.7)";
+                              e.currentTarget.style.color = "rgba(16,32,46,0.72)";
                             }}
                           >
                             {sub.label}
@@ -227,22 +230,24 @@ export default function Navbar() {
             })}
           </nav>
 
-          {/* Mobile hamburger */}
-          <div className="flex items-center gap-3 flex-shrink-0">
-            <button
-              type="button"
-              onClick={() => setMobileOpen((v) => !v)}
-              className="lg:hidden p-2 text-white cursor-pointer"
-              aria-label={mobileOpen ? "Fechar menu" : "Abrir menu"}
-              aria-expanded={mobileOpen}
-            >
-              {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
-          </div>
+          {/* Hamburger mobile */}
+          <button
+            type="button"
+            onClick={() => setMobileOpen((v) => !v)}
+            className="lg:hidden p-2 rounded-lg cursor-pointer transition-colors duration-200"
+            aria-label={mobileOpen ? "Fechar menu" : "Abrir menu"}
+            aria-expanded={mobileOpen}
+            style={{
+              color:           isLight ? NAVY : "#fff",
+              backgroundColor: isLight ? "rgba(0,0,0,0.04)" : "rgba(255,255,255,0.1)",
+            }}
+          >
+            {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
         </div>
       </motion.header>
 
-      {/* Mobile Drawer */}
+      {/* Mobile Drawer — mantém dark (contraste garantido) */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
@@ -252,7 +257,7 @@ export default function Navbar() {
             exit={{ x: "100%" }}
             transition={{ type: "spring", damping: 28, stiffness: 280 }}
             className="fixed inset-y-0 right-0 w-72 max-w-[85vw] z-50 flex flex-col pt-24 pb-8 px-7 overflow-y-auto"
-            style={{ backgroundColor: NAVY, borderLeft: "1px solid rgba(255,255,255,0.08)" }}
+            style={{ backgroundColor: NAVY, borderLeft: "1px solid rgba(255,255,255,0.07)" }}
           >
             <nav className="flex flex-col" aria-label="Menu mobile">
               {navItems.map((item, i) => {
@@ -266,7 +271,7 @@ export default function Navbar() {
                       type="button"
                       initial={{ opacity: 0, x: 16 }}
                       animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: i * 0.045 }}
+                      transition={{ delay: i * 0.04 }}
                       onClick={() => {
                         if (hasDrop) {
                           setMobileExpanded(isExp ? null : item.name);
@@ -276,30 +281,37 @@ export default function Navbar() {
                       }}
                       className="flex items-center justify-between w-full text-base font-medium text-left py-3.5 cursor-pointer"
                       style={{
-                        color: isActive ? "#fff" : "rgba(255,255,255,0.6)",
+                        color:        isActive ? "#fff" : "rgba(255,255,255,0.55)",
                         borderBottom: "1px solid rgba(255,255,255,0.06)",
                       }}
                     >
                       <div className="flex items-center gap-3">
-                        {isActive && <span className="w-1 h-4 rounded-full flex-shrink-0" style={{ backgroundColor: RED }} />}
+                        {isActive && (
+                          <span
+                            className="w-1 h-4 rounded-full flex-shrink-0"
+                            style={{ backgroundColor: RED }}
+                          />
+                        )}
                         {item.name}
                       </div>
                       {hasDrop && (
                         <ChevronDown
                           className="w-4 h-4 transition-transform duration-200"
-                          style={{ transform: isExp ? "rotate(180deg)" : "rotate(0deg)", color: "rgba(255,255,255,0.4)" }}
+                          style={{
+                            transform: isExp ? "rotate(180deg)" : "rotate(0deg)",
+                            color: "rgba(255,255,255,0.35)",
+                          }}
                         />
                       )}
                     </motion.button>
 
-                    {/* Mobile sub-items */}
                     <AnimatePresence>
                       {hasDrop && isExp && (
                         <motion.div
                           initial={{ opacity: 0, height: 0 }}
                           animate={{ opacity: 1, height: "auto" }}
-                          exit={{ opacity: 0, height: 0 }}
-                          transition={{ duration: 0.22 }}
+                          exit={   { opacity: 0, height: 0 }}
+                          transition={{ duration: 0.2 }}
                           className="overflow-hidden"
                         >
                           {dropdowns[item.name].map((sub) => (
@@ -309,11 +321,14 @@ export default function Navbar() {
                               onClick={() => { setMobileOpen(false); setMobileExpanded(null); }}
                               className="flex items-center pl-6 py-3 text-sm"
                               style={{
-                                color: "rgba(255,255,255,0.5)",
+                                color:        "rgba(255,255,255,0.45)",
                                 borderBottom: "1px solid rgba(255,255,255,0.04)",
                               }}
                             >
-                              <span className="w-1 h-1 rounded-full mr-3 flex-shrink-0" style={{ backgroundColor: RED }} />
+                              <span
+                                className="w-1 h-1 rounded-full mr-3 flex-shrink-0"
+                                style={{ backgroundColor: RED }}
+                              />
                               {sub.label}
                             </Link>
                           ))}
@@ -328,7 +343,7 @@ export default function Navbar() {
         )}
       </AnimatePresence>
 
-      {/* Mobile overlay */}
+      {/* Overlay mobile */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
@@ -339,7 +354,7 @@ export default function Navbar() {
             transition={{ duration: 0.2 }}
             onClick={() => setMobileOpen(false)}
             className="fixed inset-0 z-40 lg:hidden"
-            style={{ backgroundColor: "rgba(10,22,40,0.55)", backdropFilter: "blur(3px)" }}
+            style={{ backgroundColor: "rgba(10,22,40,0.5)", backdropFilter: "blur(3px)" }}
           />
         )}
       </AnimatePresence>
