@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
 
 @theme {
@@ -13,7 +13,7 @@
   --color-anchor: #6B7A8D;
   --color-anchor-light: #8FA0B4;
 
-  /* Paleta costeira — base clara e quente */
+  /* Paleta costeira */
   --color-sand: #FAF8F3;
   --color-sand-100: #F2EEE6;
   --color-mist: #EAF2F6;
@@ -21,21 +21,36 @@
   --color-ink: #16202E;
   --color-ink-soft: #4A5666;
 
-  --font-display: 'Cormorant', Georgia, serif;
+  --font-display: 'Cormorant Garamond', Georgia, serif;
   --font-body: 'IBM Plex Sans', system-ui, sans-serif;
 
-  --shadow-luxury: 0 4px 20px rgba(10, 22, 40, 0.12), 0 1px 4px rgba(10, 22, 40, 0.08);
-  --shadow-luxury-lg: 0 20px 60px rgba(10, 22, 40, 0.2), 0 4px 16px rgba(10, 22, 40, 0.12);
+  /* Radius consistente em todos os cards e botões */
+  --radius-card: 10px;
+  --radius-btn: 8px;
+
+  /* Sombras calibradas — nunca pesadas */
+  --shadow-luxury:       0 2px 12px rgba(10, 22, 40, 0.07), 0 1px 3px rgba(10, 22, 40, 0.05);
+  --shadow-luxury-hover: 0 8px 28px rgba(10, 22, 40, 0.13), 0 2px 8px rgba(10, 22, 40, 0.06);
+  --shadow-luxury-lg:    0 20px 56px rgba(10, 22, 40, 0.15), 0 4px 14px rgba(10, 22, 40, 0.08);
 }
 
+/* Fundo escuro para Footer e Instalações */
 .navy-ambient {
   background-color: #0A1628;
   background-image:
-    radial-gradient(ellipse 70% 55% at 85% 8%, rgba(30,70,140,0.18) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 65% at 8% 92%, rgba(20,52,104,0.20) 0%, transparent 58%);
+    radial-gradient(ellipse 70% 55% at 85% 8%,  rgba(30, 70, 140, 0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 65% at  8% 92%, rgba(20, 52, 104, 0.20) 0%, transparent 58%);
 }
 
-/* Force light mode — block browser automatic dark theme */
+/* Glass usada em Regattas */
+.glass-white {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+/* Forçar modo claro — bloquear tema escuro automático do browser */
 :root {
   color-scheme: light only;
 }
@@ -81,19 +96,14 @@
     outline-offset: 3px;
   }
 
-  ::-webkit-scrollbar {
-    width: 6px;
-  }
-  ::-webkit-scrollbar-track {
-    background: #ffffff;
-  }
+  /* Scrollbar discreta — não chama atenção */
+  ::-webkit-scrollbar       { width: 5px; }
+  ::-webkit-scrollbar-track { background: #f4f4f4; }
   ::-webkit-scrollbar-thumb {
-    background: var(--color-red);
+    background: var(--color-anchor);
     border-radius: 3px;
   }
-  ::-webkit-scrollbar-thumb:hover {
-    background: var(--color-red-light);
-  }
+  ::-webkit-scrollbar-thumb:hover { background: var(--color-ink-soft); }
 
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
@@ -101,9 +111,7 @@
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
     }
-    html {
-      scroll-behavior: auto;
-    }
+    html { scroll-behavior: auto; }
   }
 }
 
@@ -112,104 +120,48 @@
     font-family: var(--font-display);
   }
 
-  .text-gradient-red {
-    background: linear-gradient(135deg, var(--color-red) 0%, var(--color-red-light) 50%, var(--color-red) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .red-line {
-    display: block;
-    width: 60px;
-    height: 2px;
-    background: linear-gradient(90deg, var(--color-red), var(--color-red-light));
-  }
-
-  .rope-divider {
-    height: 1px;
-    background: repeating-linear-gradient(
-      90deg,
-      var(--color-red) 0px,
-      var(--color-red) 4px,
-      transparent 4px,
-      transparent 10px
-    );
-    opacity: 0.4;
-  }
-
-  .glass-navy {
-    background: rgba(10, 22, 40, 0.7);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(178, 34, 34, 0.2);
-  }
-
-  .glass-white {
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-  }
-
   .shadow-luxury {
     box-shadow: var(--shadow-luxury);
+  }
+
+  .shadow-luxury-hover {
+    box-shadow: var(--shadow-luxury-hover);
   }
 
   .shadow-luxury-lg {
     box-shadow: var(--shadow-luxury-lg);
   }
 
+  /* Padding vertical padrão de seção */
   .section-py {
-    padding-top: 3rem;
-    padding-bottom: 3rem;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
   }
 
   @media (min-width: 768px) {
-    .section-py {
-      padding-top: 4rem;
-      padding-bottom: 4rem;
-    }
-  }
-
-  @media (min-width: 1024px) {
     .section-py {
       padding-top: 5rem;
       padding-bottom: 5rem;
     }
   }
 
-  .wave-overlay {
-    background: linear-gradient(180deg, transparent 0%, rgba(10, 22, 40, 0.8) 100%);
+  @media (min-width: 1024px) {
+    .section-py {
+      padding-top: 6rem;
+      padding-bottom: 6rem;
+    }
   }
-}
 
-@keyframes wave-move {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-.wave-animate {
-  animation: wave-move 20s linear infinite;
-}
-
-@keyframes shimmer {
-  0% { background-position: -200% center; }
-  100% { background-position: 200% center; }
-}
-
-.shimmer-red {
-  background: linear-gradient(
-    90deg,
-    var(--color-red) 0%,
-    var(--color-red-light) 25%,
-    var(--color-red-pale) 50%,
-    var(--color-red-light) 75%,
-    var(--color-red) 100%
-  );
-  background-size: 200% auto;
-  animation: shimmer 4s linear infinite;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  /* Rope divider — usada em Membership */
+  .rope-divider {
+    height: 1px;
+    background: repeating-linear-gradient(
+      90deg,
+      var(--color-anchor) 0px,
+      var(--color-anchor) 4px,
+      transparent 4px,
+      transparent 10px
+    );
+    opacity: 0.25;
+  }
 }
