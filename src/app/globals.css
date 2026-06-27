@@ -87,6 +87,7 @@
     scroll-behavior: smooth;
     font-size: 16px;
     overscroll-behavior-y: none;
+    overflow-x: hidden;
   }
 
   html, body {
@@ -96,7 +97,6 @@
   body {
     font-family: var(--font-body);
     color: var(--color-navy);
-    overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
