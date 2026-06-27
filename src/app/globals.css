@@ -86,17 +86,17 @@
   html {
     scroll-behavior: smooth;
     font-size: 16px;
-    overscroll-behavior-y: none;
-    overflow-x: hidden;
   }
 
   html, body {
     background-color: #FAF8F3 !important;
+    overflow-x: clip;
   }
 
   body {
     font-family: var(--font-body);
     color: var(--color-navy);
+    overscroll-behavior-y: none;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
