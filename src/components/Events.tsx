@@ -74,12 +74,12 @@ export default function Events({ sanityData }: EventsProps) {
               >
                 {/* Imagem de capa */}
                 {event.imagem && (
-                  <div className="relative w-full" style={{ aspectRatio: "16/9" }}>
+                  <div className="relative w-full flex items-center justify-center overflow-hidden" style={{ aspectRatio: "4/3", backgroundColor: "#F3F4F6" }}>
                     <Image
-                      src={urlFor(event.imagem).width(600).height(338).url()}
+                      src={urlFor(event.imagem).width(600).url()}
                       alt={event.titulo}
                       fill
-                      className="object-cover"
+                      className="object-contain"
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     />
                   </div>

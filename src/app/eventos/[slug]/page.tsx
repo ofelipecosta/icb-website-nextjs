@@ -149,12 +149,13 @@ export default async function EventoPage({ params }: { params: Promise<{ slug: s
 
           {/* Imagem */}
           {imgUrl && (
-            <div className="relative w-full mb-10 overflow-hidden rounded-lg" style={{ aspectRatio: "16/9" }}>
+            <div className="relative w-full mb-10 overflow-hidden rounded-lg flex items-center justify-center" style={{ backgroundColor: "#F3F4F6" }}>
               <Image
                 src={imgUrl}
                 alt={evento.titulo}
-                fill
-                className="object-cover"
+                width={900}
+                height={900}
+                className="object-contain w-full h-auto"
                 priority
               />
             </div>
