@@ -105,7 +105,7 @@ export default function Events({ sanityData }: EventsProps) {
 
                   {/* Description */}
                   {desc && (
-                    <p className="text-sm leading-relaxed line-clamp-2 mb-4 flex-1" style={{ color: "#6B7A8D" }}>
+                    <p className="text-sm leading-relaxed mb-4 flex-1" style={{ color: "#6B7A8D" }}>
                       {desc}
                     </p>
                   )}
