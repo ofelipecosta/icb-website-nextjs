@@ -14,7 +14,7 @@ export default function Hero() {
       style={{ height: "clamp(420px, 72vh, 680px)" }}
     >
       <Image
-        src="/images/hero1.webp"
+        src="/images/hero1.png"
         alt="Vista aérea do Iate Clube Brasileiro"
         fill
         className="object-cover object-[20%_center] sm:object-center"
