@@ -3,7 +3,6 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { MapPin, Clock, Phone } from "lucide-react";
-import Link from "next/link";
 
 const RED  = "#B22222";
 const NAVY = "#0A1628";
@@ -205,15 +204,6 @@ export default function ContactStrip() {
               </motion.div>
             ))}
 
-            <div className="pt-5">
-              <Link
-                href="/contato"
-                className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest transition-opacity hover:opacity-60"
-                style={{ color: RED }}
-              >
-                Ver página de contato completa →
-              </Link>
-            </div>
           </motion.div>
 
         </div>
