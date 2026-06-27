@@ -1,6 +1,7 @@
-import { MapPin, Clock, Phone } from "lucide-react";
+"use client";
+
 import Link from "next/link";
-import SectionHeader from "@/components/SectionHeader";
+import { Phone, MapPin, Clock, PartyPopper } from "lucide-react";
 
 const WHATSAPP  = "https://wa.me/5521985564487";
 const TEL_HREF  = "tel:+552127148252";
@@ -16,87 +17,73 @@ const WaIcon = () => (
 export default function ContactStrip() {
   return (
     <section id="contato" className="section-py px-6" style={{ backgroundColor: "var(--color-surface)" }}>
-      <div className="max-w-7xl mx-auto">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+      <div className="max-w-3xl mx-auto text-center">
 
-          {/* Esquerda — editorial */}
-          <div>
-            <SectionHeader
-              eyebrow="Contato"
-              title="Fale com o ICB"
-              description="Nossa equipe está pronta para responder dúvidas sobre associação, eventos e serviços náuticos."
-              titleSize="lg"
-              divider={false}
-            />
-            <Link
-              href="/contato"
-              className="inline-flex items-center gap-1.5 mt-6 text-xs font-bold uppercase tracking-widest transition-opacity hover:opacity-60"
-              style={{ color: RED }}
-            >
-              Ver todos os departamentos →
-            </Link>
-          </div>
+        <p
+          className="text-xs font-semibold uppercase tracking-[0.2em] mb-3"
+          style={{ color: RED }}
+        >
+          Contato
+        </p>
 
-          {/* Direita — info + ações */}
-          <div className="flex flex-col gap-5">
+        <h2
+          className="font-display font-bold mb-8"
+          style={{ fontSize: "clamp(1.75rem, 3.5vw, 2.25rem)", color: "var(--color-ink)" }}
+        >
+          Fale com o ICB
+        </h2>
 
-            {/* Endereço e horário em linha */}
-            <div className="grid grid-cols-2 gap-x-8 gap-y-4">
-              <div className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style={{ backgroundColor: "rgba(178,34,34,0.07)" }}>
-                  <MapPin className="w-4 h-4" style={{ color: RED }} />
-                </div>
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-wider mb-1" style={{ color: "var(--color-ink)" }}>Endereço</p>
-                  <p className="text-sm leading-relaxed" style={{ color: "var(--color-anchor)" }}>
-                    Est. Leopoldo Fróes, 400<br />
-                    São Francisco, Niterói — RJ
-                  </p>
-                </div>
-              </div>
+        {/* Botões de contato */}
+        <div className="flex flex-wrap gap-3 justify-center mb-10">
+          <a
+            href={TEL_HREF}
+            className="inline-flex items-center gap-2 font-semibold text-sm px-6 py-3 transition-opacity hover:opacity-80"
+            style={{ backgroundColor: RED, color: "#fff", borderRadius: "var(--radius-btn)" }}
+          >
+            <Phone className="w-4 h-4" />
+            {TEL_LABEL}
+          </a>
 
-              <div className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style={{ backgroundColor: "rgba(178,34,34,0.07)" }}>
-                  <Clock className="w-4 h-4" style={{ color: RED }} />
-                </div>
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-wider mb-1" style={{ color: "var(--color-ink)" }}>Horário</p>
-                  <p className="text-sm leading-relaxed" style={{ color: "var(--color-anchor)" }}>
-                    Ter a dom, 08h às 20h<br />
-                    <span style={{ opacity: 0.6 }}>Segunda fechado</span>
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Divisor */}
-            <div style={{ height: 1, backgroundColor: "rgba(0,0,0,0.07)" }} />
-
-            {/* Botões */}
-            <div className="flex flex-wrap gap-3">
-              <a
-                href={TEL_HREF}
-                className="inline-flex items-center gap-2 font-semibold text-sm px-5 py-3 transition-opacity hover:opacity-75"
-                style={{ backgroundColor: "#fff", color: "var(--color-ink)", border: "1px solid rgba(0,0,0,0.12)", borderRadius: "var(--radius-btn)" }}
-              >
-                <Phone className="w-4 h-4" style={{ color: RED }} />
-                {TEL_LABEL}
-              </a>
-
-              <a
-                href={WHATSAPP}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 font-semibold text-sm px-5 py-3 transition-opacity hover:opacity-90"
-                style={{ backgroundColor: "#25D366", color: "#fff", borderRadius: "var(--radius-btn)" }}
-              >
-                <WaIcon />
-                WhatsApp
-              </a>
-            </div>
-          </div>
-
+          <a
+            href={WHATSAPP}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 font-semibold text-sm px-6 py-3 transition-opacity hover:opacity-90"
+            style={{ backgroundColor: "#25D366", color: "#fff", borderRadius: "var(--radius-btn)" }}
+          >
+            <WaIcon />
+            WhatsApp
+          </a>
         </div>
+
+        {/* Info row */}
+        <div
+          className="flex flex-wrap items-start justify-center gap-6 md:gap-10 mb-8 text-sm"
+          style={{ color: "var(--color-anchor)" }}
+        >
+          <span className="flex items-center gap-1.5">
+            <MapPin className="w-4 h-4 flex-shrink-0" style={{ color: RED }} />
+            Est. Leopoldo Fróes, 400 · São Francisco, Niterói
+          </span>
+          <span className="flex items-center gap-1.5">
+            <Clock className="w-4 h-4 flex-shrink-0" style={{ color: RED }} />
+            Ter a dom · 08h às 20h
+          </span>
+          <span className="flex items-center gap-1.5">
+            <PartyPopper className="w-4 h-4 flex-shrink-0" style={{ color: RED }} />
+            Salão de Festas disponível para eventos
+          </span>
+        </div>
+
+        {/* Link departamentos */}
+        <Link
+          href="/contato"
+          className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest transition-opacity hover:opacity-60"
+          style={{ color: RED }}
+        >
+          Ver todos os departamentos →
+        </Link>
+
       </div>
     </section>
   );
