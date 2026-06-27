@@ -100,13 +100,13 @@ export default function Hero() {
               text="Área do Associado"
               onClick={() => window.open("https://icb.areadosocio.com.br/#/entrada", "_blank")}
               variant="red"
-              className="w-full sm:w-auto"
+              className="w-full sm:w-52"
             />
             <FlowButton
               text="Seja Sócio"
               onClick={() => { window.location.href = "/seja-socio"; }}
               variant="dark"
-              className="w-full sm:w-auto"
+              className="w-full sm:w-52"
             />
           </motion.div>
         </div>
