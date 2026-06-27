@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import Image from "next/image";
+import SectionHeader from "@/components/SectionHeader";
 
 const RED  = "#B22222";
 const NAVY = "#0A1628";
@@ -23,20 +24,12 @@ export default function About() {
           animate={inView ? { opacity: 1 } : {}}
           transition={{ duration: 0.4 }}
           className="mb-16"
-          style={{ paddingBottom: "1.5rem", borderBottom: `1px solid rgba(0,0,0,0.07)` }}
         >
-          <p
-            className="text-xs tracking-[0.28em] uppercase font-semibold mb-2"
-            style={{ color: RED }}
-          >
-            Nossa História
-          </p>
-          <h2
-            className="font-display font-bold leading-none"
-            style={{ fontSize: "clamp(1.75rem, 3.5vw, 2.5rem)", color: INK }}
-          >
-            Iate Clube Brasileiro
-          </h2>
+          <SectionHeader
+            eyebrow="Nossa História"
+            title="Iate Clube Brasileiro"
+            titleSize="lg"
+          />
         </motion.div>
 
         {/* ── Conteúdo principal ── */}

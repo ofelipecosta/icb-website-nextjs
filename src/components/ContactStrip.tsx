@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { MapPin, Clock, Phone } from "lucide-react";
+import SectionHeader from "@/components/SectionHeader";
 
 const RED  = "#B22222";
 const NAVY = "#0A1628";
@@ -122,18 +123,14 @@ export default function ContactStrip() {
             transition={{ duration: 0.5 }}
             className="order-2 lg:order-1"
           >
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] mb-2" style={{ color: RED }}>
-              Contato
-            </p>
-            <h2
-              className="font-display font-bold leading-tight mb-3"
-              style={{ fontSize: "clamp(1.5rem, 2.5vw, 2rem)", color: "var(--color-ink)" }}
-            >
-              Fale com o ICB
-            </h2>
-            <p className="text-sm leading-relaxed mb-8" style={{ color: "var(--color-anchor)", maxWidth: 340 }}>
-              Encontre o departamento certo e fale diretamente com quem pode ajudar.
-            </p>
+            <SectionHeader
+              eyebrow="Contato"
+              title="Fale com o ICB"
+              description="Encontre o departamento certo e fale diretamente com quem pode ajudar."
+              titleSize="lg"
+              divider={false}
+              className="mb-8"
+            />
 
             <div className="grid grid-cols-2 gap-6 mb-8">
               <div className="flex items-start gap-2.5">
