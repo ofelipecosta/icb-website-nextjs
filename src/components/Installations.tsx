@@ -87,12 +87,11 @@ function PhotoModal({ item, onClose }: { item: CardItem; onClose: () => void }) 
   const prev = useCallback(() => navigate((idx - 1 + photos.length) % photos.length), [idx, navigate, photos.length]);
   const next = useCallback(() => navigate((idx + 1) % photos.length), [idx, navigate, photos.length]);
 
-  // Keyboard nav + scroll lock
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape")      onClose();
-      if (e.key === "ArrowLeft")   prev();
-      if (e.key === "ArrowRight")  next();
+      if (e.key === "Escape")     onClose();
+      if (e.key === "ArrowLeft")  prev();
+      if (e.key === "ArrowRight") next();
     };
     window.addEventListener("keydown", onKey);
     document.body.style.overflow = "hidden";
@@ -102,7 +101,6 @@ function PhotoModal({ item, onClose }: { item: CardItem; onClose: () => void }) 
     };
   }, [onClose, prev, next]);
 
-  // Scroll active thumb into view
   useEffect(() => {
     activeRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
   }, [idx]);
@@ -114,31 +112,27 @@ function PhotoModal({ item, onClose }: { item: CardItem; onClose: () => void }) 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.22 }}
-      className="fixed inset-0 z-50 flex items-center justify-center"
-      style={{ backgroundColor: "rgba(5, 10, 20, 0.96)", backdropFilter: "blur(12px)" }}
+      transition={{ duration: 0.2 }}
+      className="fixed inset-0 z-50 flex items-center justify-center px-4"
+      style={{ backgroundColor: "rgba(10,22,40,0.75)", backdropFilter: "blur(6px)" }}
       onClick={onClose}
     >
       <motion.div
-        initial={{ scale: 0.96, opacity: 0, y: 16 }}
+        initial={{ scale: 0.97, opacity: 0, y: 12 }}
         animate={{ scale: 1,    opacity: 1, y: 0 }}
-        exit={   { scale: 0.96, opacity: 0, y: 16 }}
-        transition={{ duration: 0.28, ease: [0.32, 0, 0.67, 0] }}
-        className="relative flex flex-col w-full mx-4"
-        style={{ maxWidth: 900, borderRadius: 16, overflow: "hidden", background: "#0d1b30" }}
+        exit={   { scale: 0.97, opacity: 0, y: 12 }}
+        transition={{ duration: 0.24, ease: [0.32, 0, 0.67, 0] }}
+        className="relative flex flex-col w-full"
+        style={{
+          maxWidth: 860,
+          borderRadius: "var(--radius-card)",
+          overflow: "hidden",
+          background: "#fff",
+          boxShadow: "var(--shadow-luxury-lg)",
+        }}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Close button */}
-        <button
-          onClick={onClose}
-          className="absolute top-3 right-3 z-30 flex items-center justify-center w-9 h-9 rounded-full transition-all duration-200 hover:scale-110"
-          style={{ backgroundColor: "rgba(0,0,0,0.55)", backdropFilter: "blur(6px)", color: "#fff" }}
-          aria-label="Fechar"
-        >
-          <X className="w-4 h-4" />
-        </button>
-
-        {/* ── Main image + swipe ─────────────────────────────────────────── */}
+        {/* ── Foto principal ─────────────────────────────────────────────── */}
         <div className="relative overflow-hidden select-none" style={{ aspectRatio: "16/9" }}>
           <AnimatePresence custom={dir} initial={false}>
             <motion.div
@@ -165,42 +159,50 @@ function PhotoModal({ item, onClose }: { item: CardItem; onClose: () => void }) 
                   alt={`${item.title} — foto ${idx + 1}`}
                   fill
                   className="object-cover pointer-events-none"
-                  sizes="(max-width: 900px) 100vw, 900px"
+                  sizes="(max-width: 860px) 100vw, 860px"
                   priority
                 />
               ) : (
                 <div className={`absolute inset-0 bg-gradient-to-br ${item.fallbackColor}`} />
               )}
-              {/* Subtle vignette */}
-              <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.45) 100%)" }} />
             </motion.div>
           </AnimatePresence>
 
-          {/* Counter pill */}
+          {/* Counter */}
           {hasManyPhotos && (
             <div
               className="absolute top-3 left-3 z-20 text-xs font-semibold px-2.5 py-1 rounded-full"
-              style={{ backgroundColor: "rgba(0,0,0,0.55)", backdropFilter: "blur(6px)", color: "rgba(255,255,255,0.9)" }}
+              style={{ backgroundColor: "rgba(0,0,0,0.45)", color: "#fff" }}
             >
               {idx + 1} / {photos.length}
             </div>
           )}
 
-          {/* Arrow buttons */}
+          {/* Fechar */}
+          <button
+            onClick={onClose}
+            className="absolute top-3 right-3 z-30 flex items-center justify-center w-8 h-8 rounded-full transition-opacity duration-200 hover:opacity-80"
+            style={{ backgroundColor: "rgba(0,0,0,0.45)", color: "#fff" }}
+            aria-label="Fechar"
+          >
+            <X className="w-4 h-4" />
+          </button>
+
+          {/* Arrows */}
           {hasManyPhotos && (
             <>
               <button
                 onClick={prev}
-                className="absolute left-3 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center w-10 h-10 rounded-full transition-all duration-200 hover:scale-110"
-                style={{ backgroundColor: "rgba(0,0,0,0.55)", backdropFilter: "blur(6px)", color: "#fff" }}
+                className="absolute left-3 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center w-9 h-9 rounded-full transition-opacity duration-200 hover:opacity-80"
+                style={{ backgroundColor: "rgba(0,0,0,0.45)", color: "#fff" }}
                 aria-label="Foto anterior"
               >
                 <ChevronLeft className="w-5 h-5" />
               </button>
               <button
                 onClick={next}
-                className="absolute right-3 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center w-10 h-10 rounded-full transition-all duration-200 hover:scale-110"
-                style={{ backgroundColor: "rgba(0,0,0,0.55)", backdropFilter: "blur(6px)", color: "#fff" }}
+                className="absolute right-3 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center w-9 h-9 rounded-full transition-opacity duration-200 hover:opacity-80"
+                style={{ backgroundColor: "rgba(0,0,0,0.45)", color: "#fff" }}
                 aria-label="Próxima foto"
               >
                 <ChevronRight className="w-5 h-5" />
@@ -209,52 +211,46 @@ function PhotoModal({ item, onClose }: { item: CardItem; onClose: () => void }) 
           )}
         </div>
 
-        {/* ── Thumbnail strip ────────────────────────────────────────────── */}
+        {/* ── Thumbnails ─────────────────────────────────────────────────── */}
         {hasManyPhotos && (
           <div
             ref={thumbsRef}
-            className="flex gap-2 px-4 py-3 overflow-x-auto"
-            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+            className="flex gap-2 px-4 pt-3 pb-0 overflow-x-auto"
+            style={{ scrollbarWidth: "none" }}
           >
             {thumbs.map((url, i) => (
               <motion.button
                 key={i}
                 ref={i === idx ? activeRef : null}
                 onClick={() => navigate(i)}
-                whileTap={{ scale: 0.94 }}
-                className="relative flex-shrink-0 rounded-lg overflow-hidden transition-all duration-250"
+                whileTap={{ scale: 0.95 }}
+                className="relative flex-shrink-0 overflow-hidden transition-all duration-200"
                 style={{
-                  width: 72, height: 48,
+                  width: 64, height: 42,
+                  borderRadius: 6,
                   outline: i === idx ? `2px solid ${RED}` : "2px solid transparent",
-                  outlineOffset: 1,
-                  opacity: i === idx ? 1 : 0.45,
-                  transform: i === idx ? "scale(1.05)" : "scale(1)",
+                  outlineOffset: 2,
+                  opacity: i === idx ? 1 : 0.4,
                 }}
                 aria-label={`Ver foto ${i + 1}`}
               >
-                <Image
-                  src={url}
-                  alt={`Miniatura ${i + 1}`}
-                  fill
-                  className="object-cover"
-                  sizes="72px"
-                />
+                <Image src={url} alt={`Miniatura ${i + 1}`} fill className="object-cover" sizes="64px" />
               </motion.button>
             ))}
           </div>
         )}
 
-        {/* ── Info bar ──────────────────────────────────────────────────── */}
-        <div
-          className="flex items-start justify-between gap-4 px-5 pb-5"
-          style={{ paddingTop: hasManyPhotos ? 0 : 16 }}
-        >
+        {/* ── Info ───────────────────────────────────────────────────────── */}
+        <div className="flex items-start justify-between gap-4 px-5 py-4">
           <div className="min-w-0">
-            <h3 className="font-display text-lg font-semibold text-white leading-tight">
+            <h3
+              className="font-display font-semibold leading-tight mb-1"
+              style={{ fontSize: "1.1rem", color: "var(--color-ink)" }}
+            >
               {item.title}
             </h3>
             {item.description && (
-              <p className="text-sm leading-relaxed mt-1" style={{ color: "rgba(255,255,255,0.55)" }}>
+              <p className="text-sm leading-relaxed" style={{ color: "var(--color-anchor)" }}>
                 {item.description}
               </p>
             )}
@@ -264,8 +260,8 @@ function PhotoModal({ item, onClose }: { item: CardItem; onClose: () => void }) 
               href={item.ctaUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="shrink-0 text-xs font-semibold px-4 py-2.5 rounded-lg whitespace-nowrap transition-all duration-200 hover:brightness-110"
-              style={{ backgroundColor: RED, color: "#fff" }}
+              className="shrink-0 text-xs font-semibold px-4 py-2.5 whitespace-nowrap transition-opacity duration-200 hover:opacity-80"
+              style={{ backgroundColor: RED, color: "#fff", borderRadius: "var(--radius-btn)" }}
             >
               {item.ctaLabel}
             </a>
