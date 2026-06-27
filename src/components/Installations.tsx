@@ -3,10 +3,7 @@
 import { useRef, useState, useEffect, useCallback } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import {
-  Anchor, Utensils, Dumbbell, Ship, Waves, Building2,
-  X, ChevronLeft, ChevronRight, Images, type LucideIcon,
-} from "lucide-react";
+import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import { urlFor, type InstalacaoSanity } from "@/lib/sanity";
 import SectionHeader from "@/components/SectionHeader";
 
@@ -24,18 +21,6 @@ const staticInstallations = [
 ];
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
-
-const iconMap: Record<string, LucideIcon> = {
-  marina: Ship, restaurante: Utensils, sal: Building2, academia: Dumbbell, churrasco: Anchor, n: Waves,
-};
-
-function getIcon(title: string): LucideIcon {
-  const key = title.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
-  for (const [k, Icon] of Object.entries(iconMap)) {
-    if (key.includes(k)) return Icon;
-  }
-  return Anchor;
-}
 
 function getFallbackColor(title: string): string {
   const t = title.toLowerCase();
@@ -282,7 +267,6 @@ function InstallationCard({
   const [photoIdx, setPhotoIdx] = useState(0);
   const [hovered,  setHovered ] = useState(false);
   const wasDrag = useRef(false);
-  const Icon    = getIcon(item.title);
   const photos  = item.cardPhotos;
   const count   = photos.length;
   const hasPhotos = count > 0;
@@ -358,11 +342,7 @@ function InstallationCard({
 
       {/* Content */}
       <div className="relative z-10 p-8 h-full flex flex-col justify-end pointer-events-none" style={{ minHeight: 280 }}>
-        <div className="mb-auto">
-          <div className="w-12 h-12 rounded-full flex items-center justify-center mb-4" style={{ background: "rgba(255,255,255,0.12)", backdropFilter: "blur(8px)" }}>
-            <Icon className="w-6 h-6" style={{ color: RED }} />
-          </div>
-        </div>
+        <div className="mb-auto" />
         <div>
           <h3 className="font-display text-2xl font-semibold text-white mb-2">{item.title}</h3>
           <p className="text-sm leading-relaxed line-clamp-2" style={{ color: "rgba(255,255,255,0.6)" }}>
