@@ -66,11 +66,6 @@ export default function Footer() {
             <p className="italic text-sm leading-relaxed mb-4" style={{ color: "rgba(255,255,255,0.5)" }}>
               "O primeiro clube de vela do Brasil."
             </p>
-            <address className="not-italic text-sm leading-relaxed mb-6" style={{ color: "rgba(255,255,255,0.4)" }}>
-              Estrada Leopoldo Fróes, 400<br />
-              São Francisco, Niterói — RJ<br />
-              CEP 24360-005
-            </address>
             <div className="flex items-center gap-3">
               {socialLinks.map((social) => (
                 <a
