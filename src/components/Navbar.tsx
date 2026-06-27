@@ -315,7 +315,7 @@ export default function Navbar() {
             </div>
 
             {/* Nav items */}
-            <nav className="flex flex-col px-6 flex-1" aria-label="Menu mobile">
+            <nav className="flex flex-col px-6" aria-label="Menu mobile">
               {navItems.map((item, i) => {
                 const isActive = activeItem === item.name;
                 const hasDrop  = !!dropdowns[item.name];
