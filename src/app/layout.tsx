@@ -17,7 +17,8 @@ const inter = Inter({
   display: "swap",
 });
 
-const BASE_URL = "https://icb.org.br";
+// Após migrar DNS para Vercel, trocar para "https://icb.org.br"
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://icb-website-nextjs.vercel.app";
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
