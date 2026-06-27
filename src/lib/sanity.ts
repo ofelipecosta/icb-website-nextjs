@@ -114,7 +114,8 @@ export interface EventoSanity {
   linkUrl?: string;
   slug?: string;
   imagem?: SanityImageSource;
-  descricao?: { _type: string; children?: { text: string }[] }[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  descricao?: any[];
 }
 
 export async function getEventos(): Promise<EventoSanity[]> {
@@ -123,9 +124,7 @@ export async function getEventos(): Promise<EventoSanity[]> {
   );
 }
 
-export interface EventoFullSanity extends EventoSanity {
-  descricao?: unknown[];
-}
+export interface EventoFullSanity extends EventoSanity {}
 
 export async function getEvento(slug: string): Promise<EventoFullSanity | null> {
   const results = await client.fetch<EventoFullSanity[]>(

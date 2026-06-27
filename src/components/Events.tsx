@@ -49,8 +49,9 @@ export default function Events({ sanityData }: EventsProps) {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
           {items.map((event, i) => {
             const cat = categoryColors[event.categoria] ?? DEFAULT_CATEGORY_COLOR;
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const desc = event.detalhe
-              ?? event.descricao?.find((b) => b._type === "block")?.children?.map((c) => c.text).join("") ?? undefined;
+              ?? event.descricao?.find((b: any) => b._type === "block")?.children?.map((c: any) => c.text as string).join("") ?? undefined;
             return (
             <motion.a
               key={event._id}
