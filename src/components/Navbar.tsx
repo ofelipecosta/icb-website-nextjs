@@ -32,10 +32,10 @@ function SocialFacebook() {
 const navItems = [
   { name: "Início",      href: "#hero" },
   { name: "O Clube",     href: "#sobre" },
+  { name: "Instalações", href: "#instalacoes" },
   { name: "Notícias",    href: "#noticias" },
   { name: "Eventos",     href: "#eventos" },
   { name: "Náutica",     href: "/nautica" },
-  { name: "Instalações", href: "#instalacoes" },
   { name: "Contato",     href: "#contato" },
 ];
 

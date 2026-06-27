@@ -27,9 +27,9 @@ export default async function Home() {
         <Hero />
         <About />
         <Installations sanityData={instalacoes} />
+        <News sanityData={noticias} />
         <Events sanityData={eventos} />
         <Regattas sanityData={regatas} />
-        <News sanityData={noticias} />
         <ContactStrip />
       </main>
       <Footer />
