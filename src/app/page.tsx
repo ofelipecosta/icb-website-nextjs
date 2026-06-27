@@ -1,4 +1,4 @@
-export const revalidate = 3600; // rebuild com dados frescos do Sanity a cada hora
+export const revalidate = 60; // rebuild com dados frescos do Sanity a cada minuto
 
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
