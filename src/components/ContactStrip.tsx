@@ -120,6 +120,7 @@ export default function ContactStrip() {
             initial={{ opacity: 0, y: 16 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5 }}
+            className="order-2 lg:order-1"
           >
             <p className="text-xs font-semibold uppercase tracking-[0.2em] mb-2" style={{ color: RED }}>
               Contato
@@ -181,7 +182,7 @@ export default function ContactStrip() {
             initial={{ opacity: 0, y: 16 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="flex flex-col"
+            className="flex flex-col order-1 lg:order-2"
           >
             {departments.map((dept, i) => (
               <motion.div
