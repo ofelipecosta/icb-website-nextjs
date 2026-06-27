@@ -94,19 +94,19 @@ export default function Hero() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}
-            className="grid grid-cols-2 sm:flex sm:flex-row gap-3 w-full sm:w-auto"
+            className="flex flex-col sm:flex-row gap-3"
           >
             <FlowButton
               text="Área do Associado"
               onClick={() => window.open("https://icb.areadosocio.com.br/#/entrada", "_blank")}
               variant="red"
-              className="w-full sm:w-auto sm:whitespace-nowrap"
+              className="w-full sm:w-auto whitespace-nowrap"
             />
             <FlowButton
               text="Seja Sócio"
               onClick={() => { window.location.href = "/seja-socio"; }}
               variant="dark"
-              className="w-full sm:w-auto sm:whitespace-nowrap"
+              className="w-full sm:w-auto whitespace-nowrap"
             />
           </motion.div>
         </div>
