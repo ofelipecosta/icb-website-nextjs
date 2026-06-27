@@ -122,6 +122,24 @@ export async function getEventos(): Promise<EventoSanity[]> {
   );
 }
 
+export interface EventoFullSanity extends EventoSanity {
+  descricao?: unknown[];
+}
+
+export async function getEvento(slug: string): Promise<EventoFullSanity | null> {
+  const results = await client.fetch<EventoFullSanity[]>(
+    `*[_type == "evento" && slug.current == $slug][0...1]{ _id, titulo, categoria, data, local, detalhe, ctaLabel, linkUrl, "slug": slug.current, imagem, descricao }`,
+    { slug }
+  );
+  return results?.[0] ?? null;
+}
+
+export async function getEventosNav(): Promise<{ slug: string; titulo: string }[]> {
+  return client.fetch(
+    `*[_type == "evento"] | order(data asc){ "slug": slug.current, titulo }`
+  );
+}
+
 export interface PlanSanity {
   _key: string;
   parcelas: number;

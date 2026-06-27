@@ -1,5 +1,6 @@
 export const revalidate = 3600;
 
+import Link from "next/link";
 import { Calendar, MapPin } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -13,12 +14,6 @@ import { formatDateShort } from "@/lib/utils";
 const RED = "#B22222";
 const INK = "#16202E";
 
-const FALLBACK_EVENTOS = [
-  { _id: "1", titulo: "Jantar de Abertura da Temporada",    categoria: "Social",  data: "2026-03-15", local: "Salão Nobre",    detalhe: "Celebre o início da temporada em nosso tradicional jantar de abertura." },
-  { _id: "2", titulo: "Festa do Sócio",                     categoria: "Social",  data: "2026-04-19", local: "Salão de Festas", detalhe: "Grande confraternização com drinks, gastronomia e muito lazer." },
-  { _id: "3", titulo: "Escola de Vela – Início das Turmas", categoria: "Náutico", data: "2026-05-10", local: "Marina",          detalhe: "Inscrições abertas para iniciantes e avançados na Escola de Vela do ICB." },
-  { _id: "4", titulo: "Festa Junina do ICB",                categoria: "Social",  data: "2026-06-13", local: "Área Externa",    detalhe: "Festa com comidas típicas, danças regionais e muita diversão para todos." },
-];
 
 export const metadata = {
   title: "Eventos — Iate Clube Brasileiro",
@@ -26,8 +21,7 @@ export const metadata = {
 };
 
 export default async function EventosPage() {
-  const sanityEventos = await getEventos().catch(() => []);
-  const eventos = sanityEventos.length > 0 ? sanityEventos : FALLBACK_EVENTOS;
+  const eventos = await getEventos().catch(() => []);
 
   return (
     <>
@@ -50,10 +44,15 @@ export default async function EventosPage() {
                   </p>
                 ) : eventos.map((event) => {
                   const cat = categoryColors[event.categoria] ?? DEFAULT_CATEGORY_COLOR;
+                  const href = (event as { linkUrl?: string; slug?: string }).linkUrl
+                    ?? ((event as { slug?: string }).slug ? `/eventos/${(event as { slug?: string }).slug}` : null);
                   return (
-                    <div
+                    <Link
                       key={event._id}
-                      className="bg-white overflow-hidden group card-hover"
+                      href={href ?? "#"}
+                      target={(event as { linkUrl?: string }).linkUrl ? "_blank" : undefined}
+                      rel={(event as { linkUrl?: string }).linkUrl ? "noopener noreferrer" : undefined}
+                      className="bg-white overflow-hidden group card-hover block"
                       style={{
                         borderRadius: "var(--radius-card)",
                         border: "1px solid rgba(0,0,0,0.07)",
@@ -94,7 +93,7 @@ export default async function EventosPage() {
                           </p>
                         )}
                       </div>
-                    </div>
+                    </Link>
                   );
                 })}
               </div>
