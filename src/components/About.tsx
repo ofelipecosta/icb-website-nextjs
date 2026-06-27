@@ -26,7 +26,7 @@ export default function About() {
           className="mb-16"
         >
           <SectionHeader
-            eyebrow="Nossa História"
+            eyebrow="Conheça"
             title="Iate Clube Brasileiro"
             titleSize="lg"
           />
