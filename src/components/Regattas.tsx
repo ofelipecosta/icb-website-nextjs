@@ -7,19 +7,12 @@ import type { RegatasSanity } from "@/lib/sanity";
 import { formatDateLong } from "@/lib/utils";
 import SectionHeader from "@/components/SectionHeader";
 
-const FALLBACK_REGATTAS: RegatasSanity[] = [
-  { _id: "fr-1", titulo: "Interclubes de Niterói",           classes: "ILCA 4 · ILCA 6 · Optimist", data: "2026-06-28", inscricoes: "https://regatas.icb.org.br" },
-  { _id: "fr-2", titulo: "3.º Campeonato Interclube — Vela", classes: "Snipe · Laser · Optimist",    data: "2026-08-15", inscricoes: "https://regatas.icb.org.br" },
-  { _id: "fr-3", titulo: "Regata da Primavera",               classes: "Todas as classes",            data: "2026-09-21", inscricoes: "https://regatas.icb.org.br" },
-  { _id: "fr-4", titulo: "Copa ICB de Fim de Ano",            classes: "ILCA · Snipe · ORC",         data: "2026-11-29", inscricoes: "https://regatas.icb.org.br" },
-];
-
 interface RegattasProps {
   sanityData?: RegatasSanity[];
 }
 
 export default function Regattas({ sanityData }: RegattasProps) {
-  const items = sanityData && sanityData.length > 0 ? sanityData : FALLBACK_REGATTAS;
+  const items = sanityData ?? [];
   const ref   = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
@@ -47,6 +40,12 @@ export default function Regattas({ sanityData }: RegattasProps) {
             }
           />
         </motion.div>
+
+        {items.length === 0 && (
+          <p className="mb-6 text-sm" style={{ color: "var(--color-anchor)" }}>
+            O calendário de regatas será divulgado em breve.
+          </p>
+        )}
 
         <div className="space-y-3">
           {items.map((regatta, i) => (

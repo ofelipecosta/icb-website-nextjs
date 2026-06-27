@@ -12,18 +12,12 @@ const RED    = "#B22222";
 const INK    = "#16202E";
 const ANCHOR = "#6B7A8D";
 
-const FALLBACK_EVENTS: EventoSanity[] = [
-  { _id: "1", titulo: "Jantar de Abertura da Temporada",    categoria: "Social",  data: "2026-03-15", local: "Salão Nobre",    detalhe: "Celebre o início da temporada em nosso tradicional jantar de abertura." },
-  { _id: "2", titulo: "Festa do Sócio",                     categoria: "Social",  data: "2026-04-19", local: "Salão de Festas", detalhe: "Grande confraternização com drinks, gastronomia e lazer para toda a família." },
-  { _id: "3", titulo: "Escola de Vela – Início das Turmas", categoria: "Náutico", data: "2026-05-10", local: "Marina",          detalhe: "Inscrições abertas para iniciantes e avançados na Escola de Vela do ICB." },
-];
-
 interface EventsProps {
   sanityData?: EventoSanity[];
 }
 
 export default function Events({ sanityData }: EventsProps) {
-  const items = (sanityData && sanityData.length > 0 ? sanityData : FALLBACK_EVENTS).slice(0, 3);
+  const items = (sanityData ?? []).slice(0, 3);
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
@@ -41,6 +35,13 @@ export default function Events({ sanityData }: EventsProps) {
             cta={{ label: "Ver todos", href: "/eventos" }}
           />
         </motion.div>
+
+        {/* Empty state */}
+        {items.length === 0 && (
+          <p className="mt-8 text-sm text-center" style={{ color: "var(--color-anchor)" }}>
+            Em breve novos eventos. Fique ligado!
+          </p>
+        )}
 
         {/* Event cards grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
