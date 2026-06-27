@@ -25,7 +25,7 @@ export default function Regattas({ sanityData }: RegattasProps) {
 
   return (
     <section id="regatas" className="section-py px-6" style={{ backgroundColor: "var(--color-surface)" }}>
-      <div className="max-w-4xl mx-auto" ref={ref}>
+      <div className="max-w-7xl mx-auto" ref={ref}>
 
         <motion.div
           initial={{ opacity: 0 }}
