@@ -281,18 +281,11 @@ export default function Navbar() {
               boxShadow: "-4px 0 28px rgba(0,0,0,0.12)",
             }}
           >
-            {/* Drawer header: logo colorido + fechar */}
+            {/* Drawer header: fechar */}
             <div
-              className="flex items-center justify-between px-6 pt-6 pb-5 flex-shrink-0"
+              className="flex items-center justify-end px-6 pt-6 pb-5 flex-shrink-0"
               style={{ borderBottom: "1px solid rgba(0,0,0,0.06)" }}
             >
-              <Image
-                src="/images/logo/logo-icb-colorido.png"
-                alt="Iate Clube Brasileiro"
-                width={110}
-                height={40}
-                className="object-contain"
-              />
               <button
                 type="button"
                 onClick={() => setMobileOpen(false)}
