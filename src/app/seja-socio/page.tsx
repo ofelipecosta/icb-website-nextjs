@@ -18,7 +18,7 @@ export default async function SejaSocioPage() {
   return (
     <>
       <Navbar />
-      <main>
+      <main className="pt-[72px]">
         <Membership sanityData={socio} />
       </main>
       <Footer />
