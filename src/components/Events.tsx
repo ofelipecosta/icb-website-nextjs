@@ -50,12 +50,15 @@ export default function Events({ sanityData }: EventsProps) {
           {items.map((event, i) => {
             const cat = categoryColors[event.categoria] ?? DEFAULT_CATEGORY_COLOR;
             return (
-            <motion.div
+            <motion.a
               key={event._id}
+              href={event.linkUrl ?? (event.slug ? `/eventos/${event.slug}` : "/eventos")}
+              target={event.linkUrl ? "_blank" : undefined}
+              rel={event.linkUrl ? "noopener noreferrer" : undefined}
               initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.2 + i * 0.08 }}
-              className="group cursor-pointer"
+              className="group cursor-pointer block"
             >
               <div
                 className="card-hover h-full"
@@ -120,7 +123,7 @@ export default function Events({ sanityData }: EventsProps) {
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </motion.a>
             );
           })}
         </div>
