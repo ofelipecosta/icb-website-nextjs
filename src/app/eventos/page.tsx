@@ -1,13 +1,14 @@
 export const revalidate = 3600;
 
 import Link from "next/link";
+import Image from "next/image";
 import { Calendar, MapPin } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import PageHeader from "@/components/PageHeader";
 import FadeIn from "@/components/FadeIn";
-import { getEventos } from "@/lib/sanity";
+import { getEventos, urlFor } from "@/lib/sanity";
 import { categoryColors, DEFAULT_CATEGORY_COLOR } from "@/lib/constants";
 import { formatDateShort } from "@/lib/utils";
 
@@ -62,6 +63,17 @@ export default async function EventosPage() {
                         boxShadow: "var(--shadow-luxury)",
                       }}
                     >
+                      {event.imagem && (
+                        <div className="relative w-full flex items-center justify-center" style={{ aspectRatio: "4/3", backgroundColor: "#F3F4F6" }}>
+                          <Image
+                            src={urlFor(event.imagem).width(600).url()}
+                            alt={event.titulo}
+                            fill
+                            className="object-contain"
+                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                          />
+                        </div>
+                      )}
                       <div className="p-6 flex flex-col h-full gap-3">
                         <div className="flex items-center gap-2 flex-wrap">
                           {event.data && (
