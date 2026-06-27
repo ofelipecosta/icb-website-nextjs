@@ -214,7 +214,7 @@ export default function Membership({ sanityData }: MembershipProps) {
                   <WaIcon /> WhatsApp
                 </a>
                 <Link
-                  href="/contato"
+                  href="/#contato"
                   className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest transition-opacity hover:opacity-60"
                   style={{ color: "var(--color-red)" }}
                 >

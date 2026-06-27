@@ -3,7 +3,9 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { Calendar, MapPin, ArrowRight } from "lucide-react";
+import Image from "next/image";
 import type { EventoSanity } from "@/lib/sanity";
+import { urlFor } from "@/lib/sanity";
 import { categoryColors, DEFAULT_CATEGORY_COLOR } from "@/lib/constants";
 import { formatDateShort } from "@/lib/utils";
 import SectionHeader from "@/components/SectionHeader";
@@ -65,6 +67,18 @@ export default function Events({ sanityData }: EventsProps) {
                   overflow:     "hidden",
                 }}
               >
+                {/* Imagem de capa */}
+                {event.imagem && (
+                  <div className="relative w-full" style={{ aspectRatio: "16/9" }}>
+                    <Image
+                      src={urlFor(event.imagem).width(600).height(338).url()}
+                      alt={event.titulo}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    />
+                  </div>
+                )}
                 <div className="p-5 flex flex-col h-full">
                   {/* Date + Category */}
                   <div className="flex flex-wrap items-center gap-3 mb-4">
