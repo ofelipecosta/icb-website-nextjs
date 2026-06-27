@@ -25,8 +25,8 @@ const departments = [
     name: "Secretaria Social",
     desc: "Atendimento geral, associação e informações sobre o clube.",
     contacts: [
-      { type: "tel",      label: "(21) 2714-8252",       href: "tel:+552127148252" },
       { type: "whatsapp", label: "(21) 98556-4487",       href: "https://wa.me/5521985564487" },
+      { type: "tel",      label: "(21) 2714-8252",       href: "tel:+552127148252" },
       { type: "email",    label: "secretaria@icb.org.br", href: "mailto:secretaria@icb.org.br" },
     ],
   },
