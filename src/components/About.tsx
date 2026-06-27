@@ -2,42 +2,12 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Award, Users, Waves, Star } from "lucide-react";
 import Image from "next/image";
 
 const RED  = "#B22222";
 const NAVY = "#0A1628";
 const INK  = "#16202E";
 
-const stats = [
-  { value: "1906", label: "Fundação" },
-  { value: "120",  label: "Anos" },
-  { value: "5k+",  label: "Sócios" },
-  { value: "300+", label: "Regatas/ano" },
-];
-
-const pillars = [
-  {
-    icon: Waves,
-    title: "Esporte Náutico",
-    text: "Tradição em vela, remo e pesca esportiva na Baía de Guanabara com atletas campeões nacionais.",
-  },
-  {
-    icon: Users,
-    title: "Vida Social",
-    text: "Eventos exclusivos, gastronomia de excelência e um ambiente acolhedor para toda a família.",
-  },
-  {
-    icon: Award,
-    title: "Tradição",
-    text: "Mais de 120 anos formando gerações de velejadores e preservando a cultura náutica brasileira.",
-  },
-  {
-    icon: Star,
-    title: "Exclusividade",
-    text: "Um dos clubes mais tradicionais do Rio de Janeiro, com estrutura completa e localização privilegiada.",
-  },
-];
 
 export default function About() {
   const ref    = useRef<HTMLDivElement>(null);
@@ -183,43 +153,6 @@ export default function About() {
               </a>
             </div>
           </motion.div>
-        </div>
-
-        {/* ── Quatro pilares ── */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {pillars.map((pillar, i) => (
-            <motion.div
-              key={pillar.title}
-              initial={{ opacity: 0, y: 24 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.55, delay: 0.35 + i * 0.08 }}
-              className="rounded-[var(--radius-card)] p-7 group card-hover"
-              style={{
-                backgroundColor: "#fff",
-                border:      "1px solid rgba(0,0,0,0.07)",
-                boxShadow:   "var(--shadow-luxury)",
-              }}
-            >
-              <div
-                className="w-11 h-11 rounded-full flex items-center justify-center mb-5 transition-colors duration-300"
-                style={{ backgroundColor: "rgba(10,22,40,0.05)" }}
-              >
-                <pillar.icon className="w-5 h-5" style={{ color: RED }} />
-              </div>
-              <h3
-                className="font-display font-semibold mb-2"
-                style={{ fontSize: "1.1rem", color: NAVY }}
-              >
-                {pillar.title}
-              </h3>
-              <p
-                className="text-sm leading-relaxed"
-                style={{ color: "#6B7A8D" }}
-              >
-                {pillar.text}
-              </p>
-            </motion.div>
-          ))}
         </div>
 
       </div>
