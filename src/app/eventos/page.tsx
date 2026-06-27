@@ -46,6 +46,9 @@ export default async function EventosPage() {
                   const cat = categoryColors[event.categoria] ?? DEFAULT_CATEGORY_COLOR;
                   const href = (event as { linkUrl?: string; slug?: string }).linkUrl
                     ?? ((event as { slug?: string }).slug ? `/eventos/${(event as { slug?: string }).slug}` : null);
+                  const desc = event.detalhe
+                    ?? (event as { descricao?: { _type: string; children?: { text: string }[] }[] }).descricao
+                        ?.find((b) => b._type === "block")?.children?.map((c) => c.text).join("") ?? undefined;
                   return (
                     <Link
                       key={event._id}
@@ -82,9 +85,9 @@ export default async function EventosPage() {
                         >
                           {event.titulo}
                         </h3>
-                        {event.detalhe && (
+                        {desc && (
                           <p className="text-sm leading-relaxed flex-1" style={{ color: "var(--color-anchor)" }}>
-                            {event.detalhe}
+                            {desc}
                           </p>
                         )}
                         {event.local && (
