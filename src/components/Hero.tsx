@@ -70,7 +70,7 @@ export default function Hero() {
             }}
           >
             O Primeiro<br />
-            Clube de <em className="not-italic" style={{ color: RED }}>Iatismo</em><br />
+            Clube de <em className="not-italic" style={{ color: RED }}>Vela</em><br />
             do Brasil
           </motion.h1>
 
