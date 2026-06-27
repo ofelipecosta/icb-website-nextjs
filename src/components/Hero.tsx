@@ -11,7 +11,7 @@ export default function Hero() {
     <section
       id="hero"
       className="relative overflow-hidden"
-      style={{ height: "clamp(420px, 72vh, 680px)" }}
+      style={{ height: "100svh", minHeight: 560 }}
     >
       <Image
         src="/images/hero1.png"
