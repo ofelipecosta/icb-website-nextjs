@@ -44,58 +44,20 @@ export default function About() {
             <div
               className="relative overflow-hidden"
               style={{
-                aspectRatio: "4/3",
+                aspectRatio: "16/9",
                 borderRadius: "var(--radius-card)",
                 boxShadow: "0 24px 48px rgba(10,22,40,0.22), 0 4px 16px rgba(10,22,40,0.1)",
               }}
             >
-              {/* Fundo gradient com profundidade */}
-              <div
-                className="absolute inset-0"
-                style={{
-                  background: "radial-gradient(ellipse at 50% 40%, #1E3A5F 0%, #0D1F3C 60%, #070F1E 100%)",
-                }}
+              <iframe
+                src="https://www.youtube.com/embed/QrRoMpiAGXg?si=2d9q2HT0-TsdzFso"
+                title="Iate Clube Brasileiro"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+                className="absolute inset-0 w-full h-full"
+                style={{ border: 0 }}
               />
-
-              {/* Vignette nas bordas */}
-              <div
-                className="absolute inset-0 pointer-events-none"
-                style={{
-                  background: "radial-gradient(ellipse at 50% 50%, transparent 42%, rgba(5,10,20,0.55) 100%)",
-                }}
-              />
-
-              {/* Highlight sutil no topo */}
-              <div
-                className="absolute top-0 left-0 right-0 h-px pointer-events-none"
-                style={{
-                  background: "linear-gradient(to right, transparent 10%, rgba(255,255,255,0.1) 50%, transparent 90%)",
-                }}
-              />
-
-              {/* Logo */}
-              <div className="absolute inset-0 flex items-center justify-center pb-10">
-                <Image
-                  src="/images/logo-timao-contorno.png"
-                  alt="Logo Iate Clube Brasileiro"
-                  width={340}
-                  height={340}
-                  className="object-contain w-[54%] h-auto max-h-[64%]"
-                  style={{ filter: "drop-shadow(0 4px 24px rgba(0,0,0,0.4))" }}
-                />
-              </div>
-
-              {/* "Fundado em 1906" — elegante, dentro do card */}
-              <div className="absolute bottom-0 left-0 right-0 flex items-center gap-3 px-6 pb-5">
-                <div className="flex-1 h-px" style={{ background: "rgba(255,255,255,0.1)" }} />
-                <span
-                  className="text-xs font-medium uppercase tracking-[0.2em] whitespace-nowrap"
-                  style={{ color: "rgba(255,255,255,0.35)" }}
-                >
-                  Fundado em 1906
-                </span>
-                <div className="flex-1 h-px" style={{ background: "rgba(255,255,255,0.1)" }} />
-              </div>
             </div>
           </motion.div>
 
