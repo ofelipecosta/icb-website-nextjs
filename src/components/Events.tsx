@@ -49,6 +49,8 @@ export default function Events({ sanityData }: EventsProps) {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
           {items.map((event, i) => {
             const cat = categoryColors[event.categoria] ?? DEFAULT_CATEGORY_COLOR;
+            const desc = event.detalhe
+              ?? event.descricao?.find((b) => b._type === "block")?.children?.map((c) => c.text).join("") ?? undefined;
             return (
             <motion.a
               key={event._id}
@@ -101,9 +103,9 @@ export default function Events({ sanityData }: EventsProps) {
                   </h4>
 
                   {/* Description */}
-                  {event.detalhe && (
+                  {desc && (
                     <p className="text-sm leading-relaxed line-clamp-2 mb-4 flex-1" style={{ color: "#6B7A8D" }}>
-                      {event.detalhe}
+                      {desc}
                     </p>
                   )}
 

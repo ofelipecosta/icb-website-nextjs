@@ -114,11 +114,12 @@ export interface EventoSanity {
   linkUrl?: string;
   slug?: string;
   imagem?: SanityImageSource;
+  descricao?: { _type: string; children?: { text: string }[] }[];
 }
 
 export async function getEventos(): Promise<EventoSanity[]> {
   return client.fetch(
-    `*[_type == "evento"] | order(data asc){ _id, titulo, categoria, data, local, detalhe, ctaLabel, linkUrl, "slug": slug.current, imagem }`
+    `*[_type == "evento"] | order(data asc){ _id, titulo, categoria, data, local, detalhe, ctaLabel, linkUrl, "slug": slug.current, imagem, descricao }`
   );
 }
 
