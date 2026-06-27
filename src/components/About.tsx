@@ -99,16 +99,18 @@ export default function About() {
                     <div className="flex-1 h-px" style={{ background: "rgba(255,255,255,0.1)" }} />
                   </div>
 
-                  {/* Botão play */}
-                  <div
-                    className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                    style={{ background: "rgba(10,22,40,0.35)" }}
-                  >
+                  {/* Botão play estilo YouTube */}
+                  <div className="absolute inset-0 flex items-center justify-center">
                     <div
-                      className="w-16 h-16 rounded-full flex items-center justify-center transition-transform duration-200 group-hover:scale-110"
-                      style={{ backgroundColor: RED }}
+                      className="flex items-center justify-center transition-transform duration-200 group-hover:scale-110"
+                      style={{
+                        backgroundColor: RED,
+                        borderRadius: 12,
+                        width: 68,
+                        height: 48,
+                      }}
                     >
-                      <svg width="22" height="22" viewBox="0 0 24 24" fill="white" aria-hidden="true">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="white" aria-hidden="true">
                         <path d="M8 5v14l11-7z"/>
                       </svg>
                     </div>
