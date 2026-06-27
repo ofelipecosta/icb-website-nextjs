@@ -114,23 +114,30 @@ export default function ContactStrip() {
     <section id="contato" className="section-py px-6" style={{ backgroundColor: "var(--color-surface)" }}>
       <div className="max-w-7xl mx-auto" ref={ref}>
 
+        {/* Cabeçalho acima do grid — visível no topo em mobile e desktop */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.4 }}
+          className="mb-10"
+        >
+          <SectionHeader
+            eyebrow="Contato"
+            title="Fale com o ICB"
+            description="Encontre o departamento certo e fale diretamente com quem pode ajudar."
+            titleSize="lg"
+          />
+        </motion.div>
+
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
 
-          {/* ── Coluna esquerda: editorial + endereço + mapa ── */}
+          {/* ── Coluna esquerda: endereço + mapa ── */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5 }}
             className="order-2 lg:order-1"
           >
-            <SectionHeader
-              eyebrow="Contato"
-              title="Fale com o ICB"
-              description="Encontre o departamento certo e fale diretamente com quem pode ajudar."
-              titleSize="lg"
-              divider={false}
-              className="mb-8"
-            />
 
             <div className="grid grid-cols-2 gap-6 mb-8">
               <div className="flex items-start gap-2.5">
