@@ -15,12 +15,6 @@ export const metadata = {
   description: "Calendário de regatas, velas e serviços da Secretaria Náutica do Iate Clube Brasileiro.",
 };
 
-const FALLBACK_REGATAS: RegatasSanity[] = [
-  { _id: "fr-1", titulo: "Interclubes de Niterói",           classes: "ILCA 4 · ILCA 6 · Optimist", data: "2026-06-28", inscricoes: "https://regatas.icb.org.br" },
-  { _id: "fr-2", titulo: "3.º Campeonato Interclube — Vela", classes: "Snipe · Laser · Optimist",    data: "2026-08-15", inscricoes: "https://regatas.icb.org.br" },
-  { _id: "fr-3", titulo: "Regata da Primavera",               classes: "Todas as classes",            data: "2026-09-21", inscricoes: "https://regatas.icb.org.br" },
-  { _id: "fr-4", titulo: "Copa ICB de Fim de Ano",            classes: "ILCA · Snipe · ORC",         data: "2026-11-29", inscricoes: "https://regatas.icb.org.br" },
-];
 
 const servicos = [
   { icon: Anchor,    titulo: "Vagas Náuticas",      desc: "Locação e venda de vagas para embarcações de variadas capacidades." },
@@ -39,8 +33,7 @@ const WaIcon = () => (
 );
 
 export default async function NauticaPage() {
-  const sanityRegatas = await getRegatas().catch(() => []);
-  const regatas = sanityRegatas.length > 0 ? sanityRegatas : FALLBACK_REGATAS;
+  const regatas = await getRegatas().catch(() => []);
 
   return (
     <>

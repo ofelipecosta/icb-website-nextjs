@@ -105,7 +105,7 @@ export default async function EventoPage({ params }: { params: Promise<{ slug: s
       <main style={{ backgroundColor: "#ffffff" }}>
 
         {/* Header */}
-        <div className="navy-ambient relative overflow-hidden" style={{ paddingTop: "7rem", paddingBottom: "0" }}>
+        <div className="relative overflow-hidden" style={{ paddingTop: "5.5rem", paddingBottom: "0", backgroundColor: "var(--color-surface)" }}>
           <div className="max-w-4xl mx-auto px-6 pb-6">
             <Breadcrumb items={[{ label: "Eventos", href: "/eventos" }, { label: evento.titulo }]} />
           </div>
