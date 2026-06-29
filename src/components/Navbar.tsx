@@ -388,18 +388,6 @@ export default function Navbar() {
               })}
             </nav>
 
-            {/* CTA mobile */}
-            <div className="px-6 pb-4 pt-2 flex-shrink-0">
-              <Link
-                href="/seja-socio"
-                onClick={() => setMobileOpen(false)}
-                className="flex items-center justify-center py-3.5 text-sm font-semibold w-full transition-opacity hover:opacity-85"
-                style={{ backgroundColor: RED, color: "#fff", borderRadius: "var(--radius-btn)" }}
-              >
-                Seja Sócio
-              </Link>
-            </div>
-
             {/* Rodapé com redes sociais */}
             <div
               className="px-6 py-5 flex-shrink-0"
