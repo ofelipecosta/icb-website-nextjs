@@ -17,7 +17,7 @@ export default function Regattas({ sanityData }: RegattasProps) {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="regatas" className="section-py px-6" style={{ backgroundColor: "var(--color-surface)" }}>
+    <section id="regatas" className="section-py px-6" style={{ backgroundColor: "#ffffff" }}>
       <div className="max-w-7xl mx-auto" ref={ref}>
 
         <motion.div

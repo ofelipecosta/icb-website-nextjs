@@ -50,7 +50,7 @@ export default function News({ sanityData = [] }: NewsProps) {
   return (
     <section
       id="noticias"
-      style={{ backgroundColor: "#FAF8F3" }}
+      style={{ backgroundColor: "#ffffff" }}
     >
       <div className="max-w-7xl mx-auto px-6" ref={ref}>
 

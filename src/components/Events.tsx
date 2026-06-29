@@ -24,7 +24,7 @@ export default function Events({ sanityData }: EventsProps) {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="eventos" className="section-py px-6" style={{ backgroundColor: "#ffffff" }}>
+    <section id="eventos" className="section-py px-6" style={{ backgroundColor: "var(--color-surface)" }}>
       <div className="max-w-7xl mx-auto" ref={ref}>
         {/* Masthead */}
         <motion.div

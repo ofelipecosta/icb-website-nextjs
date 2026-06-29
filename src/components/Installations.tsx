@@ -408,7 +408,7 @@ export default function Installations({ sanityData = [] }: InstallationsProps) {
 
   return (
     <>
-      <section id="instalacoes" className="section-py px-6" style={{ backgroundColor: "#FAF8F3" }}>
+      <section id="instalacoes" className="section-py px-6" style={{ backgroundColor: "var(--color-surface)" }}>
         <div className="max-w-7xl mx-auto" ref={ref}>
           {/* Masthead */}
           <motion.div

@@ -1,3 +1,5 @@
+export const revalidate = 60;
+
 import Image from "next/image";
 import { ExternalLink, Leaf, Anchor, Ship, Warehouse, Wind, Wrench, Package } from "lucide-react";
 import Navbar from "@/components/Navbar";
@@ -44,9 +46,6 @@ export default async function NauticaPage() {
           title="Velas & Regatas"
           description="Calendário de competições, serviços náuticos e infraestrutura completa para sua embarcação na Baía de Guanabara."
           breadcrumb={[{ label: "Náutica" }]}
-          image="/images/vela.png"
-          imageAlt="Marina do Iate Clube Brasileiro"
-          variant="image-side"
         />
 
         {/* Sobre o departamento */}
