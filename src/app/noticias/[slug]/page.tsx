@@ -115,8 +115,8 @@ export default async function NoticiaPage({ params }: { params: Promise<{ slug: 
       <main style={{ backgroundColor: "#ffffff" }}>
 
         {/* ── Header with breadcrumb ── */}
-        <div className="relative overflow-hidden" style={{ paddingTop: "5.5rem", paddingBottom: "0", backgroundColor: "var(--color-surface)" }}>
-          <div className="max-w-4xl mx-auto px-6 pb-6">
+        <div style={{ paddingTop: "6.5rem", paddingBottom: "2.5rem", backgroundColor: "var(--color-surface)", borderBottom: "1px solid var(--color-border)" }}>
+          <div className="max-w-7xl mx-auto px-6">
             <Breadcrumb items={[{ label: "Notícias", href: "/noticias" }, { label: title }]} />
           </div>
         </div>

@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { ChevronRight } from "lucide-react";
 
 export interface BreadcrumbItem {
   label: string;
@@ -10,28 +9,44 @@ interface BreadcrumbProps {
   items: BreadcrumbItem[];
 }
 
+const INK   = "var(--color-ink)";
+const MUTED = "var(--color-anchor)";
+
 export default function Breadcrumb({ items }: BreadcrumbProps) {
   const all = [{ label: "Início", href: "/" }, ...items];
 
   return (
-    <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-xs flex-wrap">
+    <nav aria-label="Breadcrumb" className="flex items-center flex-wrap gap-1">
       {all.map((item, i) => {
         const isLast = i === all.length - 1;
         return (
-          <span key={i} className="flex items-center gap-1.5">
+          <span key={i} className="flex items-center gap-1">
             {i > 0 && (
-              <ChevronRight className="w-3 h-3 flex-shrink-0" style={{ color: "rgba(255,255,255,0.25)" }} />
+              <span style={{ color: "#CBD5E0", fontSize: "10px", lineHeight: 1 }}>/</span>
             )}
             {item.href && !isLast ? (
               <Link
                 href={item.href}
-                className="transition-colors duration-150 hover:text-white"
-                style={{ color: "rgba(255,255,255,0.45)" }}
+                className="opacity-75 hover:opacity-100 transition-opacity duration-150"
+                style={{
+                  fontSize: "10px",
+                  letterSpacing: "0.06em",
+                  color: MUTED,
+                  textDecoration: "none",
+                }}
               >
                 {item.label}
               </Link>
             ) : (
-              <span style={{ color: isLast ? "rgba(255,255,255,0.85)" : "rgba(255,255,255,0.45)" }}>
+              <span
+                style={{
+                  fontSize: "10px",
+                  letterSpacing: "0.06em",
+                  color: isLast ? INK : MUTED,
+                  opacity: isLast ? 0.9 : 0.75,
+                  fontWeight: isLast ? 500 : 400,
+                }}
+              >
                 {item.label}
               </span>
             )}
