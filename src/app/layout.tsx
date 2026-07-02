@@ -1,19 +1,18 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, IBM_Plex_Sans } from "next/font/google";
+import { Spectral, Instrument_Sans } from "next/font/google";
 import "./globals.css";
 
-const cormorant = Cormorant_Garamond({
-  variable: "--font-cormorant",
+const spectral = Spectral({
+  variable: "--font-spectral",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700", "800"],
   style: ["normal", "italic"],
   display: "swap",
 });
 
-const ibmPlex = IBM_Plex_Sans({
-  variable: "--font-ibm-plex",
+const instrumentSans = Instrument_Sans({
+  variable: "--font-instrument",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -114,7 +113,7 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
-      className={`${cormorant.variable} ${ibmPlex.variable} scroll-smooth`}
+      className={`${spectral.variable} ${instrumentSans.variable} scroll-smooth`}
     >
       <head>
         <meta name="color-scheme" content="light only" />

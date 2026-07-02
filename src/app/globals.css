@@ -32,10 +32,11 @@
   --shadow-luxury-lg:    0 20px 56px rgba(10, 22, 40, 0.15), 0 4px 14px rgba(10, 22, 40, 0.08);
 }
 
-/* Fontes do next/font — 'inline' resolve a variável em runtime (senão cai no fallback) */
-@theme inline {
-  --font-display: var(--font-cormorant), Georgia, serif;
-  --font-body: var(--font-ibm-plex), system-ui, sans-serif;
+/* Fontes do next/font — declaradas em :root para resolverem em runtime.
+   (dentro de @theme o Tailwind não emite as vars e o site cai no fallback) */
+:root {
+  --font-display: var(--font-spectral), Georgia, serif;
+  --font-body: var(--font-instrument), system-ui, sans-serif;
 }
 
 /* Fundo escuro para Footer e Instalações */
