@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import Membership from "@/components/Membership";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import Breadcrumb from "@/components/Breadcrumb";
 import { getSocio } from "@/lib/sanity";
 
 export const revalidate = 3600;
@@ -18,7 +19,13 @@ export default async function SejaSocioPage() {
   return (
     <>
       <Navbar />
-      <main className="pt-[72px]">
+      <main>
+        {/* Cabeçalho com breadcrumb — mesmo padrão das demais páginas */}
+        <div style={{ backgroundColor: "var(--color-surface)", paddingTop: "6.5rem" }}>
+          <div className="max-w-7xl mx-auto px-6">
+            <Breadcrumb items={[{ label: "Seja Sócio" }]} />
+          </div>
+        </div>
         <Membership sanityData={socio} />
       </main>
       <Footer />
