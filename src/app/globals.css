@@ -35,8 +35,8 @@
 /* Fontes do next/font — declaradas em :root para resolverem em runtime.
    (dentro de @theme o Tailwind não emite as vars e o site cai no fallback) */
 :root {
-  --font-display: var(--font-crimson), Georgia, serif;
-  --font-body: var(--font-figtree), system-ui, sans-serif;
+  --font-display: var(--font-redhat-display), system-ui, sans-serif;
+  --font-body: var(--font-redhat-text), system-ui, sans-serif;
 }
 
 /* Fundo escuro para Footer e Instalações */

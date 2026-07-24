@@ -1,17 +1,18 @@
 import type { Metadata } from "next";
-import { Crimson_Pro, Figtree } from "next/font/google";
+import { Red_Hat_Display, Red_Hat_Text } from "next/font/google";
 import "./globals.css";
 
-const crimson = Crimson_Pro({
-  variable: "--font-crimson",
+const redHatDisplay = Red_Hat_Display({
+  variable: "--font-redhat-display",
   subsets: ["latin"],
   style: ["normal", "italic"],
   display: "swap",
 });
 
-const figtree = Figtree({
-  variable: "--font-figtree",
+const redHatText = Red_Hat_Text({
+  variable: "--font-redhat-text",
   subsets: ["latin"],
+  style: ["normal", "italic"],
   display: "swap",
 });
 
@@ -112,7 +113,7 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
-      className={`${crimson.variable} ${figtree.variable} scroll-smooth`}
+      className={`${redHatDisplay.variable} ${redHatText.variable} scroll-smooth`}
     >
       <head>
         <meta name="color-scheme" content="light only" />
