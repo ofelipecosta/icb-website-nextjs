@@ -1,17 +1,15 @@
 import type { Metadata } from "next";
-import { Spectral, Instrument_Sans } from "next/font/google";
+import { Archivo, Hanken_Grotesk } from "next/font/google";
 import "./globals.css";
 
-const spectral = Spectral({
-  variable: "--font-spectral",
+const archivo = Archivo({
+  variable: "--font-archivo",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-  style: ["normal", "italic"],
   display: "swap",
 });
 
-const instrumentSans = Instrument_Sans({
-  variable: "--font-instrument",
+const hanken = Hanken_Grotesk({
+  variable: "--font-hanken",
   subsets: ["latin"],
   display: "swap",
 });
@@ -113,7 +111,7 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
-      className={`${spectral.variable} ${instrumentSans.variable} scroll-smooth`}
+      className={`${archivo.variable} ${hanken.variable} scroll-smooth`}
     >
       <head>
         <meta name="color-scheme" content="light only" />

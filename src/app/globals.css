@@ -35,8 +35,8 @@
 /* Fontes do next/font — declaradas em :root para resolverem em runtime.
    (dentro de @theme o Tailwind não emite as vars e o site cai no fallback) */
 :root {
-  --font-display: var(--font-spectral), Georgia, serif;
-  --font-body: var(--font-instrument), system-ui, sans-serif;
+  --font-display: var(--font-archivo), system-ui, sans-serif;
+  --font-body: var(--font-hanken), system-ui, sans-serif;
 }
 
 /* Fundo escuro para Footer e Instalações */
@@ -106,6 +106,7 @@
 
   h1, h2, h3, h4 {
     font-family: var(--font-display);
+    letter-spacing: -0.02em;
   }
 
   ::selection {
