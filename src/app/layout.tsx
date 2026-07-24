@@ -1,15 +1,16 @@
 import type { Metadata } from "next";
-import { Archivo, Hanken_Grotesk } from "next/font/google";
+import { Crimson_Pro, Figtree } from "next/font/google";
 import "./globals.css";
 
-const archivo = Archivo({
-  variable: "--font-archivo",
+const crimson = Crimson_Pro({
+  variable: "--font-crimson",
   subsets: ["latin"],
+  style: ["normal", "italic"],
   display: "swap",
 });
 
-const hanken = Hanken_Grotesk({
-  variable: "--font-hanken",
+const figtree = Figtree({
+  variable: "--font-figtree",
   subsets: ["latin"],
   display: "swap",
 });
@@ -111,7 +112,7 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
-      className={`${archivo.variable} ${hanken.variable} scroll-smooth`}
+      className={`${crimson.variable} ${figtree.variable} scroll-smooth`}
     >
       <head>
         <meta name="color-scheme" content="light only" />
