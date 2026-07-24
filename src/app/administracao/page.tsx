@@ -128,11 +128,12 @@ export default function AdministracaoPage() {
                     style={{ borderRadius: "var(--radius-card)", boxShadow: "var(--shadow-luxury-lg)" }}
                   >
                     <Image
-                      src="/images/comodoro_e_vice.webp"
+                      src="/images/comodoria.png"
                       alt="Comodoro e Vice-Comodoro do Iate Clube Brasileiro"
-                      width={360}
-                      height={460}
-                      className="object-cover w-full"
+                      width={1291}
+                      height={734}
+                      className="w-full h-auto"
+                      sizes="(max-width: 1024px) 100vw, 360px"
                     />
                   </div>
                   <p className="text-xs text-center" style={{ color: "var(--color-anchor)" }}>
