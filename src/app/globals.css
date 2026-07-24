@@ -39,6 +39,20 @@
   --font-body: var(--font-redhat-text), system-ui, sans-serif;
 }
 
+/* Links do menu — hover via CSS. Antes era escrito no DOM por JS, o que
+   deixava a cor "presa" ao alternar entre navbar escura (sobre o hero) e
+   clara (após rolar), fazendo o texto branco sumir no fundo branco. */
+.nav-link {
+  color: var(--nav-link);
+  transition: color 200ms;
+}
+.nav-link:hover {
+  color: var(--nav-link-hover);
+}
+.nav-link[data-active="true"] {
+  color: var(--nav-link-active);
+}
+
 /* Fundo escuro para Footer e Instalações */
 .navy-ambient {
   background-color: #0A1628;

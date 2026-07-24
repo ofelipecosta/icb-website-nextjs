@@ -125,6 +125,9 @@ export default function Navbar() {
         transition={{ duration: 0.5, ease: "easeOut" }}
         className="fixed top-0 left-0 right-0 z-50"
         style={{
+          ["--nav-link"        as string]: linkColor,
+          ["--nav-link-hover"  as string]: linkHoverColor,
+          ["--nav-link-active" as string]: linkActiveColor,
           background: isLight
             ? "rgba(255,255,255,0.97)"
             : "linear-gradient(to bottom, rgba(10,22,40,0.72) 0%, transparent 100%)",
@@ -174,10 +177,8 @@ export default function Navbar() {
                     aria-current={isActive ? "page" : undefined}
                     aria-haspopup={hasDrop ? "true" : undefined}
                     aria-expanded={hasDrop ? isOpen : undefined}
-                    className="relative flex items-center gap-1 text-sm font-medium px-3.5 py-2 rounded-md cursor-pointer select-none whitespace-nowrap transition-colors duration-200"
-                    style={{ color: isActive ? linkActiveColor : linkColor }}
-                    onMouseEnter={(e) => { e.currentTarget.style.color = linkHoverColor; }}
-                    onMouseLeave={(e) => { e.currentTarget.style.color = isActive ? linkActiveColor : linkColor; }}
+                    className="nav-link relative flex items-center gap-1 text-sm font-medium px-3.5 py-2 rounded-md cursor-pointer select-none whitespace-nowrap"
+                    data-active={isActive ? "true" : undefined}
                   >
                     {item.name}
                     {hasDrop && (
