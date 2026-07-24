@@ -46,9 +46,14 @@ Conteúdo precisa estar **Publicado** no Studio para aparecer nas queries.
 - O `.env` do Studio contém o **token do Sanity** — **NUNCA commitar** (já está no `.gitignore`).
 
 ## Domínio
-- Definitivo: `icb.org.br` — DNS ainda na Kinghost (por causa do e-mail); migração **pendente**.
-- Produção atual: **https://icb-website-nextjs.vercel.app**
-- Após migrar DNS: definir `NEXT_PUBLIC_SITE_URL=https://icb.org.br` na Vercel e adicionar CORS no Sanity.
+- Produção: **https://icb.org.br** (DNS migrado em 24/07/2026).
+- Os nameservers continuam na **Kinghost** — lá foi trocado só o `A` do domínio raiz
+  para `216.198.79.1` (Vercel) e removido o `AAAA` (IPv6) que conflitava.
+- `icb-website-nextjs.vercel.app` segue funcionando como endereço alternativo.
+- ⚠️ **Não mexer** na Kinghost em: `MX`, `TXT` (SPF/DKIM/DMARC), `mail/imap/pop/smtp/webmail`
+  e `regatas.icb.org.br` — e-mail do clube e portal de inscrições dependem deles.
+- `www.icb.org.br` ainda aponta para a Kinghost (site antigo) — pendente redirecionar para o principal.
+- CORS no Sanity **não é necessário**: todas as consultas são feitas no servidor (Server Components).
 
 ## Avisos importantes
 - **E-mail Kinghost**: NÃO cancelar até a migração de DNS concluída (o e-mail `icb.org.br` roda lá).

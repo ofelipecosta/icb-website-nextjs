@@ -16,8 +16,9 @@ const redHatText = Red_Hat_Text({
   display: "swap",
 });
 
-// Após migrar DNS para Vercel, trocar para "https://icb.org.br"
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://icb-website-nextjs.vercel.app";
+// Domínio de produção (DNS migrado para a Vercel em 24/07/2026).
+// Mesma base usada em sitemap.ts e robots.ts.
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://icb.org.br";
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
