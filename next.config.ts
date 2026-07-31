@@ -15,7 +15,7 @@ const nextConfig: NextConfig = {
         // regatas.icb.org.br -> página de inscrição da Escola de Vela (projeto externo)
         source: "/:path*",
         has: [{ type: "host", value: "regatas.icb.org.br" }],
-        destination: "https://mariners-compass-icb.vercel.app/escola-vela/inscricao",
+        destination: "https://mariners-compass-icb.vercel.app/regatas",
         permanent: false,
       },
     ];
