@@ -46,13 +46,13 @@ export default function NewsCard({ noticia, index, imgUrl }: NewsCardProps) {
         }}
       >
         {/* Cover */}
-        <div className="aspect-video overflow-hidden relative flex-shrink-0">
+        <div className="aspect-video overflow-hidden relative flex-shrink-0" style={{ backgroundColor: "#F3F4F6" }}>
           {imgUrl ? (
             <Image
               src={imgUrl}
               alt={title}
               fill
-              className="object-cover transition-transform duration-500 group-hover:scale-105"
+              className="object-contain"
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             />
           ) : (
@@ -62,7 +62,6 @@ export default function NewsCard({ noticia, index, imgUrl }: NewsCardProps) {
               </span>
             </div>
           )}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
           {noticia.fixado && (
             <div
               className="absolute top-3 left-3 flex items-center gap-1 text-xs font-semibold px-2.5 py-1"

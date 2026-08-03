@@ -33,7 +33,7 @@ export default async function NoticiasPage() {
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 {noticias.map((noticia, i) => {
                   const imgUrl = noticia.capa
-                    ? urlFor(noticia.capa).width(720).height(405).url()
+                    ? urlFor(noticia.capa).width(720).url()
                     : null;
                   return (
                     <NewsCard

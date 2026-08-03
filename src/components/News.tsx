@@ -44,7 +44,7 @@ export default function News({ sanityData = [] }: NewsProps) {
 
   const featSlug = (featured as NoticiaSanity).slug?.current;
   const featImg  = (featured as NoticiaSanity).capa
-    ? urlFor((featured as NoticiaSanity).capa!).width(1100).height(740).url()
+    ? urlFor((featured as NoticiaSanity).capa!).width(1100).url()
     : null;
 
   return (
@@ -82,14 +82,14 @@ export default function News({ sanityData = [] }: NewsProps) {
             {/* Image */}
             <div
               className="relative overflow-hidden"
-              style={{ aspectRatio: "3/2", borderRadius: "2px" }}
+              style={{ aspectRatio: "3/2", borderRadius: "2px", backgroundColor: "#F3F4F6" }}
             >
               {featImg ? (
                 <Image
                   src={featImg}
                   alt={stripEmoji(featured.titulo)}
                   fill
-                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                  className="object-contain"
                   sizes="(max-width: 768px) 100vw, 55vw"
                   priority
                 />
@@ -154,7 +154,7 @@ export default function News({ sanityData = [] }: NewsProps) {
           {secondary.map((item, i) => {
             const slug   = (item as NoticiaSanity).slug?.current;
             const imgUrl = (item as NoticiaSanity).capa
-              ? urlFor((item as NoticiaSanity).capa!).width(600).height(380).url()
+              ? urlFor((item as NoticiaSanity).capa!).width(600).url()
               : null;
 
             return (
@@ -178,14 +178,14 @@ export default function News({ sanityData = [] }: NewsProps) {
                     {/* Image */}
                     <div
                       className="relative overflow-hidden flex-shrink-0 rounded-t-lg"
-                      style={{ aspectRatio: "16/9" }}
+                      style={{ aspectRatio: "16/9", backgroundColor: "#F3F4F6" }}
                     >
                       {imgUrl ? (
                         <Image
                           src={imgUrl}
                           alt={stripEmoji(item.titulo)}
                           fill
-                          className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                          className="object-contain"
                           sizes="(max-width: 640px) 100vw, 33vw"
                         />
                       ) : (
