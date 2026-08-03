@@ -173,24 +173,22 @@ export default async function NoticiaPage({ params }: { params: Promise<{ slug: 
               </div>
             )}
 
-            {/* Cover image */}
+            {/* Cover image — imagem inteira, sem corte (altura/largura automáticas com teto) */}
             {imgUrl && (
               <div
-                className="w-full flex items-center justify-center mb-12 overflow-hidden rounded-lg"
-                style={{
-                  backgroundColor: "#F9FAFB",
-                  minHeight: 300,
-                  maxHeight: "60vh",
-                }}
+                className="w-full flex justify-center mb-12 rounded-lg"
+                style={{ backgroundColor: "#F9FAFB" }}
               >
                 <img
                   src={imgUrl}
                   alt={title}
                   style={{
                     display: "block",
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "contain",
+                    maxWidth: "100%",
+                    maxHeight: "75vh",
+                    width: "auto",
+                    height: "auto",
+                    borderRadius: 8,
                   }}
                 />
               </div>
