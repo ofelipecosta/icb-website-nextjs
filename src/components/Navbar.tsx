@@ -30,7 +30,7 @@ function SocialFacebook() {
 
 
 const navItems = [
-  { name: "Início",      href: "#hero" },
+  { name: "Início",      href: "#inicio" },
   { name: "O Clube",     href: "#sobre" },
   { name: "Instalações", href: "#instalacoes" },
   { name: "Notícias",    href: "#noticias" },

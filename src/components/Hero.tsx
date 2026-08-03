@@ -9,7 +9,7 @@ const RED = "#B22222";
 export default function Hero() {
   return (
     <section
-      id="hero"
+      id="inicio"
       className="relative overflow-hidden"
       style={{ height: "100svh", minHeight: 560 }}
     >
