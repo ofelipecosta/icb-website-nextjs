@@ -70,6 +70,22 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Autocorreção: alguns navegadores/extensões acumulam o hash (ex.: #hero#hero#hero).
+  // Mantém só a primeira âncora, sem recarregar. replaceState não dispara hashchange, então não gera loop.
+  useEffect(() => {
+    const normalizeHash = () => {
+      const h = window.location.hash;
+      if (h && (h.match(/#/g)?.length ?? 0) > 1) {
+        const first = h.replace(/^#/, "").split("#").filter(Boolean)[0] ?? "";
+        const clean = first ? `#${first}` : window.location.pathname + window.location.search;
+        window.history.replaceState(null, "", clean);
+      }
+    };
+    normalizeHash();
+    window.addEventListener("hashchange", normalizeHash);
+    return () => window.removeEventListener("hashchange", normalizeHash);
+  }, []);
+
   useEffect(() => {
     if (!isHome) return;
     const ratios = new Map<string, number>();
