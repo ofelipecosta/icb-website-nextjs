@@ -15,7 +15,8 @@ const INK = "#16202E";
 
 const diretoriaExecutiva = [
   { cargo: "Comodoro",                        nome: "Eduardo Augusto Granato de Carvalho" },
-  { cargo: "Vice-Comodoro",                   nome: "Marcelo Cardoso Coelho" },
+  { cargo: "Segundo Vice-Comodoro",           nome: "Marcelo Cardoso Coelho" },
+  { cargo: "Terceiro Vice-Comodoro",          nome: "Rafael Rocha Ramos" },
   { cargo: "Diretor Administrativo",          nome: "Luiz Antonio Alves" },
   { cargo: "Diretor Financeiro",              nome: "Eduardo Augusto Granato de Carvalho" },
   { cargo: "Diretor Médico",                  nome: "Henrique Tostes Padilha Neto" },
