@@ -1,20 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 
 const RED = "#B22222";
 
 interface HistoryVideoProps {
   videoId?: string;
-  /** Legenda no rodapé do pôster. String vazia esconde. */
-  caption?: string;
 }
 
-export default function HistoryVideo({
-  videoId = "dkbSf1zBFPQ",
-  caption = "120 anos · Fundado em 1906",
-}: HistoryVideoProps) {
+export default function HistoryVideo({ videoId = "dkbSf1zBFPQ" }: HistoryVideoProps) {
   const [playing, setPlaying] = useState(false);
 
   return (
@@ -24,6 +18,7 @@ export default function HistoryVideo({
         aspectRatio: "16/9",
         borderRadius: "var(--radius-card)",
         boxShadow: "var(--shadow-luxury-lg)",
+        backgroundColor: "#0A1628",
       }}
     >
       {playing ? (
@@ -42,34 +37,20 @@ export default function HistoryVideo({
           className="absolute inset-0 w-full h-full group"
           aria-label="Reproduzir o documentário dos 120 anos do Iate Clube Brasileiro"
         >
-          {/* Fundo navy */}
-          <div
-            className="absolute inset-0"
-            style={{ background: "radial-gradient(ellipse at 50% 40%, #1E3A5F 0%, #0D1F3C 60%, #070F1E 100%)" }}
+          {/* Miniatura real do YouTube */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={`https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`}
+            alt="Documentário dos 120 anos do Iate Clube Brasileiro"
+            className="absolute inset-0 w-full h-full object-cover"
+            loading="lazy"
+            onError={(e) => {
+              e.currentTarget.src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+            }}
           />
 
-          {/* Logo */}
-          <div className="absolute inset-0 flex items-center justify-center">
-            <Image
-              src="/images/logo-timao-contorno.png"
-              alt="Logo Iate Clube Brasileiro"
-              width={260}
-              height={260}
-              className="object-contain w-[34%] h-auto"
-              style={{ filter: "drop-shadow(0 4px 24px rgba(0,0,0,0.4))", opacity: 0.9 }}
-            />
-          </div>
-
-          {/* Legenda */}
-          {caption && (
-            <div className="absolute bottom-0 left-0 right-0 flex items-center gap-3 px-6 pb-4">
-              <div className="flex-1 h-px" style={{ background: "rgba(255,255,255,0.1)" }} />
-              <span className="text-xs font-medium uppercase tracking-[0.2em] whitespace-nowrap" style={{ color: "rgba(255,255,255,0.35)" }}>
-                {caption}
-              </span>
-              <div className="flex-1 h-px" style={{ background: "rgba(255,255,255,0.1)" }} />
-            </div>
-          )}
+          {/* Leve escurecimento para contraste do botão */}
+          <div className="absolute inset-0" style={{ backgroundColor: "rgba(10,22,40,0.18)" }} />
 
           {/* Botão play estilo YouTube */}
           <div className="absolute inset-0 flex items-center justify-center">

@@ -40,7 +40,7 @@ export default function Anniversary120Band() {
 
         {/* Vídeo (direita no desktop, topo no mobile) */}
         <div className="order-1 lg:order-2">
-          <HistoryVideo caption="1906 – 2026" />
+          <HistoryVideo />
         </div>
       </div>
     </section>
