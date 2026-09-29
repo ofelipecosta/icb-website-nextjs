@@ -4,6 +4,8 @@ import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import PageHeader from "@/components/PageHeader";
 import FadeIn from "@/components/FadeIn";
+import SectionHeader from "@/components/SectionHeader";
+import HistoryVideo from "@/components/HistoryVideo";
 
 const RED = "#B22222";
 const INK = "#16202E";
@@ -56,6 +58,22 @@ export default function HistoriaPage() {
             { value: "1.°",  label: "Do Brasil" },
           ]}
         />
+
+        {/* Vídeo dos 120 anos */}
+        <FadeIn>
+          <div className="px-6 py-16 bg-white">
+            <div className="max-w-4xl mx-auto">
+              <SectionHeader
+                eyebrow="120 anos · 1906–2026"
+                title="Nossa história em vídeo"
+                titleSize="lg"
+              />
+              <div className="mt-8">
+                <HistoryVideo />
+              </div>
+            </div>
+          </div>
+        </FadeIn>
 
         {/* Pull-quote */}
         <FadeIn>

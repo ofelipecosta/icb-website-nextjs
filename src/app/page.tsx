@@ -3,6 +3,7 @@ export const revalidate = 60; // rebuild com dados frescos do Sanity a cada minu
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
+import Anniversary120Band from "@/components/Anniversary120Band";
 import Installations from "@/components/Installations";
 import Events from "@/components/Events";
 import Regattas from "@/components/Regattas";
@@ -26,6 +27,7 @@ export default async function Home() {
       <main>
         <Hero />
         <About />
+        <Anniversary120Band />
         <Installations sanityData={instalacoes} />
         <News sanityData={noticias} />
         <Events sanityData={eventos} />
