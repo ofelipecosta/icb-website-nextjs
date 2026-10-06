@@ -45,14 +45,20 @@ Conteúdo precisa estar **Publicado** no Studio para aparecer nas queries.
 - Publicar Studio: `npx sanity deploy` dentro de `C:\ICB\studio`.
 - O `.env` do Studio contém o **token do Sanity** — **NUNCA commitar** (já está no `.gitignore`).
 
-## Domínio
+## Domínio (nameservers na Kinghost; só os registros abaixo apontam para a Vercel)
 - Produção: **https://icb.org.br** (DNS migrado em 24/07/2026).
-- Os nameservers continuam na **Kinghost** — lá foi trocado só o `A` do domínio raiz
-  para `216.198.79.1` (Vercel) e removido o `AAAA` (IPv6) que conflitava.
-- `icb-website-nextjs.vercel.app` segue funcionando como endereço alternativo.
-- ⚠️ **Não mexer** na Kinghost em: `MX`, `TXT` (SPF/DKIM/DMARC), `mail/imap/pop/smtp/webmail`
-  e `regatas.icb.org.br` — e-mail do clube e portal de inscrições dependem deles.
-- `www.icb.org.br` ainda aponta para a Kinghost (site antigo) — pendente redirecionar para o principal.
+- `A` do domínio raiz (`@`) → **`76.76.21.21`** (IP estável/legado da Vercel).
+  ⚠️ Em 06/10/2026 o IP anterior `216.198.79.1` (recomendado pela Vercel na migração)
+  **parou de responder** e derrubou o site; trocado para `76.76.21.21`, que a Vercel
+  suporta permanentemente. Se cair de novo, confirmar o IP atual no painel da Vercel
+  (Settings → Domains → View DNS configuration) antes de trocar.
+- `AAAA` (IPv6) removido — conflitava.
+- `www.icb.org.br` → CNAME `97e6edcbd67496ee.vercel-dns-017.com`, redirect 308 para o apex.
+- `regatas.icb.org.br` → CNAME para a Vercel; redirect (next.config) para
+  `mariners-compass-icb.vercel.app/regatas` (portal de regatas, projeto de terceiro).
+- `icb-website-nextjs.vercel.app` segue como endereço alternativo.
+- ⚠️ **Não mexer** na Kinghost em: `MX`, `TXT` (SPF/DKIM/DMARC) e `mail/imap/pop/smtp/webmail`
+  — e-mail do clube depende deles.
 - CORS no Sanity **não é necessário**: todas as consultas são feitas no servidor (Server Components).
 
 ## Avisos importantes
